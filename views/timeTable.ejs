@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <!-- <meta charset="utf-8"> -->
+  <title>Class</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">CLASS</a> -->
+      <h3>CLASS</h3>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item" aria-current="page" href="#">ATTENDANCE</a>
+          <a class="nav-item" href="/timeTable">TIMETABLE</a>
+          <a class="nav-item" href="#">CONTACT</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav>
+    <form action="/timeTable" method="post">
+      <div class="nav navbar-timetable nav-tabs" id="nav-tab" role="tablist">
+
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="monday">Monday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="tuesday">Tuesday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="wednesday">Wednesday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="thursday">Thursday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="friday">Friday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="saturday">Saturday</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="submit" role="tab" aria-controls="nav-profile" aria-selected="false" name="day" value="sunday">Sunday</button>
+
+      </div>
+    </form>
+  </nav>
+
+</head>
+
+<body>

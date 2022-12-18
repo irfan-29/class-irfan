@@ -1,0 +1,121 @@
+.period{
+  margin: 20px 23%;
+  width: auto;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  border: solid;
+  border-color: #bdbdbd;
+  border-width: medium;
+  padding: 15px 15px 10px 18px;
+}
+.head{
+  color: white;
+  margin: 35px 23%;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: #9b9b9b;
+  border-radius: 15px;
+  border: solid;
+  border-color: black;
+  border-width: medium;
+  padding: 15px 15px 10px 18px;
+}
+.new-class{
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: 25px;
+  margin-right: 23%;
+}
+.container-fluid{
+  margin-top: 0;
+  position: relative;
+  bottom: 8px;
+  background-color: #3cc47c;
+  /* text-align: center; */
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 25px;
+  text-align: left;
+}
+.navbar{
+  margin: 0;
+}
+.navbar-timetable {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    background-color: #fd5200;
+    border-radius: 0;
+}
+
+.navbar a{
+  font-weight: 700;
+  /* width: 100%; */
+  font-stretch: condensed;
+  text-decoration: none;
+}
+.nav-item{
+  color: white;
+  flex: 1;
+  padding-left: 12px;
+  padding-right: 62px;
+  font-stretch: expanded;
+  word-wrap: normal;
+}
+.nav-link{
+  flex: 1;
+  font-weight: 600;
+  padding: 0.5% 4%;
+  font-size: 1.2rem;
+  color: white;
+}
+.navbar-nav{
+  margin-left: 0;
+  padding-right: 15px;
+  /* text-align: right; */
+  width: 40%;
+}
+
+.navbar-timetable{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  /* text-align: center; */
+  margin-top: 15px;
+}
+a:hover {
+    color: black !important;
+    text-decoration: none;
+}
+.nav-link:hover {
+    color: black !important;
+    text-decoration: none;
+}
+h3{
+  color: white;
+  font-weight: 900;
+  width: 15%;
+  padding-right: 67%;
+  padding-left: 10px;
+}
+h4{
+  text-align: center;
+}
+button{
+  margin-top: 6px;
+}
+
+
+
+.form-floating{
+  margin: 20px 23%;
+  width: auto;
+  text-align: center;
+}

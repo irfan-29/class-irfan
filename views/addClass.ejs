@@ -1,0 +1,35 @@
+<%- include("partials/header") -%>
+
+
+<form class="" action="/addClass" method="post">
+
+
+  <div class="form-floating">
+    <textarea class="form-control" placeholder="Enter the Day" id="day" name="day"></textarea>
+    <label for="day">Day</label>
+  </div>
+
+  
+<div class="form-floating">
+  <input class="form-control" onchange="onTimeChange()" type="time" id="start" name="start">
+  <label for="start">Start time</label>
+</div>
+
+<div class="form-floating">
+  <input class="form-control" type="time" id="end" name="end">
+  <label for="end">End time</label>
+</div>
+
+<div class="form-floating">
+  <textarea class="form-control" placeholder="Enter the Subject" id="subject" name="subject"></textarea>
+  <label for="subject">Subject</label>
+</div>
+
+  <div class="new-class">
+    <button type="submit" class="add btn btn-outline-primary">Add</button>
+  </div>
+
+</form>
+
+
+<%- include("partials/footer") -%>
