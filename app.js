@@ -8,10 +8,14 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static("public"));
 
-mongoose.set({strictQuery: true});
+mongoose.set({
+  strictQuery: true
+});
 mongoose.connect("mongodb+srv://admin-irfan:Irf6360944@cluster0.jo7etur.mongodb.net/classDB")
 
 app.get("/", function(req, res) {
@@ -22,10 +26,12 @@ const periodSchema = new mongoose.Schema({
   day: String,
   start: String,
   end: String,
-  subject: String
+  subject: String,
+  present: Number,
+  absent: Number
 });
+const Period = mongoose.model("Period", periodSchema);
 
-const Period = mongoose.model("Period",periodSchema);
 
 app.post("/timeTable", function(req, res) {
   const day = req.body.day;
@@ -40,82 +46,148 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/timeTable",function(req,res){
-  const weekday = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+app.get("/timeTable", function(req, res) {
+  const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-   const d = new Date();
-   let day = weekday[d.getDay()];
-  res.redirect("/"+day);;
-});
-
-app.get("/:day", function(req, res) {
-  const day = req.params.day;
-
-  Period.find({day: day},function(err,period){
-    if(!err){
-      res.render(day,{keyPeriod: period});
-    }
-  });
+  const d = new Date();
+  let day = weekday[d.getDay()];
+  res.redirect("/" + day);;
 });
 
 
+app.get("/attendance", function(req, res) {
+          Period.find(function(err, period) {
+                if (!err) {
+                  Period.distinct("subject",function(err, item){
 
 
-app.post("/day", function(req, res) {
-  res.render("addClass");
-});
+                  res.render("attendance", { keyAttendance: period, keyItem: item});
+                  })
+                }
+              });
+          });
+
+
+    app.get("/:day", function(req, res) {
+      const day = req.params.day;
+
+      Period.find({
+        day: day
+      }, function(err, period) {
+        if (!err) {
+          res.render(day, {
+            keyPeriod: period
+          });
+        }
+      });
+    });
+
+
+    app.post("/day", function(req, res) {
+      res.render("addClass");
+    });
+
+
+    app.post("/addClass", function(req, res) {
+      const day = _.lowerCase(req.body.day);
+      var s = String(req.body.start);
+      var e = String(req.body.end);
+      const subject = req.body.subject;
+
+      //To convert the 24hrs format to 12hrs format
+      var splitStart = s.split(":");
+      if (splitStart[0] < 12) {
+        if (splitStart[0] == "0" || splitStart[0] == "00") {
+          splitStart[0] = "12";
+        }
+        s = splitStart[0] + ":" + splitStart[1] + "AM";
+      } else {
+        splitStart[0] = splitStart[0] % 12;
+        if (splitStart[0] == "0" || splitStart[0] == "00") {
+          splitStart[0] = "12";
+        }
+        s = splitStart[0] + ":" + splitStart[1] + "PM";
+      }
+
+      var splitEnd = e.split(":");
+      if (splitEnd[0] < 12) {
+        if (splitEnd[0] == "0" || splitEnd[0] == "00") {
+          splitEnd[0] = "12";
+        }
+        e = splitEnd[0] + ":" + splitEnd[1] + "AM";
+      } else {
+        splitEnd[0] = splitEnd[0] % 12;
+        if (splitEnd[0] == "0" || splitEnd[0] == "00") {
+          splitEnd[0] = "12";
+        }
+        e = splitEnd[0] + ":" + splitEnd[1] + "PM";
+      }
+
+      const period = new Period({
+        day: day,
+        start: s,
+        end: e,
+        subject: subject,
+        present: 0,
+        absent: 0
+      });
+      period.save();
+
+      res.redirect("/timeTable");
+    });
 
 
 
-app.post("/addClass", function(req, res) {
-  const day = _.lowerCase(req.body.day);
-  var s = String(req.body.start);
-  var e = String(req.body.end);
-  const subject = req.body.subject;
+    app.post("/:day", function(req, res) {
+      if (req.params.day != "addClass") {
+        const day = req.params.day;
+        const sub = req.body.period;
+        const subject = sub.split("-");
+        const sub1 = subject[0];
+        const sub2 = subject[1];
 
-//To convert the 24hrs format to 12hrs format
-  var splitStart = s.split(":");
-  if(splitStart[0]<12){
-    if(splitStart[0]=="0" || splitStart[0]=="00"){
-      splitStart[0] = "12";
-    }
-    s = splitStart[0]+":"+splitStart[1]+"AM";
-  }else{
-    splitStart[0] = splitStart[0] % 12;
-    if(splitStart[0]=="0" || splitStart[0]=="00"){
-      splitStart[0] = "12";
-    }
-    s = splitStart[0]+":"+splitStart[1]+"PM";
-  }
-
-  var splitEnd = e.split(":");
-  if(splitEnd[0]<12){
-    if(splitEnd[0]=="0" || splitEnd[0]=="00"){
-      splitEnd[0] = "12";
-    }
-    e = splitEnd[0]+":"+splitEnd[1]+"AM";
-  }else{
-    splitEnd[0] = splitEnd[0] % 12;
-    if(splitEnd[0]=="0" || splitEnd[0]=="00"){
-      splitEnd[0] = "12";
-    }
-    e = splitEnd[0]+":"+splitEnd[1]+"PM";
-  }
-
-  const period = new Period({
-    day: day,
-    start: s,
-    end: e,
-    subject: subject
-  });
-  period.save();
-  res.redirect("/timeTable");
-});
+        Period.findOne({
+          subject: sub2
+        }, function(err, item) {
+          if (!err) {
+            if (sub1 === "p") {
+              let present = item.present;
+              present = present + 1;
+              Period.updateOne({
+                subject: sub2
+              }, {
+                present: present
+              }, function(err) {
+                if (err) {
+                  console.log(err);
+                }
+              });
+            } else if (sub1 === "a") {
+              let absent = item.absent;
+              absent = absent + 1;
+              Period.updateOne({
+                subject: sub2
+              }, {
+                absent: absent
+              }, function(err) {
+                if (err) {
+                  console.log(err);
+                }
+              });
+            }
+          }
+        });
+        res.redirect("/" + day);
+      }
+    });
 
 
 
 
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log("Server started at port 3000");
-});
+
+
+
+    app.listen(process.env.PORT || 3000, function() {
+      console.log("Server started at port 3000");
+    });

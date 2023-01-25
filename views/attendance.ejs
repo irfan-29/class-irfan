@@ -1,0 +1,24 @@
+<%- include("partials/header") -%>
+
+<div class="head">
+  <h4>Attendance</h4>
+</div>
+
+
+<% keyAttendance.forEach(function(ele){ %>
+
+  <div class="period">
+    <h5><%= ele.subject %></h5>
+    <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
+    <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
+  </div>
+
+<% }); %>
+
+
+
+
+
+
+
+<%- include("partials/footer") -%>

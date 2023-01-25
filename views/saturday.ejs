@@ -7,14 +7,9 @@
 </div>
 
 
-<% keyPeriod.forEach(function(ele){ %>
-  <div class="period">
-    <p><%= ele.subject %></p>
-    <p><%= ele.start %> - <%= ele.end %></p>
-    <button type="button" class="btn btn-success">Present</button>
-    <button type="button" class="btn btn-danger">Absent</button>
-  </div>
-<% }); %>
+<div class="period">
+  <p>No classes were assigned today, pls refer to the order of Timetable</p>
+</div>
 
 
 <form class="" action="/day" method="post">
