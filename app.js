@@ -58,17 +58,14 @@ app.get("/timeTable", function(req, res) {
 app.get("/attendance", function(req, res) {
           Period.find(function(err, period) {
                 if (!err) {
-                  Period.distinct("subject",function(err, item){
 
-
-                  res.render("attendance", { keyAttendance: period, keyItem: item});
-                  })
+                  res.render("attendance", { keyAttendance: period});
                 }
               });
           });
 
 
-    app.get("/:day", function(req, res) {
+app.get("/:day", function(req, res) {
       const day = req.params.day;
 
       Period.find({
