@@ -32,7 +32,7 @@
               0: { side: 'top', label: 'Percentage'} // Top x-axis.
             }
           },
-          bar: { groupWidth: "80%"}
+          bar: { groupWidth: "90%"}
         };
 
         var chart = new google.charts.Bar(document.getElementById('top_x_div'));
@@ -40,17 +40,17 @@
       };
     </script>
 
-    <div id="top_x_div" style="width: 90%; height: 45%;text-align: center; align-items: center; display: flex; justify-content: center; margin-left: 5%; margin-right: 5%; margin-bottom: 50px;"></div>
+    <div id="top_x_div" class="attendance"></div>
 
     <% keyAttendance.forEach(function(ele){ %>
 
-  <div class="period">
-    <h5><%= ele.subject %></h5>
-    <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
-    <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
-  </div>
+      <div class="period">
+        <h5><%= ele.subject %></h5>
+        <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
+        <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
+      </div>
 
-<% }); %>
+    <% }); %>
 
 
 <%- include("partials/footer") -%>

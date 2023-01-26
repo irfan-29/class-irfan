@@ -206,3 +206,53 @@ footer{
   width: auto;
   text-align: center;
 }
+
+.attendance{
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px){
+  .attendance{
+      width: 85%;
+      height: 450px;
+      margin-left: 3%;
+      margin-right: 10%;
+  }
+  .period{
+    margin: 20px 10%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .attendance{
+      width: 70%;
+      height: 700px;
+      margin-left: 12%;
+      margin-right: 20%;
+    }
+    .period{
+      margin: 20px 17%;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .attendance{
+      width: 60%;
+      height: 900px;
+      margin-left: 18%;
+      margin-right: 20%;
+  }
+  .period{
+    margin: 20px 27%;
+  }
+}
