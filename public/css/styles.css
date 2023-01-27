@@ -34,7 +34,6 @@
   position: relative;
   bottom: 8px;
   background-color: #3cc47c;
-  /* text-align: center; */
   padding-top: 15px;
   padding-bottom: 15px;
   padding-right: 25px;
@@ -56,7 +55,6 @@
 
 .navbar a{
   font-weight: 700;
-  /* width: 100%; */
   font-stretch: condensed;
   text-decoration: none;
 }
@@ -66,8 +64,6 @@
   padding-left: 20px;
   padding-right: 0;
   margin-right: 0;
-  /* font-stretch: expanded;
-  word-wrap: normal; */
 }
 span{
   text-align: center;
@@ -96,7 +92,6 @@ span{
 }
 
 .contact-btn{
-  /* background-image: linear-gradient(#11cdd4,#11999e); */
   background-color: #fd5200;
 
   color: white;
@@ -109,7 +104,6 @@ span{
   top: 15px;
 }
 .contact-btn:hover{
-  /* background-image: linear-gradient(#30e3cb,#2bc4ad); */
   background-color: #3cc47c;
   color: white;
 }
@@ -215,6 +209,8 @@ footer{
   margin-bottom: 50px;
 }
 
+
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px){
   .attendance{
@@ -232,7 +228,7 @@ footer{
 @media only screen and (min-width: 600px) {
   .attendance{
       width: 70%;
-      height: 700px;
+      height: 600px;
       margin-left: 12%;
       margin-right: 20%;
     }
@@ -247,9 +243,9 @@ footer{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .attendance{
-      width: 60%;
-      height: 900px;
-      margin-left: 18%;
+      width: 62%;
+      height: 750px;
+      margin-left: 16.5%;
       margin-right: 20%;
   }
   .period{
