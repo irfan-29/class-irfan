@@ -1,0 +1,36 @@
+<%- include("partials/header") -%>
+
+
+<div class="head">
+  <h4>Tasks</h4>
+</div>
+
+<% keyTask.forEach(function(ele){ %>
+  <form action="/deleteTask" method="post">
+   <div class="task">
+    <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
+        <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>">
+        <p style="position: relative; left: 5px;"> <%= ele.task %></p>
+    </div>
+   <div style="float: right; padding: 0;">
+      <button type="submit" class="add btn btn-danger" style="border-radius: 50%; background-color:#de1e1d; height: 40px; width: 40px;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+   </div>
+</div>
+</form>
+<% }); %>
+
+
+<form class="" action="/tasks" method="post">
+  <div class="form-floating">
+    <input class="form-control" type="text" required autocomplete="off" id="task" placeholder="Add New Task" name="newTask">
+    <label for="task">Add New Task</label>
+  </div>
+  <div class="new-class">
+    <button type="submit" class="add btn btn-primary" name="addTask">Add Task</button>
+  </div>
+</form>
+
+
+
+
+<%- include("partials/footer") -%>

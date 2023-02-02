@@ -10,6 +10,34 @@
   border-width: medium;
   padding: 15px 15px 10px 18px;
 }
+
+.task{
+  margin: 20px 23%;
+  width: auto;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  border: solid;
+  border-color: #bdbdbd;
+  border-width: medium;
+  padding: 7.5px 15px 7px 15px;
+  display: flex;
+  align-items: stretch;
+}
+
+
+input:checked+p{
+  text-decoration: line-through;
+  text-decoration-color: #36b170;
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 22px;
+  position: relative;
+  top: 6px;
+}
+
 .head{
   color: #36b170;
   margin: 35px 23%;
@@ -226,6 +254,9 @@ footer{
   .period{
     margin: 20px 10%;
   }
+  .task{
+    margin: 20px 10%;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -237,6 +268,9 @@ footer{
       margin-right: 20%;
     }
     .period{
+      margin: 20px 17%;
+    }
+    .task{
       margin: 20px 17%;
     }
 }
@@ -253,6 +287,9 @@ footer{
       margin-right: 20%;
   }
   .period{
+    margin: 20px 27%;
+  }
+  .task{
     margin: 20px 27%;
   }
 }
