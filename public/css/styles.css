@@ -142,7 +142,8 @@ span{
 
 .parent {
   margin: 1rem;
-  padding: 2rem 2rem;
+  padding: 2rem 1rem;
+  padding-bottom: 100px;
   text-align: center;
 }
 .child {
@@ -257,6 +258,9 @@ footer{
   .task{
     margin: 20px 8%;
   }
+  .head{
+    margin: 35px 12%;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -291,5 +295,8 @@ footer{
   }
   .task{
     margin: 20px 27%;
+  }
+  .head{
+    margin: 35px 30%;
   }
 }
