@@ -35,6 +35,10 @@ const taskSchema = new mongoose.Schema({
 });
 const Task = mongoose.model("Task",taskSchema);
 
+const completeTaskSchema = new mongoose.Schema({
+  completeTask: String
+});
+const CompleteTask = mongoose.model("CompleteTask",completeTaskSchema);
 
 //to set the error raised by favicon.ico
 app.use(function(req, res, next) {
@@ -80,7 +84,11 @@ app.post("/tasks", function(req, res) {
 app.get("/tasks", function(req, res){
     Task.find(function(err, task){
         if (!err){
-           res.render("tasks", {keyTask: task});
+          CompleteTask.find(function(err, completeTask){
+            if(!err){
+               res.render("tasks", {keyTask: task, keyCompleteTask: completeTask});
+            }
+          });
         }
     });
 });
@@ -90,6 +98,38 @@ app.post("/deleteTask", function(req,res){
   Task.deleteOne({task: deleteTask}, function(err){
     if(err){console.log();}
   });
+  res.redirect("/tasks");
+});
+
+app.post("/deleteCompleteTask", function(req,res){
+  const deleteCompleteTask = req.body.deleteCompleteTask;
+  CompleteTask.deleteOne({completeTask: deleteCompleteTask}, function(err){
+    if(err){console.log();}
+  });
+  res.redirect("/tasks");
+});
+
+app.post("/completeTask", function(req,res){
+  const completeTask = req.body.checkbox;
+  Task.deleteOne({task: completeTask}, function(err){
+    if(err){console.log();}
+  });
+  const newCompleteTask = new CompleteTask({
+    completeTask: completeTask
+  });
+  newCompleteTask.save();
+  res.redirect("/tasks");
+});
+
+app.post("/notCompleteTask", function(req,res){
+  const notCompleteTask = req.body.checkbox2;
+  CompleteTask.deleteOne({completeTask: notCompleteTask}, function(err){
+    if(err){console.log();}
+  });
+  const newNotCompleteTask = new Task({
+    task: notCompleteTask
+  });
+  newNotCompleteTask.save();
   res.redirect("/tasks");
 });
 

@@ -5,22 +5,59 @@
   <h4>Tasks</h4>
 </div>
 
+<div class="task" style="color: #36b170; background-color: white; padding-left: 0; border: none; padding-bottom: 0;">
+  <h5 style="font-size: 1.4rem; font-weight: 700;">Yet To Completed</h5>
+</div>
+
 <% keyTask.forEach(function(ele){ %>
-  <form action="/deleteTask" method="post">
+
    <div class="task">
     <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
-        <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>">
-        <p style="position: relative; left: 5px;"> <%= ele.task %></p>
+      <form action="/completeTask" method="post">
+        <div class="" style="display: flex;">
+          <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>" onchange="this.form.submit()">
+          <p style="position: relative; left: 5px;"> <%= ele.task %></p>
+        </div>
+      </form>
     </div>
    <div style="float: right; padding: 0;">
-      <button type="submit" class="add btn btn-danger" style="border-radius: 50%; background-color:#de1e1d; height: 40px; width: 40px;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+     <form action="/deleteTask" method="post">
+      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+     </form>
    </div>
 </div>
-</form>
+
 <% }); %>
 
 
-<form class="" action="/tasks" method="post">
+<div class="task" style="color: #36b170; background-color: white; padding-left: 0; border: none; padding-bottom: 0;">
+  <h5 style="font-size: 1.4rem; font-weight: 700;">Completed</h5>
+</div>
+
+<% keyCompleteTask.forEach(function(ele){ %>
+
+   <div class="task">
+    <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
+      <form action="/notCompleteTask" method="post">
+        <div class="" style="display: flex;">
+          <input class="taskInput" type="checkbox" name="checkbox2" value="<%= ele.completeTask %>" onchange="this.form.submit()">
+          <p style="position: relative; left: 5px; text-decoration: line-through; text-decoration-color: #36b170;"> <%= ele.completeTask %></p>
+        </div>
+      </form>
+    </div>
+   <div style="float: right; padding: 0;">
+     <form action="/deleteCompleteTask" method="post">
+      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteCompleteTask" value="<%= ele.completeTask %>"><img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+     </form>
+   </div>
+</div>
+
+<% }); %>
+
+
+
+
+<form class="" action="/tasks" style="padding-top: 10px;" method="post">
   <div class="form-floating">
     <input class="form-control" type="text" required autocomplete="off" id="task" placeholder="Add New Task" name="newTask">
     <label for="task">Add New Task</label>
@@ -29,8 +66,5 @@
     <button type="submit" class="add btn btn-primary" name="addTask">Add Task</button>
   </div>
 </form>
-
-
-
 
 <%- include("partials/footer") -%>
