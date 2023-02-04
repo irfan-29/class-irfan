@@ -51,7 +51,7 @@ input[type="checkbox"] {
   border-width: 2px;;
   padding: 15px 15px 10px 18px;
 }
-.new-class{
+.new-class, .new-task{
   text-align: right;
   margin-top: 0;
   margin-bottom: 25px;
@@ -224,6 +224,7 @@ footer{
   text-align: center;
 }
 
+
 .attendance{
   text-align: center;
   align-items: center;
@@ -242,10 +243,10 @@ footer{
       margin-left: 3%;
       margin-right: 10%;
   }
-  .period{
+  .period, .new-class{
     margin: 20px 10%;
   }
-  .task{
+  .task, .form-floating, .new-task{
     margin: 20px 8%;
   }
   .head{
@@ -261,10 +262,10 @@ footer{
       margin-left: 12%;
       margin-right: 20%;
     }
-    .period{
+    .period, .new-class{
       margin: 20px 17%;
     }
-    .task{
+    .task, .form-floating, .new-task{
       margin: 20px 17%;
     }
 }
@@ -280,10 +281,10 @@ footer{
       margin-left: 16.5%;
       margin-right: 20%;
   }
-  .period{
+  .period, .new-class{
     margin: 20px 27%;
   }
-  .task{
+  .task, .form-floating, .new-task{
     margin: 20px 27%;
   }
   .head{
