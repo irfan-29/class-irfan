@@ -66,6 +66,9 @@ input[type="checkbox"] {
   padding-bottom: 15px;
   padding-right: 25px;
   text-align: left;
+  /* filter: blur(2px);
+  -webkit-filter: blur(2px); */
+  opacity: 0.9;
 }
 .navbar{
   margin: 0;
@@ -80,22 +83,23 @@ input[type="checkbox"] {
     align-items: center;
     width: 100%;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     background-color: #fd5200;
     border-radius: 0;
+    padding: 0;
+    padding-bottom: 8px;
 }
 
-.navbar a{
-  font-weight: 700;
+.navbar-nav a{
+  font-weight: 600;
+  font-size: 1rem;
   font-stretch: condensed;
   text-decoration: none;
+  padding-bottom: 3px;
+  padding-top: 3px;
 }
 .nav-item{
   color: white;
-  flex: 1;
-  padding-left: 20px;
-  padding-right: 0;
-  margin-right: 0;
 }
 span{
   text-align: center;
@@ -103,29 +107,20 @@ span{
 .nav-link{
   flex: 1;
   font-weight: 600;
-  padding: 0.5% 4%;
   font-size: 1.2rem;
   color: white;
 }
-.navbar-nav{
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 15px;
-  /* text-align: right; */
-  width: 40%;
-}
+
 
 
 .det{
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
 .contact-btn{
   background-color: #fd5200;
-
   color: white;
   font-size: 15px;
   border-radius: 8px;
@@ -158,16 +153,6 @@ span{
   /* text-align: left; */
 }
 
-
-.navbar-timetable{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-  padding: 12px 0;
-  /* text-align: center; */
-  margin-top: 15px;
-}
 a:hover {
     color: black !important;
     text-decoration: none;
@@ -214,12 +199,13 @@ button{
 footer{
   background-color: #3cc47c;
   margin-bottom: 0;
+  margin-right: 0;
   text-align: right;
   padding-top: 4px;
   padding-bottom: 4px;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   width: 100%;
 }
 .dett{
