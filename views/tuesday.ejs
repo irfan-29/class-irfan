@@ -1,32 +1,26 @@
 <%- include("partials/timeTableFix") -%>
 
 
-
 <div class="head">
   <h4>Tuesday</h4>
 </div>
 
-
 <% keyPeriod.forEach(function(ele){ %>
-
-  <div class="period">
-    <p><%= ele.subject %></p>
-    <p><%= ele.start %> - <%= ele.end %></p>
-    <form class="" action="/<%= ele.day %>" method="post">
-      <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>">Present</button>
-      <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>">Absent</button>
-    </form>
-  </div>
-
+<div class="period">
+  <p><%= ele.subject %></p>
+  <p><%= ele.start %> - <%= ele.end %></p>
+  <form action="/<%= ele.day %>" method="post">
+    <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>">Present</button>
+    <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>">Absent</button>
+  </form>
+</div>
 <% }); %>
 
-
-<form class="" action="/day" method="post">
+<form action="/day" method="post">
   <div class="new-class">
     <button type="submit" class="add btn btn-primary" name="addClass">Add Class</button>
   </div>
 </form>
-
 
 
 <%- include("partials/footer") -%>

@@ -1,4 +1,4 @@
-.period{
+.period {
   margin: 20px 23%;
   width: auto;
   font-size: 1.3rem;
@@ -11,7 +11,7 @@
   padding: 15px 15px 10px 18px;
 }
 
-.task{
+.task {
   margin: 20px 23%;
   width: auto;
   font-size: 1.3rem;
@@ -26,11 +26,11 @@
   align-items: stretch;
 }
 
-
-input:checked+p{
+input:checked+p {
   text-decoration: line-through;
   text-decoration-color: #36b170;
 }
+
 input[type="checkbox"] {
   width: 20px;
   height: 22px;
@@ -38,26 +38,28 @@ input[type="checkbox"] {
   top: 6px;
 }
 
-.head{
+.head {
   color: #36b170;
   margin: 35px 23%;
   font-size: 1.5rem;
   font-weight: 900;
   background-color: white;
-  /* background-color: #c43c40; */
   border-radius: 12px;
   border: solid;
   border-color: black;
-  border-width: 2px;;
+  border-width: 2px;
+  ;
   padding: 15px 15px 10px 18px;
 }
-.new-class, .new-task{
+
+.new-class, .new-task {
   text-align: right;
   margin-top: 0;
   margin-bottom: 25px;
   margin-right: 23%;
 }
-.container-fluid{
+
+.container-fluid {
   margin-top: 0;
   position: relative;
   bottom: 8px;
@@ -66,31 +68,31 @@ input[type="checkbox"] {
   padding-bottom: 15px;
   padding-right: 25px;
   text-align: left;
-  /* filter: blur(2px);
-  -webkit-filter: blur(2px); */
   opacity: 0.9;
 }
-.navbar{
+
+.navbar {
   margin: 0;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1;
 }
+
 .navbar-timetable {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-    background-color: #fd5200;
-    border-radius: 0;
-    padding: 0;
-    padding-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #fd5200;
+  border-radius: 0;
+  padding: 0;
+  padding-bottom: 8px;
 }
 
-.navbar-nav a{
+.navbar-nav a {
   font-weight: 600;
   font-size: 1rem;
   font-stretch: condensed;
@@ -98,28 +100,29 @@ input[type="checkbox"] {
   padding-bottom: 3px;
   padding-top: 3px;
 }
-.nav-item{
+
+.nav-item {
   color: white;
 }
-span{
+
+span {
   text-align: center;
 }
-.nav-link{
+
+.nav-link {
   flex: 1;
   font-weight: 600;
   font-size: 1.2rem;
   color: white;
 }
 
-
-
-.det{
+.det {
   font-size: 19px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
-.contact-btn{
+.contact-btn {
   background-color: #fd5200;
   color: white;
   font-size: 15px;
@@ -130,14 +133,11 @@ span{
   position: relative;
   top: 15px;
 }
-.contact-btn:hover{
+
+.contact-btn:hover {
   background-color: #3cc47c;
   color: white;
 }
-
-
-
-
 
 .parent {
   margin: 1rem;
@@ -145,23 +145,25 @@ span{
   padding-bottom: 100px;
   text-align: center;
 }
+
 .child {
   display: inline-block;
   padding: 1rem 1rem;
   vertical-align: middle;
   text-align: center;
-  /* text-align: left; */
 }
 
 a:hover {
-    color: black !important;
-    text-decoration: none;
+  color: black !important;
+  text-decoration: none;
 }
+
 .nav-link:hover {
-    color: black !important;
-    text-decoration: none;
+  color: black !important;
+  text-decoration: none;
 }
-h3{
+
+h3 {
   color: white;
   text-align: left;
   font-weight: 900;
@@ -170,7 +172,8 @@ h3{
   padding-left: 5px;
   padding-top: 3px;
 }
-sup{
+
+sup {
   background: linear-gradient(250deg, #ED1E79, #662D8C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -179,52 +182,50 @@ sup{
   padding-left: 6px;
   letter-spacing: 1.5px;
   vertical-align: middle;
-  /* position: relative;
-  bottom: 2px; */
 }
-h4{
+
+h4 {
   text-align: center;
   font-weight: bold;
   font-size: 1.6rem;
 }
-h5{
+
+h5 {
   font-size: 1.5rem;
   font-weight: 700;
   padding-bottom: 10px;
 }
-button{
+
+button {
   margin-top: 6px;
 }
 
-footer{
+footer {
   background-color: #3cc47c;
   margin-bottom: 0;
   margin-right: 0;
   text-align: right;
   padding-top: 4px;
   padding-bottom: 4px;
-  /* position: fixed;
-  left: 0;
-  bottom: 0; */
   width: 100%;
 }
-.dett{
+
+.dett {
   font-weight: 400;
   font-size: 0.9rem;
   padding-right: 8px;
   padding-bottom: 2px;
-  /* padding-top: 1px; */
   margin: 0;
   margin-top: 2px;
 }
 
-.form-floating{
+.form-floating {
   margin: 20px 23%;
   width: auto;
   text-align: center;
 }
 
-.attendance{
+.attendance {
   text-align: center;
   align-items: center;
   display: flex;
@@ -232,55 +233,56 @@ footer{
   margin-bottom: 50px;
 }
 
-
-
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px){
-  .attendance{
-      width: 85%;
-      height: 450px;
-      margin-left: 3%;
-      margin-right: 10%;
+@media only screen and (max-width: 600px) {
+  .attendance {
+    width: 85%;
+    height: 450px;
+    margin-left: 3%;
+    margin-right: 10%;
   }
-  .period, .new-class, .task, .form-floating, .new-task{
+
+  .period, .new-class, .task, .form-floating, .new-task {
     margin: 20px 10%;
   }
-  .head{
+
+  .head {
     margin: 35px 10%;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .attendance{
-      width: 70%;
-      height: 600px;
-      margin-left: 12%;
-      margin-right: 20%;
-    }
-    .period, .new-class, .task, .form-floating, .new-task{
-      margin: 20px 17%;
-    }
-    .head{
-      margin: 35px 17%;
-    }
-}
+  .attendance {
+    width: 70%;
+    height: 600px;
+    margin-left: 12%;
+    margin-right: 20%;
+  }
 
-/* Large devices (laptops/desktops, 992px and up) */
-/* @media only screen and (min-width: 992px) {...} */
+  .period, .new-class, .task, .form-floating, .new-task {
+    margin: 20px 17%;
+  }
+
+  .head {
+    margin: 35px 17%;
+  }
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .attendance{
-      width: 62%;
-      height: 750px;
-      margin-left: 16.5%;
-      margin-right: 20%;
+  .attendance {
+    width: 62%;
+    height: 750px;
+    margin-left: 16.5%;
+    margin-right: 20%;
   }
-  .period, .new-class, .task, .form-floating, .new-task{
+
+  .period, .new-class, .task, .form-floating, .new-task {
     margin: 20px 27%;
   }
-  .head{
+
+  .head {
     margin: 35px 27%;
   }
 }

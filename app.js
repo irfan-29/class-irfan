@@ -15,20 +15,31 @@ mongoose.set({strictQuery: true});
 mongoose.connect("mongodb+srv://admin-irfan:Irf6360944@cluster0.jo7etur.mongodb.net/classDB")
 
 
+
+// Home page
+
 app.get("/", function(req, res) {
   res.render("home");
 });
+
+
+
+// Creating new Schemas
 
 const periodSchema = new mongoose.Schema({
   day: String,
   start: String,
   end: String,
+  subject: String
+});
+const Period = mongoose.model("Period", periodSchema);
+
+const attendanceSchema = new mongoose.Schema({
   subject: String,
   present: Number,
   absent: Number
 });
-const Period = mongoose.model("Period", periodSchema);
-
+const Attendance = mongoose.model("Attendance", attendanceSchema);
 
 const taskSchema = new mongoose.Schema({
   task: String
@@ -40,7 +51,10 @@ const completeTaskSchema = new mongoose.Schema({
 });
 const CompleteTask = mongoose.model("CompleteTask",completeTaskSchema);
 
-//to set the error raised by favicon.ico
+
+
+// To set the error raised by favicon.ico
+
 app.use(function(req, res, next) {
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
     return res.sendStatus(204);
@@ -48,6 +62,9 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
+// Time Table
 
 app.get("/timeTable", function(req, res) {
   const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
@@ -62,8 +79,11 @@ app.post("/timeTable", function(req, res) {
 });
 
 
+
+// Passing attendance with respective subject
+
 app.get("/attendance", function(req, res){
-    Period.find(function(err, period){
+    Attendance.find(function(err, period){
         if (!err){
            res.render("attendance", {keyAttendance: period});
         }
@@ -71,7 +91,9 @@ app.get("/attendance", function(req, res){
 });
 
 
-//Tasks
+
+// Tasks
+
 app.post("/tasks", function(req, res) {
   const task = req.body.newTask;
   const newTask = new Task({
@@ -134,22 +156,11 @@ app.post("/notCompleteTask", function(req,res){
 });
 
 
-// app.get("/addDay/:day", function(req,res){
-//   const day = req.params.day;
-//   console.log(day);
-//   Period.find({day: day}, function(err, period){
-//       if (!err){
-//         res.render("saturday", {keyPeriod: period});
-//       }
-//   });
-//   // res.redirect("/saturday-"+day);
-// });
 
-
+// Passing periods to respective day of timtable
 
 app.get("/:day", function(req, res){
     const day = req.params.day;
-
     Period.find({day: day}, function(err, period){
         if (!err){
           res.render(day, {keyPeriod: period});
@@ -158,10 +169,16 @@ app.get("/:day", function(req, res){
 });
 
 
+
+// Redirecting to add new Class page
+
 app.post("/day", function(req, res) {
   res.render("addClass");
 });
 
+
+
+// Creating a new period
 
 app.post("/addClass", function(req, res) {
   const day = _.lowerCase(req.body.day);
@@ -176,42 +193,54 @@ app.post("/addClass", function(req, res) {
         splitStart[0] = "12";
     }
     s = splitStart[0] + ":" + splitStart[1] + "AM";
-    }else{
-        splitStart[0] = splitStart[0] % 12;
-        if (splitStart[0] == "0" || splitStart[0] == "00") {
-           splitStart[0] = "12";
-        }
-        s = splitStart[0] + ":" + splitStart[1] + "PM";
+  }else{
+    splitStart[0] = splitStart[0] % 12;
+    if (splitStart[0] == "0" || splitStart[0] == "00") {
+      splitStart[0] = "12";
     }
+    s = splitStart[0] + ":" + splitStart[1] + "PM";
+  }
 
-      var splitEnd = e.split(":");
-      if (splitEnd[0] < 12) {
-        if (splitEnd[0] == "0" || splitEnd[0] == "00") {
-          splitEnd[0] = "12";
-        }
-        e = splitEnd[0] + ":" + splitEnd[1] + "AM";
-      } else {
+  var splitEnd = e.split(":");
+  if (splitEnd[0] < 12) {
+    if (splitEnd[0] == "0" || splitEnd[0] == "00") {
+      splitEnd[0] = "12";
+    }
+    e = splitEnd[0] + ":" + splitEnd[1] + "AM";
+    } else {
         splitEnd[0] = splitEnd[0] % 12;
         if (splitEnd[0] == "0" || splitEnd[0] == "00") {
           splitEnd[0] = "12";
         }
         e = splitEnd[0] + ":" + splitEnd[1] + "PM";
-      }
+    }
 
-      const period = new Period({
-        day: day,
-        start: s,
-        end: e,
-        subject: subject,
-        present: 0,
-        absent: 0
-      });
-      period.save();
-
-      res.redirect("/timeTable");
+    const period = new Period({
+      day: day,
+      start: s,
+      end: e,
+      subject: subject
     });
+    period.save();
+
+    Attendance.findOne({subject: subject}, function(err, item){
+      if(!err){
+        if(!item){
+          const newAttendance = new Attendance({
+            subject: subject,
+            present: 0,
+            absent: 0
+          });
+          newAttendance.save();
+        }
+      }
+    });
+    res.redirect("/timeTable");
+});
 
 
+
+// Attendance marking as Present or Absent
 
 app.post("/:day", function(req, res){
   if (req.params.day != "addClass"){
@@ -221,28 +250,26 @@ app.post("/:day", function(req, res){
     const sub1 = subject[0];
     const sub2 = subject[1];
 
-    Period.findOne({subject: sub2}, function(err, item){
-      if (!err){
-        if (sub1 === "p"){
-          let present = item.present;
-          present = present + 1;
-          Period.updateOne({subject: sub2}, {present: present}, function(err){
-              if(err){console.log(err);}
-              });
-        }else if (sub1 === "a"){
-            let absent = item.absent;
-            absent = absent + 1;
-            Period.updateOne({subject: sub2}, {absent: absent}, function(err){
-              if(err){console.log(err);}
-            });
-        }
-      }
-    });
+    Attendance.findOne({subject: sub2}, function(err, item){
+     if (!err){
+       if (sub1 === "p"){
+         let present = item.present;
+         present = present + 1;
+         Attendance.updateOne({subject: sub2}, {present: present}, function(err){
+             if(err){console.log(err);}
+             });
+       }else if (sub1 === "a"){
+           let absent = item.absent;
+           absent = absent + 1;
+           Attendance.updateOne({subject: sub2}, {absent: absent}, function(err){
+             if(err){console.log(err);}
+           });
+       }
+     }
+   });
     res.redirect("/" + day);
   }
 });
-
-
 
 
 

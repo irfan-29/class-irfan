@@ -1,5 +1,6 @@
 <%- include("partials/header") -%>
 
+
     <div class="head">
       <h4>Attendance</h4>
     </div>
@@ -23,12 +24,10 @@
         var options = {
           title: 'Class Attendance',
           legend: { position: 'none'},
-          // chart: { title: 'Chess opening moves',
-          //          subtitle: 'popularity by percentage' },
-          bars: 'horizontal', // Required for Material Bar Charts.
+          bars: 'horizontal',
           axes: {
             x: {
-              0: { side: 'top', label: 'Percentage'} // Top x-axis.
+              0: { side: 'top', label: 'Percentage'}
             }
           },
           bar: { groupWidth: "90%"}
@@ -42,13 +41,11 @@
     <div id="top_x_div" class="attendance"></div>
 
     <% keyAttendance.forEach(function(ele){ %>
-
       <div class="period">
         <h5><%= ele.subject %></h5>
         <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
         <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
       </div>
-
     <% }); %>
 
 
