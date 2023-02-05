@@ -133,14 +133,30 @@ app.post("/notCompleteTask", function(req,res){
   res.redirect("/tasks");
 });
 
+
+// app.get("/addDay/:day", function(req,res){
+//   const day = req.params.day;
+//   console.log(day);
+//   Period.find({day: day}, function(err, period){
+//       if (!err){
+//         res.render("saturday", {keyPeriod: period});
+//       }
+//   });
+//   // res.redirect("/saturday-"+day);
+// });
+
+
+
 app.get("/:day", function(req, res){
     const day = req.params.day;
+
     Period.find({day: day}, function(err, period){
         if (!err){
           res.render(day, {keyPeriod: period});
         }
     });
 });
+
 
 app.post("/day", function(req, res) {
   res.render("addClass");

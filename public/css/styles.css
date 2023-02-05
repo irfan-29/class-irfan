@@ -224,7 +224,6 @@ footer{
   text-align: center;
 }
 
-
 .attendance{
   text-align: center;
   align-items: center;
@@ -243,14 +242,11 @@ footer{
       margin-left: 3%;
       margin-right: 10%;
   }
-  .period, .new-class{
+  .period, .new-class, .task, .form-floating, .new-task{
     margin: 20px 10%;
   }
-  .task, .form-floating, .new-task{
-    margin: 20px 8%;
-  }
   .head{
-    margin: 35px 12%;
+    margin: 35px 10%;
   }
 }
 
@@ -262,11 +258,11 @@ footer{
       margin-left: 12%;
       margin-right: 20%;
     }
-    .period, .new-class{
+    .period, .new-class, .task, .form-floating, .new-task{
       margin: 20px 17%;
     }
-    .task, .form-floating, .new-task{
-      margin: 20px 17%;
+    .head{
+      margin: 35px 17%;
     }
 }
 
@@ -281,13 +277,10 @@ footer{
       margin-left: 16.5%;
       margin-right: 20%;
   }
-  .period, .new-class{
-    margin: 20px 27%;
-  }
-  .task, .form-floating, .new-task{
+  .period, .new-class, .task, .form-floating, .new-task{
     margin: 20px 27%;
   }
   .head{
-    margin: 35px 30%;
+    margin: 35px 27%;
   }
 }
