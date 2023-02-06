@@ -16,11 +16,14 @@
 </div>
 <% }); %>
 
-<form action="/day" method="post">
-  <div class="new-class">
-    <button type="submit" class="add btn btn-primary" name="addClass">Add Class</button>
-  </div>
-</form>
+<div class="delete-add" style="display: flex; justify-content: space-between;">
+  <form action="/day1" method="post" style=" float: left;">
+    <button type="submit" class="add btn btn-danger" name="deleteClass" value="deleteClass">Delete Class</button>
+  </form>
+  <form action="/day2" method="post" style="float: right;">
+    <button type="submit" class="add btn btn-primary" name="addClass" value="addClass">Add Class</button>
+  </form>
+</div>
 
 
 <%- include("partials/footer") -%>

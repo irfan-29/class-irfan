@@ -1,0 +1,38 @@
+<%- include("partials/timeTableFix") -%>
+
+
+<div class="head">
+  <h4>Delete Class</h4>
+</div>
+
+<div class="delete-add" style="display: flex; justify-content: space-between;">
+  <form action="/back" method="post">
+    <div style="float: left; ">
+      <button type="submit" class="add btn btn-outline-danger" value="back" name="back">Back</button>
+    </div>
+  </form>
+  <form action="/deleteAllClass" method="post">
+    <div style="float: right;">
+      <button type="submit" class="add btn btn-danger" name="deleteAllClass">Delete All Classes</button>
+    </div>
+  </form>
+</div>
+
+<% keyPeriod.forEach(function(ele){ %>
+<div class="task" style="border-radius:20px;">
+  <div style="float: left; width: 93%; margin-top: 8px;">
+    <p style="font-weight: 700;"><%= ele.day %></p>
+    <p><%= ele.subject %></p>
+    <p><%= ele.start %> - <%= ele.end %></p>
+  </div>
+  <div style="float: right; padding: 0;">
+    <form action="/deleteClass" method="post">
+      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= ele.day %>-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">
+        <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+    </form>
+  </div>
+</div>
+<% }); %>
+
+
+<%- include("partials/footer") -%>

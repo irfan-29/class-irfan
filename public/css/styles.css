@@ -236,16 +236,15 @@ footer {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .attendance {
-    width: 85%;
+    width: 96%;
     height: 450px;
-    margin-left: 3%;
-    margin-right: 10%;
+    margin-left: 1%;
+    margin-right: 3%;
   }
 
-  .period, .new-class, .task, .form-floating, .new-task {
+  .period, .new-class, .task, .form-floating, .new-task, .delete-add{
     margin: 20px 10%;
   }
-
   .head {
     margin: 35px 10%;
   }
@@ -260,10 +259,9 @@ footer {
     margin-right: 20%;
   }
 
-  .period, .new-class, .task, .form-floating, .new-task {
+  .period, .new-class, .task, .form-floating, .new-task, .delete-add{
     margin: 20px 17%;
   }
-
   .head {
     margin: 35px 17%;
   }
@@ -278,10 +276,9 @@ footer {
     margin-right: 20%;
   }
 
-  .period, .new-class, .task, .form-floating, .new-task {
+  .period, .new-class, .task, .form-floating, .new-task, .delete-add{
     margin: 20px 27%;
   }
-
   .head {
     margin: 35px 27%;
   }

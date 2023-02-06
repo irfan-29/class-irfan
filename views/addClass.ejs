@@ -1,8 +1,11 @@
 <%- include("partials/header") -%>
 
 
-<form class="" action="/addClass" method="post">
+<div class="head">
+  <h4>Add Class</h4>
+</div>
 
+<form action="/addClass" method="post">
   <div class="form-floating">
     <input class="form-control" placeholder="Enter the Day" type="text" required id="day" name="day">
     <label for="day">Day</label>
@@ -19,10 +22,17 @@
     <input class="form-control" type="text" required id="subject" placeholder="Subject" name="subject">
     <label for="subject">Subject (should not contain "-")</label>
   </div>
-  <div class="new-class">
-    <button type="submit" class="add btn btn-outline-primary">Add</button>
+  <div class="new-task">
+    <button type="submit" class="add btn btn-outline-primary" value="add" name="add">Add</button>
   </div>
+</form>
 
+<form action="/back" method="post">
+  <div class="delete-add" style="display: flex; justify-content: space-between;">
+    <div style="float: left; position: relative; bottom: 65px;">
+      <button type="submit" class="add btn btn-outline-danger" value="back" name="back">Back</button>
+    </div>
+  </div>
 </form>
 
 

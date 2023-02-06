@@ -67,7 +67,7 @@ app.use(function(req, res, next) {
 // Time Table
 
 app.get("/timeTable", function(req, res) {
-  const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const d = new Date();
   let day = weekday[d.getDay()];
   res.redirect("/" + day);;
@@ -170,10 +170,61 @@ app.get("/:day", function(req, res){
 
 
 
-// Redirecting to add new Class page
+// Redirecting to add new Class & delete Class page
 
-app.post("/day", function(req, res) {
+app.post("/day1", function(req, res) {
+  Period.find(function(err, period){
+    if (!err){
+       res.render("deleteClass", {keyPeriod: period});
+    }
+  });
+});
+
+app.post("/day2", function(req, res) {
   res.render("addClass");
+});
+
+
+
+// Deleting period
+
+app.post("/deleteClass", function(req, res){
+   const deleteClass = req.body.deleteClass;
+   const deletePeriod = deleteClass.split("-");
+   const day = deletePeriod[0];
+   const sub = deletePeriod[1];
+   const start = deletePeriod[2];
+   const end = deletePeriod[3];
+
+   Period.deleteOne({day: day, subject: sub, start: start, end: end}, function(err){
+       if(!err){
+         Period.findOne({subject: sub}, function(err, period){
+           if(!err){
+             if(!period){
+               console.log(sub);
+               Attendance.deleteOne({subject: sub}, function(err){
+                 if(err){console.log(err);}
+               });
+             }
+           }
+         });
+       }
+    });
+   res.redirect("/timeTable");
+});
+
+
+
+// Delete All Periods
+
+app.post("/deleteAllClass", function(req, res){
+  Period.deleteMany(function(err){
+    if(err){console.log(err);}
+  });
+  Attendance.deleteMany(function(err){
+    if(err){console.log(err);}
+  });
+  res.redirect("/timeTable");
 });
 
 
@@ -181,7 +232,7 @@ app.post("/day", function(req, res) {
 // Creating a new period
 
 app.post("/addClass", function(req, res) {
-  const day = _.lowerCase(req.body.day);
+  const day = _.capitalize(req.body.day);
   var s = String(req.body.start);
   var e = String(req.body.end);
   const subject = req.body.subject;
@@ -236,6 +287,14 @@ app.post("/addClass", function(req, res) {
       }
     });
     res.redirect("/timeTable");
+});
+
+
+
+// Back in delete class and add class
+
+app.post("/back", function(req,res){
+  res.redirect("/timeTable");
 });
 
 

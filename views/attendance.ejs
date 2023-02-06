@@ -1,52 +1,60 @@
 <%- include("partials/header") -%>
 
 
-    <div class="head">
-      <h4>Attendance</h4>
-    </div>
+<div class="head">
+  <h4>Attendance</h4>
+</div>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {
+    'packages': ['bar']
+  });
+  google.charts.setOnLoadCallback(drawStuff);
 
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+  function drawStuff() {
+    var data = new google.visualization.arrayToDataTable([
+      ['', 'Attendance'],
 
-      function drawStuff() {
-        var data = new google.visualization.arrayToDataTable([
-       ['Subject', 'Attendance'],
+      <% keyAttendance.forEach(function(ele) { %>
+        ["<%= ele.subject %>", <%= ((ele.present / (ele.present + ele.absent)) * 100).toFixed(2) %>], 
+      <% }); %>
 
-       <% keyAttendance.forEach(function(ele){ %>
-           ["<%= ele.subject %>", <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %>],
-       <% }); %>
+    ]);
 
-        ]);
+    var options = {
+      title: 'Class Attendance',
+      legend: {
+        position: 'none'
+      },
+      bars: 'horizontal',
+      axes: {
+        x: {
+          0: {
+            side: 'top',
+            label: 'Percentage'
+          }
+        }
+      },
+      bar: {
+        groupWidth: "90%"
+      }
+    };
 
-        var options = {
-          title: 'Class Attendance',
-          legend: { position: 'none'},
-          bars: 'horizontal',
-          axes: {
-            x: {
-              0: { side: 'top', label: 'Percentage'}
-            }
-          },
-          bar: { groupWidth: "90%"}
-        };
+    var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+    chart.draw(data, options);
+  };
+</script>
 
-        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-        chart.draw(data, options);
-      };
-    </script>
+<div id="top_x_div" class="attendance"></div>
 
-    <div id="top_x_div" class="attendance"></div>
-
-    <% keyAttendance.forEach(function(ele){ %>
-      <div class="period">
-        <h5><%= ele.subject %></h5>
-        <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
-        <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
-      </div>
-    <% }); %>
+<% keyAttendance.forEach(function(ele){ %>
+<div class="period">
+  <h5><%= ele.subject %></h5>
+  <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
+  <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
+</div>
+<% }); %>
 
 
 <%- include("partials/footer") -%>

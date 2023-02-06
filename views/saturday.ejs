@@ -9,7 +9,7 @@
 <div class="period">
   <p><%= ele.subject %></p>
   <p><%= ele.start %> - <%= ele.end %></p>
-  <form class="" action="/<%= ele.day %>" method="post">
+  <form action="/<%= ele.day %>" method="post">
     <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>">Present</button>
     <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>">Absent</button>
   </form>
@@ -22,24 +22,27 @@
       Select order day
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="/saturday">None</a></li>
+      <li><a class="dropdown-item" href="/Saturday">None</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" href="/monday">Monday</a></li>
-      <li><a class="dropdown-item" href="/tuesday">Tuesday</a></li>
-      <li><a class="dropdown-item" href="/wednesday">Wednesday</a></li>
-      <li><a class="dropdown-item" href="/thursday">Thursday</a></li>
-      <li><a class="dropdown-item" href="/friday">Friday</a></li>
+      <li><a class="dropdown-item" href="/Monday">Monday</a></li>
+      <li><a class="dropdown-item" href="/Tuesday">Tuesday</a></li>
+      <li><a class="dropdown-item" href="/Wednesday">Wednesday</a></li>
+      <li><a class="dropdown-item" href="/Thursday">Thursday</a></li>
+      <li><a class="dropdown-item" href="/Friday">Friday</a></li>
     </ul>
   </div>
 </div>
 
-<form class="" action="/day" method="post">
-  <div class="new-class">
-    <button type="submit" class="add btn btn-primary" name="addClass">Add Class</button>
-  </div>
-</form>
+<div class="delete-add" style="display: flex; justify-content: space-between;">
+  <form action="/day1" method="post" style=" float: left;">
+    <button type="submit" class="add btn btn-danger" name="deleteClass" value="deleteClass">Delete Class</button>
+  </form>
+  <form action="/day2" method="post" style="float: right;">
+    <button type="submit" class="add btn btn-primary" name="addClass" value="addClass">Add Class</button>
+  </form>
+</div>
 
 
 <%- include("partials/footer") -%>
