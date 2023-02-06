@@ -236,10 +236,10 @@ footer {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .attendance {
-    width: 96%;
+    width: 97%;
     height: 450px;
     margin-left: 1%;
-    margin-right: 3%;
+    margin-right: 2%;
   }
 
   .period, .new-class, .task, .form-floating, .new-task, .delete-add{

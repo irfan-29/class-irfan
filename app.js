@@ -201,7 +201,6 @@ app.post("/deleteClass", function(req, res){
          Period.findOne({subject: sub}, function(err, period){
            if(!err){
              if(!period){
-               console.log(sub);
                Attendance.deleteOne({subject: sub}, function(err){
                  if(err){console.log(err);}
                });
