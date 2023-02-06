@@ -67,7 +67,7 @@ app.use(function(req, res, next) {
 // Time Table
 
 app.get("/timeTable", function(req, res) {
-  const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
   const d = new Date();
   let day = weekday[d.getDay()];
   res.redirect("/" + day);;
@@ -232,7 +232,7 @@ app.post("/deleteAllClass", function(req, res){
 // Creating a new period
 
 app.post("/addClass", function(req, res) {
-  const day = _.capitalize(req.body.day);
+  const day = _.lowercase(req.body.day);
   var s = String(req.body.start);
   var e = String(req.body.end);
   const subject = req.body.subject;
