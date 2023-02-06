@@ -232,7 +232,7 @@ app.post("/deleteAllClass", function(req, res){
 // Creating a new period
 
 app.post("/addClass", function(req, res) {
-  const day = _.lowercase(req.body.day);
+  const day = _.lowerCase(req.body.day);
   var s = String(req.body.start);
   var e = String(req.body.end);
   const subject = req.body.subject;
