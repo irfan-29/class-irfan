@@ -1,3 +1,7 @@
+body{
+  padding-bottom: 70px;
+}
+
 .period {
   margin: 20px 23%;
   width: auto;
@@ -48,7 +52,6 @@ input[type="checkbox"] {
   border: solid;
   border-color: black;
   border-width: 2px;
-  ;
   padding: 15px 15px 10px 18px;
 }
 
@@ -208,6 +211,8 @@ footer {
   padding-top: 4px;
   padding-bottom: 4px;
   width: 100%;
+  position: relative;
+  top: 70px;
 }
 
 .dett {
