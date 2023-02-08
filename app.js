@@ -41,6 +41,14 @@ const attendanceSchema = new mongoose.Schema({
 });
 const Attendance = mongoose.model("Attendance", attendanceSchema);
 
+const absentSchema = new mongoose.Schema({
+  subject: String,
+  date: String,
+  start: String,
+  end: String
+});
+const Absent = mongoose.model("Absent", absentSchema);
+
 const taskSchema = new mongoose.Schema({
   task: String
 });
@@ -80,12 +88,16 @@ app.post("/timeTable", function(req, res) {
 
 
 
-// Passing attendance with respective subject
+// Passing attendance & absent details with respective subject
 
 app.get("/attendance", function(req, res){
     Attendance.find(function(err, period){
         if (!err){
-           res.render("attendance", {keyAttendance: period});
+          Absent.find(function(err, absent){
+            if(!err){
+              res.render("attendance", {keyAttendance: period, keyAbsent: absent});
+            }
+          });
         }
     });
 });
@@ -231,6 +243,9 @@ app.post("/deleteClass", function(req, res){
                Attendance.deleteOne({subject: sub}, function(err){
                  if(err){console.log(err);}
                });
+               Absent.deleteMany({subject: sub}, function(err){
+                 if(err){console.log(err);}
+               });
              }
            }
          });
@@ -248,6 +263,9 @@ app.post("/deleteAllClass", function(req, res){
     if(err){console.log(err);}
   });
   Attendance.deleteMany(function(err){
+    if(err){console.log(err);}
+  });
+  Absent.deleteMany(function(err){
     if(err){console.log(err);}
   });
   res.redirect("/timeTable");
@@ -334,6 +352,10 @@ app.post("/:day", function(req, res){
     const subject = sub.split("-");
     const sub1 = subject[0];
     const sub2 = subject[1];
+    const start = subject[2];
+    const end = subject[3];
+    const d = new Date().toLocaleDateString("fr-FR");
+
 
     Attendance.findOne({subject: sub2}, function(err, item){
      if (!err){
@@ -349,6 +371,13 @@ app.post("/:day", function(req, res){
            Attendance.updateOne({subject: sub2}, {absent: absent}, function(err){
              if(err){console.log(err);}
            });
+           const newAbsent = new Absent({
+             subject: sub2,
+             date: d,
+             start: start,
+             end: end
+           });
+           newAbsent.save();
        }
      }
    });

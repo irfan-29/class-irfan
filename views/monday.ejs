@@ -10,8 +10,8 @@
   <p><%= ele.subject %></p>
   <p><%= ele.start %> - <%= ele.end %></p>
   <form action="/<%= ele.day %>" method="post">
-    <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>">Present</button>
-    <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>">Absent</button>
+    <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
+    <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
   </form>
 </div>
 <% }); %>

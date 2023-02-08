@@ -57,8 +57,15 @@
   <h5><%= ele.subject %></h5>
   <p>Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
   <p>Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
+  <p style="font-weight: 700;">Absent on</p>
+  <% keyAbsent.forEach(function(abs){ %>
+    <% if(ele.subject == abs.subject){ %>
+      <p style="font-size: 1.05rem;">• <%= abs.date %>⇾ <%= abs.start %>-<%= abs.end %></p>
+    <% } %>
+  <% }); %>
 </div>
 <% }); %>
+
 
 
 <%- include("partials/footer") -%>
