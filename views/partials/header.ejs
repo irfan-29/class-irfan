@@ -17,12 +17,14 @@
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a href="/" style="text-decoration: none;  padding-right: 12px;">
-        <h3><img src="images/class.png" style="width: 43px; height: 43px; color: white; float: left; padding-right: 5px; padding-top: 2.5px; padding-bottom: 2.5px" alt="class">CLASS<sup>BETA</sup></h3>
+      <a href="/" class="top" style="text-decoration: none;  padding-right: 12px;">
+        <h3><img src="images/class.png" style="width: 43px; height: 43px; color: white; float: left; padding-right: 5px; padding-top: 2.5px; padding-bottom: 2.5px">CLASS<sup>BETA</sup></h3>
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -42,10 +44,25 @@
           </li>
         </ul>
       </div>
+     <div class="display: flex; float: right">
+        <img src="images/sun.png" id="icon">
+     </div>
     </div>
+
   </nav>
 </head>
 
+<script>
+  var icon =document.getElementById("icon");
+  icon.onclick = function(){
+    document.body.classList.toggle("dark-theme");
+    if(document.body.classList.contains("dark-theme")){
+      icon.src="images/moon.png";
+    }else{
+      icon.src="images/sun.png";
+    }
+  }
+</script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -60,7 +77,6 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
 
 <body>
   <div class="container-fluid" style="padding-top: 70px;">
