@@ -1,0 +1,53 @@
+<%- include("partials/header") -%>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Attendance', 'Percentage'],
+      ['Present', <%= keyPresent %>],
+      ['Absent', <%= keyAbsent %>]
+    ]);
+
+    var options = {
+      legend: {position: 'bottom'},
+      pieHole: 0.35,
+      slices: {
+            0: { color: '#4bb543' },
+            1: { color: '#fc100d' }
+          },
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+  }
+</script>
+
+
+<div class="head">
+  <h4>Overall Attendance</h4>
+</div>
+
+<form action="/backAttendance" method="post">
+  <div class="delete-add" style="display: flex; justify-content: space-between;">
+    <div style="float: left;">
+      <button type="submit" class="add btn btn-outline-danger" value="back" name="back">Back</button>
+    </div>
+  </div>
+</form>
+
+<div id="donutchart" class="overallAttendance"></div>
+
+<div class="period">
+  <p style="font-weight: 700;">Overall Classes : <%= keyPresent + keyAbsent %></p>
+  <p>Overall Present : <%= keyPresent %></p>
+  <p>Overall Absent  : <%= keyAbsent %></p>
+</div>
+
+
+
+
+<%- include("partials/footer") -%>

@@ -5,6 +5,10 @@
   <h4>Attendance</h4>
 </div>
 
+<form action="/overallAttendance" class="new-task" method="post">
+  <button type="submit" class="add btn btn-outline-primary" name="overall">Overall Attendance</button>
+</form>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {
@@ -17,7 +21,7 @@
       ['', 'Attendance'],
 
       <% keyAttendance.forEach(function(ele) { %>
-        ["<%= ele.subject %>", <%= ((ele.present / (ele.present + ele.absent)) * 100).toFixed(2) %>], 
+        ["<%= ele.subject %>", <%= ((ele.present / (ele.present + ele.absent)) * 100).toFixed(2) %>],
       <% }); %>
 
     ]);

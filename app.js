@@ -92,6 +92,33 @@ app.get("/attendance", function(req, res){
 
 
 
+// Overall Attendance
+
+app.post("/overallAttendance", function(req, res){
+    var oPresent = 0;
+    var oAbsent = 0;
+  Attendance.find({}, function(err, periods){
+    if(!err){
+      periods.forEach(function(period){
+        oPresent += period.present;
+        oAbsent += period.absent;
+      });
+      res.render("overallAttendance", {keyPresent: oPresent, keyAbsent: oAbsent});
+    }
+  });
+});
+
+
+
+// Back in Overall Attendance
+
+app.post("/backAttendance", function(req,res){
+  res.redirect("/attendance");
+});
+
+
+
+
 // Tasks
 
 app.post("/tasks", function(req, res) {

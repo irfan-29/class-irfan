@@ -266,6 +266,13 @@ footer {
   justify-content: center;
   margin-bottom: 50px;
 }
+.overallAttendance{
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -274,6 +281,11 @@ footer {
     height: 450px;
     margin-left: 1%;
     margin-right: 2%;
+  }
+  .overallAttendance{
+    width: 100%;
+    zoom: 150%;
+    height: 250px;
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
@@ -295,7 +307,13 @@ footer {
     margin-left: 12%;
     margin-right: 20%;
   }
-
+  .overallAttendance{
+    width: 70%;
+    height: 500px;
+    zoom: 120%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
     margin: 20px 17%;
   }
@@ -315,7 +333,13 @@ footer {
     margin-left: 16.5%;
     margin-right: 20%;
   }
-
+  .overallAttendance{
+    width: 70%;
+    height: 500px;
+    zoom: 120%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
     margin: 20px 27%;
   }
