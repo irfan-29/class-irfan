@@ -297,11 +297,11 @@ footer {
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
-    margin: 20px 8%;
+    margin: 20px 7%;
   }
 
   .head {
-    margin: 35px 8%;
+    margin: 35px 7%;
   }
 
   .top {
