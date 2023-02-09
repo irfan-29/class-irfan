@@ -130,7 +130,6 @@ app.post("/backAttendance", function(req,res){
 
 
 
-
 // Tasks
 
 app.post("/tasks", function(req, res) {
@@ -356,31 +355,30 @@ app.post("/:day", function(req, res){
     const end = subject[3];
     const d = new Date().toLocaleDateString("fr-FR");
 
-
     Attendance.findOne({subject: sub2}, function(err, item){
-     if (!err){
-       if (sub1 === "p"){
-         let present = item.present;
-         present = present + 1;
-         Attendance.updateOne({subject: sub2}, {present: present}, function(err){
-             if(err){console.log(err);}
-             });
-       }else if (sub1 === "a"){
-           let absent = item.absent;
-           absent = absent + 1;
-           Attendance.updateOne({subject: sub2}, {absent: absent}, function(err){
-             if(err){console.log(err);}
-           });
-           const newAbsent = new Absent({
-             subject: sub2,
-             date: d,
-             start: start,
-             end: end
-           });
-           newAbsent.save();
-       }
-     }
-   });
+      if (!err){
+        if (sub1 === "p"){
+          let present = item.present;
+          present = present + 1;
+          Attendance.updateOne({subject: sub2}, {present: present}, function(err){
+            if(err){console.log(err);}
+          });
+        }else if (sub1 === "a"){
+          let absent = item.absent;
+          absent = absent + 1;
+          Attendance.updateOne({subject: sub2}, {absent: absent}, function(err){
+            if(err){console.log(err);}
+          });
+          const newAbsent = new Absent({
+            subject: sub2,
+            date: d,
+            start: start,
+            end: end
+          });
+          newAbsent.save();
+        }
+      }
+    });
     res.redirect("/" + day);
   }
 });
@@ -388,5 +386,5 @@ app.post("/:day", function(req, res){
 
 
 app.listen(process.env.PORT || 3000, function(){
-    console.log("Server started at port 3000");
+  console.log("Server started at port 3000");
 });

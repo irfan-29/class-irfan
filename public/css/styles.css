@@ -1,28 +1,32 @@
-#icon{
+/* Theme */
+#icon {
   width: 25px;
   cursor: pointer;
   position: relative;
   left: 5px;
 }
-:root{
+
+:root {
   --primary-color: white;
   --secondary-color: white;
   --tertiary-color: #e8e8e8;
   --forth-color: black;
 }
-.dark-theme{
+
+.dark-theme {
   --primary-color: #353535;
   --secondary-color: #454545;
   --tertiary-color: #4d4d4d;
   --forth-color: white;
 }
 
-
-body{
+/* General */
+body {
   padding-bottom: 70px;
   background: var(--primary-color);
 }
-.task-title{
+
+.task-title {
   background: var(--primary-color);
   color: #36b170;
   margin: 20px 23%;
@@ -49,7 +53,6 @@ body{
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--forth-color);
-
   background: var(--tertiary-color);
   border-radius: 15px;
   border: solid;
@@ -268,7 +271,8 @@ footer {
   justify-content: center;
   margin-bottom: 50px;
 }
-.overallAttendance{
+
+.overallAttendance {
   text-align: center;
   align-items: center;
   display: flex;
@@ -284,19 +288,22 @@ footer {
     margin-left: 1%;
     margin-right: 2%;
   }
-  .overallAttendance{
+
+  .overallAttendance {
     width: 100%;
     zoom: 150%;
     height: 250px;
   }
 
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
     margin: 20px 9%;
   }
+
   .head {
     margin: 35px 9%;
   }
-  .top{
+
+  .top {
     width: 67%;
   }
 }
@@ -309,21 +316,25 @@ footer {
     margin-left: 12%;
     margin-right: 20%;
   }
-  .overallAttendance{
+
+  .overallAttendance {
     width: 70%;
     height: 500px;
     zoom: 120%;
     margin-left: 15%;
     margin-right: 15%;
   }
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
+
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
     margin: 20px 17%;
   }
+
   .head {
     margin: 35px 17%;
   }
-  .top{
-    width:85%;
+
+  .top {
+    width: 85%;
   }
 }
 
@@ -335,20 +346,24 @@ footer {
     margin-left: 16.5%;
     margin-right: 20%;
   }
-  .overallAttendance{
+
+  .overallAttendance {
     width: 70%;
     height: 500px;
     zoom: 120%;
     margin-left: 15%;
     margin-right: 15%;
   }
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add{
+
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
     margin: 20px 27%;
   }
+
   .head {
     margin: 35px 27%;
   }
-  .top{
+
+  .top {
     width: 85%;
   }
 }
