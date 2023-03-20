@@ -13,7 +13,7 @@
 <div class="task">
   <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
     <form action="/completeTask" method="post">
-      <div class="" style="display: flex;">
+      <div style="display: flex;">
         <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>" onchange="this.form.submit()">
         <p style="position: relative; left: 5px;"> <%= ele.task %></p>
       </div>
@@ -36,7 +36,7 @@
 <div class="task">
   <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
     <form action="/notCompleteTask" method="post">
-      <div class="" style="display: flex;">
+      <div style="display: flex;">
         <input class="taskInput" type="checkbox" name="checkbox2" value="<%= ele.completeTask %>" onchange="this.form.submit()">
         <p style="position: relative; left: 5px; text-decoration: line-through; text-decoration-color: #36b170;"> <%= ele.completeTask %></p>
       </div>

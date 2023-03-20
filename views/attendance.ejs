@@ -15,17 +15,13 @@
     'packages': ['bar']
   });
   google.charts.setOnLoadCallback(drawStuff);
-
   function drawStuff() {
     var data = new google.visualization.arrayToDataTable([
       ['', 'Attendance'],
-
       <% keyAttendance.forEach(function(ele) { %>
         ["<%= ele.subject %>", <%= ((ele.present / (ele.present + ele.absent)) * 100).toFixed(2) %>],
       <% }); %>
-
     ]);
-
     var options = {
       title: 'Class Attendance',
       legend: {
@@ -44,7 +40,6 @@
         groupWidth: "90%"
       }
     };
-
     var chart = new google.charts.Bar(document.getElementById('top_x_div'));
     chart.draw(data, options);
   };

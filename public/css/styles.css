@@ -20,7 +20,6 @@
   --forth-color: white;
 }
 
-
 /* General */
 body {
   padding-bottom: 70px;
@@ -74,6 +73,10 @@ input[type="checkbox"] {
   height: 22px;
   position: relative;
   top: 6px;
+}
+
+td{
+  padding: 7px 15px 7px 0;
 }
 
 .head {
@@ -178,7 +181,6 @@ span {
 }
 
 .parent {
-  margin: 1rem;
   padding: 2rem 1rem;
   padding-bottom: 70px;
   text-align: center;
@@ -186,7 +188,7 @@ span {
 
 .child {
   display: inline-block;
-  padding: 1rem 1rem;
+  padding: 0.8rem 0.8rem;
   vertical-align: middle;
   text-align: center;
 }
@@ -296,8 +298,13 @@ footer {
     height: 250px;
   }
 
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
     margin: 20px 7%;
+  }
+
+  .chd-1{
+    position: relative;
+    right: 12px;
   }
 
   .head {
@@ -326,7 +333,7 @@ footer {
     margin-right: 15%;
   }
 
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
     margin: 20px 17%;
   }
 
@@ -356,7 +363,7 @@ footer {
     margin-right: 15%;
   }
 
-  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add {
+  .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
     margin: 20px 27%;
   }
 

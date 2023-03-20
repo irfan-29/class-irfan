@@ -1,0 +1,60 @@
+<%- include("partials/header") -%>
+
+
+<div class="head">
+  <h4>Profile</h4>
+</div>
+
+
+<div class="period" style="background: none; border: none;">
+  <div class="" style="text-align: center;">
+    <img src="images/user.png" style="width: 180px;">
+  </div>
+</div>
+
+
+<div class="period">
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>:</td>
+      <td><%= keyUser.name %></td>
+    </tr>
+    <tr>
+      <td>DOB</td>
+      <td>:</td>
+      <td><%= keyUser.dob %></td>
+    </tr>
+    <tr>
+      <td>Degree</td>
+      <td>:</td>
+      <td><%= keyUser.degree %></td>
+    </tr>
+    <tr>
+      <td>College</td>
+      <td>:</td>
+      <td><%= keyUser.college %></td>
+    </tr>
+  </table>
+
+</div>
+
+
+
+
+
+<form action="/editProfile" method="post">
+  <div class="new-task">
+    <button type="submit" class="add btn btn-primary" value="add" name="add">Edit</button>
+  </div>
+</form>
+
+<form action="/logout" method="post">
+  <div class="delete-add" style="display: flex; justify-content: space-between;">
+    <div style="float: left; position: relative; bottom: 65px;">
+      <button type="submit" class="add btn btn-danger" value="back" name="back">Logout</button>
+    </div>
+  </div>
+</form>
+
+<%- include("partials/footer") -%>
