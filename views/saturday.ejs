@@ -7,14 +7,14 @@
 
 <% keyPeriod.forEach(function(ele){ %>
   <% if(ele.day==day){%>
-<div class="period">
-  <p><%= ele.subject %></p>
-  <p><%= ele.start %> - <%= ele.end %></p>
-  <form action="/<%= ele.day %>" method="post">
-    <button type="submit" class="btn btn-outline-success" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
-    <button type="submit" class="btn btn-outline-danger" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
-  </form>
-</div>
+    <div class="period">
+      <p><%= ele.subject %></p>
+      <p style="font-size: 1rem; font-weight: 400; position: relative; bottom: 10px;"><%= ele.start %> - <%= ele.end %></p>
+      <form action="/<%= ele.day %>" style="position: relative; bottom: 16px;" method="post">
+        <button type="submit" class="btn btn-outline-success" style="font-size: 0.8rem;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
+        <button type="submit" class="btn btn-outline-danger" style="font-size: 0.8rem; position: relative; left: 4px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
+      </form>
+    </div>
 <% } }); %>
 
 <div class="new-class">
