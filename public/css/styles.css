@@ -44,7 +44,7 @@ body {
   border: solid;
   border-color: #bdbdbd;
   border-width: medium;
-  padding: 10px 15px 1px 18px;
+  padding: 10px 15px 0 18px;
 }
 
 .task {
@@ -231,7 +231,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   padding-bottom: 10px;
 }
@@ -299,7 +299,7 @@ footer {
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
-    margin: 20px 8%;
+    margin: 20px 7%;
   }
 
   .chd-1{
@@ -308,7 +308,7 @@ footer {
   }
 
   .head {
-    margin: 35px 8%;
+    margin: 35px 7%;
   }
 
   .top {

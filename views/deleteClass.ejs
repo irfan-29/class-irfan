@@ -21,9 +21,9 @@
 <% keyPeriod.forEach(function(ele){ %>
 <div class="task" style="border-radius:20px;">
   <div style="float: left; width: 93%; margin-top: 8px;">
-    <p style="text-transform: capitalize; font-weight: 700;"><%= ele.day %></p>
-    <p><%= ele.subject %></p>
-    <p><%= ele.start %> - <%= ele.end %></p>
+    <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= ele.day %></h5>
+    <p style="font-weight: 700; position: relative; top: 4px;"><%= ele.subject %></p>
+    <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;"><%= ele.start %> - <%= ele.end %></p>
   </div>
   <div style="float: right; padding: 0;">
     <form action="/deleteClass" method="post">
