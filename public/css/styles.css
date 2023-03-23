@@ -299,7 +299,7 @@ footer {
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
-    margin: 20px 7%;
+    margin: 20px 8%;
   }
 
   .chd-1{
@@ -308,7 +308,7 @@ footer {
   }
 
   .head {
-    margin: 35px 7%;
+    margin: 35px 8%;
   }
 
   .top {
@@ -334,11 +334,11 @@ footer {
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
-    margin: 20px 17%;
+    margin: 20px 20%;
   }
 
   .head {
-    margin: 35px 17%;
+    margin: 35px 20%;
   }
 
   .top {
@@ -364,11 +364,11 @@ footer {
   }
 
   .period, .new-class, .task, .task-title, .form-floating, .new-task, .delete-add, .parent {
-    margin: 20px 27%;
+    margin: 20px 30%;
   }
 
   .head {
-    margin: 35px 27%;
+    margin: 35px 30%;
   }
 
   .top {
