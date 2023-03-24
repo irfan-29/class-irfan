@@ -33,22 +33,22 @@
 </div>
 
 <% keyCompleteTask.forEach(function(ele){ %>
-<div class="task">
-  <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
-    <form action="/notCompleteTask" method="post">
-      <div style="display: flex;">
-        <input class="taskInput" type="checkbox" name="checkbox2" value="<%= ele.completeTask %>" onchange="this.form.submit()">
-        <p style="position: relative; left: 5px; text-decoration: line-through; text-decoration-color: #36b170;"> <%= ele.completeTask %></p>
-      </div>
-    </form>
-  </div>
-  <div style="float: right; padding: 0;">
-    <form action="/deleteCompleteTask" method="post">
-      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteCompleteTask" value="<%= ele.completeTask %>"><img class="delete" src="images/delete.png"
+  <div class="task">
+    <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
+      <form action="/notCompleteTask" method="post">
+        <div style="display: flex;">
+          <input class="taskInput" type="checkbox" name="checkbox2" value="<%= ele.completeTask %>" onchange="this.form.submit()">
+          <p style="position: relative; left: 5px; text-decoration: line-through; text-decoration-color: #36b170;"> <%= ele.completeTask %></p>
+        </div>
+      </form>
+    </div>
+    <div style="float: right; padding: 0;">
+      <form action="/deleteCompleteTask" method="post">
+        <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteCompleteTask" value="<%= ele.completeTask %>"><img class="delete" src="images/delete.png"
           style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
-    </form>
+      </form>
+   </div>
   </div>
-</div>
 <% }); %>
 
 <form action="/tasks" style="padding-top: 10px;" method="post">

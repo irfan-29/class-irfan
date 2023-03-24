@@ -7,14 +7,14 @@
 
 <% keyPeriod.forEach(function(ele){ %>
   <% if(ele.day==day){%>
-<div class="period">
-  <h5 style="position: relative; top: 3px;"><%= ele.subject %></h5>
-  <p style="font-size: 1.15rem; font-weight: 500; position: relative; bottom: 9px;"><%= ele.start %> - <%= ele.end %></p>
-  <form action="/<%= ele.day %>" style="position: relative; bottom: 16px;" method="post">
-    <button type="submit" class="btn btn-outline-success" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
-    <button type="submit" class="btn btn-outline-danger" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
-  </form>
-</div>
+    <div class="period">
+      <h5 style="position: relative; top: 3px;"><%= ele.subject %></h5>
+      <p style="font-size: 1.15rem; font-weight: 500; position: relative; bottom: 9px;"><%= ele.start %> - <%= ele.end %></p>
+      <form action="/<%= ele.day %>" style="position: relative; bottom: 16px;" method="post">
+        <button type="submit" class="btn btn-outline-success" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
+        <button type="submit" class="btn btn-outline-danger" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
+      </form>
+    </div>
 <% } }); %>
 
 <div class="delete-add" style="display: flex; justify-content: space-between;">

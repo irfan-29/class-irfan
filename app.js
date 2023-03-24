@@ -82,6 +82,8 @@ const userSchema = new mongoose.Schema({
   completeTask: [completeTaskSchema]
 });
 
+
+
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
@@ -111,6 +113,8 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+
+
 // To set the error raised by favicon.ico
 
 app.use(function(req, res, next) {
@@ -129,11 +133,17 @@ app.get("/", function(req, res) {
 });
 
 
+
+// login with google
 app.get("/auth/google", passport.authenticate('google', {scope: ["profile"]}));
 app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: '/login'}),
   function(req, res){
     res.redirect("/home");
 });
+
+
+
+// login and register
 
 app.get("/login",function(req,res){
   res.render("login");
@@ -143,19 +153,8 @@ app.get("/register",function(req,res){
   res.render("register");
 });
 
-app.get("/profile",function(req,res){
-  const id = req.user.id;
-    User.findOne({_id: id}, function(err, user){
-        if (!err){
-          res.render("profile", {keyUser: user});
-        }
-    });
-});
-
-
 
 app.post("/register", function(req, res){
-
   User.register({username: req.body.username}, req.body.password, function(err, user){
     if(err){
       console.log(err);
@@ -185,6 +184,19 @@ app.post("/login", function(req, res){
   });
 });
 
+
+
+// User profile
+
+app.get("/profile",function(req,res){
+  const id = req.user.id;
+    User.findOne({_id: id}, function(err, user){
+        if (!err){
+          res.render("profile", {keyUser: user});
+        }
+    });
+});
+
 app.post("/profile", function(req, res){
   const id = req.user.id;
   const name = req.body.name;
@@ -208,9 +220,17 @@ app.post("/backProfile", function(req,res){
   res.redirect("/profile");
 });
 
+
+
+// logout
+
 app.post("/logout", function(req, res){
   res.redirect("/");
 })
+
+
+
+// render home page after login
 
 app.get("/home", function(req, res) {
   const id = req.user.id;
@@ -220,6 +240,8 @@ app.get("/home", function(req, res) {
         }
     });
 });
+
+
 
 // Time Table
 
@@ -234,7 +256,6 @@ app.post("/timeTable", function(req, res) {
   const day = req.body.day;
   res.redirect(String(day));
 });
-
 
 
 
@@ -287,7 +308,6 @@ app.post("/tasks", function(req, res) {
   const newTask = new Task({
     task: task
   });
-
   User.findOne({_id: id}, function(err, user){
     user.task.push(newTask);
     user.save();
@@ -361,17 +381,11 @@ app.post("/notCompleteTask", function(req,res){
 app.get("/:day", function(req, res){
     const id = req.user.id;
     const day = req.params.day;
-
-    // User.find({_id: id, period: {$elemMatch: {day: day}}});
-
     User.findOne({_id: id}, function(err, user){
-        if (!err){
-              res.render(day, {keyPeriod: user.period, day: day});
-            }
-          });
-       // }
-    // });
-
+      if (!err){
+        res.render(day, {keyPeriod: user.period, day: day});
+      }
+    });
 });
 
 
@@ -406,7 +420,6 @@ app.post("/deleteClass", function(req, res){
 
    User.updateOne({_id: id}, {$pull: {period: {day: day, subject: sub, start: start, end: end}}}, function(err){
      if(!err){
-
        User.findOne({_id: id}, function(err, user){
          if(!err){
            var i = 0;
@@ -427,7 +440,6 @@ app.post("/deleteClass", function(req, res){
        });
      }
    });
-
    res.redirect("/deleteClass");
 });
 
@@ -490,9 +502,6 @@ app.post("/addClass", function(req, res) {
       end: e,
       subject: sub
     });
-    // period.save();
-
-
 
     User.findOne({_id: id}, function(err, user){
       user.period.push(period);
@@ -513,7 +522,6 @@ app.post("/addClass", function(req, res) {
             present: 0,
             absent: 0
           });
-
           user.attendance.push(attendance);
           user.save();
 
@@ -546,10 +554,8 @@ app.post("/:day", function(req, res){
     const d = new Date().toLocaleDateString("fr-FR");
     const id = req.user.id;
 
-
     User.findOne({_id: id}, function(err, user){
       if(!err){
-        // console.log(user.attendance);
         user.attendance.forEach(function(period){
           if(period.subject === sub2){
             if(sub1 === "p"){
@@ -568,7 +574,6 @@ app.post("/:day", function(req, res){
                   console.log(err);
                 }
               });
-
               const newAbsent = new Absent({
                 subject: sub2,
                 date: d,
@@ -582,35 +587,7 @@ app.post("/:day", function(req, res){
         });
       }
     });
-
-
-    // Attendance.findOne({subject: sub2}, function(err, item){
-    //   if (!err){
-    //     if (sub1 === "p"){
-    //       let present = item.present;
-    //       present = present + 1;
-    //       Attendance.updateOne({subject: sub2}, {present: present}, function(err){
-    //         if(err){console.log(err);}
-    //       });
-    //     }else if (sub1 === "a"){
-    //       let absent = item.absent;
-    //       absent = absent + 1;
-    //       Attendance.updateOne({subject: sub2}, {absent: absent}, function(err){
-    //         if(err){console.log(err);}
-    //       });
-    //       const newAbsent = new Absent({
-    //         subject: sub2,
-    //         date: d,
-    //         start: start,
-    //         end: end
-    //       });
-    //       newAbsent.save();
-    //     }
-    //   }
-    // });
-
     res.redirect("/" + day);
-
 });
 
 
