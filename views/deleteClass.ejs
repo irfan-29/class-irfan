@@ -5,6 +5,8 @@
   <h4>Delete Class</h4>
 </div>
 
+<div id="liveAlertPlaceholder"></div>
+
 <div class="delete-add" style="display: flex; justify-content: space-between;">
   <form action="/back" method="post">
     <div style="float: left; ">
@@ -13,7 +15,7 @@
   </form>
   <form action="/deleteAllClass" method="post">
     <div style="float: right;">
-      <button type="submit" class="add btn btn-danger" name="deleteAllClass">Delete All Classes</button>
+      <button type="submit" class="add btn btn-danger" id="liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
     </div>
   </form>
 </div>
@@ -33,6 +35,36 @@
   </div>
 </div>
 <% }); %>
+
+
+<script>
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<figure class="notification_${type}" style="position: fixed; top: 85px;">`,
+      `<div class="notification_body_${type}">`,
+        `<img src="images/${type}.png" title="Success" alt="Success" class="notification_icon_${type}"/>`,
+        `${message}`, 
+      '</div>',
+      `<div class="notification_progress_${type}"></div>`,
+    '</figure>',
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+
+const alertTrigger = document.getElementById('liveAlertBtn');
+
+
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('All the classes has been Deleted!', 'danger')
+  });
+}
+</script>
+
 
 
 <%- include("partials/footer") -%>

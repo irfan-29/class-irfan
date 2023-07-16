@@ -5,6 +5,8 @@
   <h4>Add Class</h4>
 </div>
 
+<div id="liveAlertPlaceholder"></div>
+
 <form action="/addClass" method="post">
   <div class="form-floating">
     <input class="form-control" placeholder="Enter the Day" type="text" required pattern="[a-zA-Z]{6,9}" title="must mention the day completely Ex:Monday" id="day" name="day">
@@ -23,7 +25,7 @@
     <label for="subject">Subject</label>
   </div>
   <div class="new-task">
-    <button type="submit" class="add btn btn-outline-primary" value="add" name="add">Add</button>
+    <button type="submit" class="add btn btn-outline-primary" id="liveAlertBtn" value="add" name="add">Add</button>
   </div>
 </form>
 
@@ -35,5 +37,30 @@
   </div>
 </form>
 
+
+<script>
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<figure class="notification_${type}" style="position: fixed; top: 85px;">`,
+      `<div class="notification_body_${type}">`,
+        `<img src="images/${type}.png" title="Success" alt="Success" class="notification_icon_${type}"/>`,
+        `${message}`, 
+      '</div>',
+      `<div class="notification_progress_${type}"></div>`,
+    '</figure>',
+  ].join('')
+  alertPlaceholder.append(wrapper)
+}
+
+const alertTrigger = document.getElementById('liveAlertBtn');
+
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('New class Added Successfully!', 'success')
+  });
+}
+</script>
 
 <%- include("partials/footer") -%>

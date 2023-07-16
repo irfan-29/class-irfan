@@ -451,7 +451,9 @@ app.post("/deleteAllClass", function(req, res){
   const id = req.user.id;
   User.findOneAndUpdate({_id: id}, {$set: {period: [], attendance: [], absent: []}}, function(err){
     if(!err){
-      res.redirect("/deleteClass");
+      setTimeout(function () {
+        res.redirect("/deleteClass");
+       }, 2000); 
     }
   });
 });
@@ -528,7 +530,9 @@ app.post("/addClass", function(req, res) {
         }
       }
     });
-    res.redirect("/timeTable");
+    setTimeout(function () {
+      res.redirect("/timeTable");
+     }, 2000); 
 });
 
 
@@ -587,7 +591,9 @@ app.post("/:day", function(req, res){
         });
       }
     });
-    res.redirect("/" + day);
+    setTimeout(function () {
+      res.redirect("/" + day);
+     }, 2000);  
 });
 
 
