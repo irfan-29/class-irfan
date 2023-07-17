@@ -319,7 +319,9 @@ app.get("/tasks", function(req, res){
   const id = req.user.id;
   User.findOne({_id: id}, function(err, user){
     if (!err){
-      res.render("tasks", {keyTask: user.task, keyCompleteTask: user.completeTask});
+      setTimeout(function () {
+        res.render("tasks", {keyTask: user.task, keyCompleteTask: user.completeTask});
+       }, 1000); 
     }
   });
 });
@@ -330,7 +332,9 @@ app.post("/deleteTask", function(req,res){
   User.updateOne({_id: id}, {$pull: {task: {task: deleteTask}}}, function(err, user){
     if(err){console.log(err);}
   });
-  res.redirect("/tasks");
+  setTimeout(function () {
+    res.redirect("/tasks");
+   }, 1000); 
 });
 
 app.post("/deleteCompleteTask", function(req,res){
@@ -339,7 +343,9 @@ app.post("/deleteCompleteTask", function(req,res){
   User.updateOne({_id: id}, {$pull: {completeTask: {completeTask: deleteCompleteTask}}}, function(err, user){
     if(err){console.log(err);}
   });
-  res.redirect("/tasks");
+  setTimeout(function () {
+    res.redirect("/tasks");
+   }, 1000); 
 });
 
 app.post("/completeTask", function(req,res){
@@ -453,7 +459,7 @@ app.post("/deleteAllClass", function(req, res){
     if(!err){
       setTimeout(function () {
         res.redirect("/deleteClass");
-       }, 1500); 
+       }, 1000); 
     }
   });
 });
@@ -532,7 +538,7 @@ app.post("/addClass", function(req, res) {
     });
     setTimeout(function () {
       res.redirect("/timeTable");
-     }, 1500); 
+     }, 1000); 
 });
 
 
@@ -593,7 +599,7 @@ app.post("/:day", function(req, res){
     });
     setTimeout(function () {
       res.redirect("/" + day);
-     }, 1500);  
+     }, 1000);  
 });
 
 

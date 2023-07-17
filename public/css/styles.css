@@ -34,7 +34,7 @@
   border-radius: 6px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
-  animation: fade-in 2.5s linear;
+  animation: fade-in 2s linear;
   z-index: 1;
   visibility: hidden;
 }
@@ -48,7 +48,7 @@
   border-radius: 6px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
-  animation: fade-in 2.5s linear;
+  animation: fade-in 2s linear;
   z-index: 1;
   visibility: hidden;
 }
@@ -78,7 +78,7 @@
   transform-origin: left;
   background: linear-gradient(to right, #aaec8a, hsl(153, 96%, 29%));
   border-radius: inherit;
-  animation: progress 2s 0.3s linear;
+  animation: progress 1.5s 0.3s linear;
 }
 .notification_progress_danger {
   position: absolute;
@@ -90,7 +90,7 @@
   transform-origin: left;
   background: linear-gradient(to right, #f0a9b8, #dc093e);
   border-radius: inherit;
-  animation: progress 2s 0.3s linear;
+  animation: progress 1.5s 0.3s linear;
 }
 
 @keyframes fade-in {
