@@ -26,30 +26,29 @@
 
 .notification_success {
   position: fixed;
-  top: 165px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   width: max-content;
   background-color: #d1e7dd;
   color: #0a3622;
   border-radius: 6px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
-  animation: fade-in 3.5s linear;
-  opacity: 0;
+  animation: fade-in 2.5s linear;
   visibility: hidden;
 }
 .notification_danger {
   position: fixed;
-  top: 165px;
-  right: 8px;
+  bottom: 10px;
+  right: 10px;
   width: max-content;
   background-color: #F8D7DA;
   color: #58151C;
   border-radius: 6px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
-  animation: fade-in 3.5s linear;
-  opacity: 0;
+  animation: fade-in 2.5s linear;
+  /* opacity: ; */
   visibility: hidden;
 }
 
@@ -76,9 +75,9 @@
   height: 3px;
   transform: scaleX(0);
   transform-origin: left;
-  background: linear-gradient(to right, #aaec8a, #03c86f);
+  background: linear-gradient(to right, #aaec8a, hsl(153, 96%, 29%));
   border-radius: inherit;
-  animation: progress 3s 0.3s linear;
+  animation: progress 2s 0.3s linear;
 }
 .notification_progress_danger {
   position: absolute;
@@ -88,9 +87,9 @@
   height: 3px;
   transform: scaleX(0);
   transform-origin: left;
-  background: linear-gradient(to right, #ec8a9f, #c8033e);
+  background: linear-gradient(to right, #f0a9b8, #dc093e);
   border-radius: inherit;
-  animation: progress 3s 0.3s linear;
+  animation: progress 2s 0.3s linear;
 }
 
 @keyframes fade-in {

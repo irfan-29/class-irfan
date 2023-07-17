@@ -43,7 +43,7 @@
   const appendAlert = (message, type) => {
   const wrapper = document.createElement('div')
   wrapper.innerHTML = [
-    `<figure class="notification_${type}" style="position: fixed; top: 85px;">`,
+    `<figure class="notification_${type}">`,
       `<div class="notification_body_${type}">`,
         `<img src="images/${type}.png" title="Success" alt="Success" class="notification_icon_${type}"/>`,
         `${message}`, 

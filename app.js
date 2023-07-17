@@ -453,7 +453,7 @@ app.post("/deleteAllClass", function(req, res){
     if(!err){
       setTimeout(function () {
         res.redirect("/deleteClass");
-       }, 2000); 
+       }, 1500); 
     }
   });
 });
@@ -532,7 +532,7 @@ app.post("/addClass", function(req, res) {
     });
     setTimeout(function () {
       res.redirect("/timeTable");
-     }, 2000); 
+     }, 1500); 
 });
 
 
@@ -593,7 +593,7 @@ app.post("/:day", function(req, res){
     });
     setTimeout(function () {
       res.redirect("/" + day);
-     }, 2000);  
+     }, 1500);  
 });
 
 
