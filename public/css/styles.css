@@ -35,6 +35,7 @@
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
   animation: fade-in 2.5s linear;
+  z-index: 1;
   visibility: hidden;
 }
 .notification_danger {
@@ -48,7 +49,7 @@
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(30px);
   animation: fade-in 2.5s linear;
-  /* opacity: ; */
+  z-index: 1;
   visibility: hidden;
 }
 
