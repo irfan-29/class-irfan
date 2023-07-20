@@ -367,6 +367,15 @@ footer {
   top: 70px;
 }
 
+.profile-tag{
+  color: #36b170;
+  text-decoration: none;
+}
+
+.profile-tag:hover {
+  text-decoration: underline;
+}
+
 .dett {
   font-weight: 400;
   font-size: 0.9rem;
