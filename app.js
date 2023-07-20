@@ -83,6 +83,7 @@ const userSchema = new mongoose.Schema({
   dob: String,
   degree: String,
   college: String,
+  modifyDate: String,
   period: [periodSchema],
   attendance: [attendanceSchema],
   present: [presentSchema],
@@ -274,7 +275,7 @@ app.get("/attendance", function(req, res){
   const id = req.user.id;
     User.findOne({_id: id}, function(err, user){
         if (!err){
-          res.render("attendance", {keyAttendance: user.attendance, keyPresent: user.present, keyAbsent: user.absent});
+          res.render("attendance", {keyAttendance: user.attendance, keyDate: user.modifyDate, keyPresent: user.present, keyAbsent: user.absent});
         }
     });
 });
@@ -613,6 +614,11 @@ app.post("/:day", function(req, res){
             }
           }
         });
+      }
+    });
+    User.updateOne({_id: id}, {$set: {modifyDate: d}}, function(err){
+      if(err){
+        console.log(err);
       }
     });
     setTimeout(function () {
