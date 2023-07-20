@@ -11,9 +11,9 @@
 <% keyPeriod.forEach(function(ele){ %>
   <% if(ele.day==day){%>
     <div class="period">
-      <h5 style="position: relative; top: 3px;"><%= ele.subject %></h5>
-      <p style="font-size: 1.15rem; font-weight: 500; position: relative; bottom: 9px;"><%= ele.start %> - <%= ele.end %></p>
-      <form action="/<%= ele.day %>" style="position: relative; bottom: 16px;" method="post">
+      <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
+      <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
+      <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
         <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
         <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
         <p><span id="display_message"></span></p>
