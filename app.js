@@ -49,6 +49,14 @@ const attendanceSchema = new mongoose.Schema({
 });
 const Attendance = mongoose.model("Attendance", attendanceSchema);
 
+const presentSchema = new mongoose.Schema({
+  subject: String,
+  date: String,
+  start: String,
+  end: String
+});
+const Present = mongoose.model("Present", presentSchema);
+
 const absentSchema = new mongoose.Schema({
   subject: String,
   date: String,
@@ -77,6 +85,7 @@ const userSchema = new mongoose.Schema({
   college: String,
   period: [periodSchema],
   attendance: [attendanceSchema],
+  present: [presentSchema],
   absent: [absentSchema],
   task: [taskSchema],
   completeTask: [completeTaskSchema]
@@ -259,13 +268,13 @@ app.post("/timeTable", function(req, res) {
 
 
 
-// Passing attendance & absent details with respective subject
+// Passing attendance, present & absent details with respective subject
 
 app.get("/attendance", function(req, res){
   const id = req.user.id;
     User.findOne({_id: id}, function(err, user){
         if (!err){
-          res.render("attendance", {keyAttendance: user.attendance, keyAbsent: user.absent});
+          res.render("attendance", {keyAttendance: user.attendance, keyPresent: user.present, keyAbsent: user.absent});
         }
     });
 });
@@ -576,7 +585,16 @@ app.post("/:day", function(req, res){
                   console.log(err);
                 }
               });
-            }else if(sub1 === "a"){
+              const newPresent = new Present({
+                subject: sub2,
+                date: d,
+                start: start,
+                end: end
+              });
+              user.present.push(newPresent);
+              user.save();
+            }
+            else if(sub1 === "a"){
               let absent = period.absent;
               absent = absent + 1;
               User.updateOne({_id: id, "attendance.subject": sub2}, {$set: {"attendance.$.absent": absent}}, function(err, user){

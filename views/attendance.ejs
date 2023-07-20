@@ -52,6 +52,12 @@
     <h5 style="position: relative; top: 8px;"><%= ele.subject %></h5>
     <p style="font-size: 1.2rem; font-weight: 500; position: relative; bottom: 1px;">Present - <%= ele.present %>/<%= ele.present+ele.absent %></p>
     <p style="font-size: 1.2rem; font-weight: 500; position: relative; bottom: 7px;">Percentage - <%= ((ele.present/(ele.present+ele.absent))*100).toFixed(2) %></p>
+    <p style="font-weight: 700; position: relative; bottom: 8px; padding-bottom: 0;">Present on</p>
+    <% keyPresent.forEach(function(pre){ %>
+      <% if(ele.subject == pre.subject){ %>
+        <p style="font-size: 1.05rem; position: relative; bottom: 15px;">• <%= pre.date %> ➣<%= pre.start %>-<%= pre.end %></p>
+      <% } %>
+    <% }); %>
     <p style="font-weight: 700; position: relative; bottom: 8px; padding-bottom: 0;">Absent on</p>
     <% keyAbsent.forEach(function(abs){ %>
       <% if(ele.subject == abs.subject){ %>
