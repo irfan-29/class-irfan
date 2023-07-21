@@ -398,6 +398,7 @@ app.post("/notCompleteTask", function(req,res){
 app.get("/:day", function(req, res){
     const id = req.user.id;
     const day = req.params.day;
+
     User.findOne({_id: id}, function(err, user){
       if (!err){
         res.render(day, {keyPeriod: user.period, day: day});
@@ -549,6 +550,19 @@ app.post("/addClass", function(req, res) {
         }
       }
     });
+    // User.findOne({_id: id}, function(err, user){
+    //   console.log(user.period);
+    //   user.aggregate( [
+    //        {
+    //            _id: 0,
+    //            result:
+    //              {
+    //                 $sortArray: { input: "$period", sortBy: { "period.period": 1 } }
+    //              }
+    //        }
+    //  ] );
+    // });
+
     setTimeout(function () {
       res.redirect("/timeTable");
      }, 1000); 

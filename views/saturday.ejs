@@ -8,18 +8,26 @@
 <div id="liveAlertPlaceholder"></div>
 
 <% var i=1; %>
-<% keyPeriod.forEach(function(ele){ %>
-  <% if(ele.day==day){%>
-    <div class="period">
-      <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
-      <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
-      <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
-        <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
-        <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
-        <p><span id="display_message"></span></p>
-      </form>
-    </div>
-<% i+= 2;} }); i=1; %>
+<% for(let j=1; j < 11; j++){ %>
+  <% keyPeriod.forEach(function(ele){ %>
+    <% if(ele.day==day){%>
+      <% if(ele.period==j){%>
+        <div class="period" style="display: flex;">
+          <div style="float: left; width: 91%;">
+            <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
+            <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
+            <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
+              <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
+              <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
+              <p><span id="display_message"></span></p>
+            </form>
+          </div>
+          <div style="float: right; position: relative; top: 4px;">
+            <p style="font-size: 0.9rem; position: relative; top: 7px; margin: 0;">Period</p>   
+            <button type="submit" class="add btn btn-light" style="font-size: 1.4rem; font-weight: 600; border-radius: 50%; height: 37px; width: 37px; position: relative; left: 1.4px;" name="periodNumber" title="Period"><p style="position: relative; bottom: 6px; right: 0.7px;"><%= ele.period %></p></button>
+          </div>
+        </div>
+<% } } }); i+= 2;} i=1; %>
 
 <div class="new-class">
   <div class="dropdown">
@@ -82,10 +90,6 @@ const alertTrigger13 = document.getElementById('liveAlertBtn13');
 const alertTrigger14 = document.getElementById('liveAlertBtn14');
 const alertTrigger15 = document.getElementById('liveAlertBtn15');
 const alertTrigger16 = document.getElementById('liveAlertBtn16');
-const alertTrigger17 = document.getElementById('liveAlertBtn17');
-const alertTrigger18 = document.getElementById('liveAlertBtn18');
-const alertTrigger19 = document.getElementById('liveAlertBtn19');
-const alertTrigger20 = document.getElementById('liveAlertBtn20');
 
 
 if (alertTrigger1) {
@@ -150,22 +154,6 @@ if (alertTrigger1) {
   });
 }if (alertTrigger16) {
   alertTrigger16.addEventListener('click', () => {
-    appendAlert('Successfully marked as absent!', 'danger')
-  });
-}if (alertTrigger17) {
-  alertTrigger17.addEventListener('click', () => {
-    appendAlert('Successfully marked as present!', 'success')
-  });
-}if (alertTrigger18) {
-  alertTrigger18.addEventListener('click', () => {
-    appendAlert('Successfully marked as absent!', 'danger')
-  });
-}if (alertTrigger19) {
-  alertTrigger19.addEventListener('click', () => {
-    appendAlert('Successfully marked as present!', 'success')
-  });
-}if (alertTrigger20) {
-  alertTrigger20.addEventListener('click', () => {
     appendAlert('Successfully marked as absent!', 'danger')
   });
 }
