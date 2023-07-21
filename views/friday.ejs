@@ -10,14 +10,20 @@
 <% var i=1; %>
 <% keyPeriod.forEach(function(ele){ %>
   <% if(ele.day==day){%>
-    <div class="period">
-      <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
-      <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
-      <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
-        <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
-        <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
-        <p><span id="display_message"></span></p>
-      </form>
+    <div class="period" style="display: flex;">
+      <div style="float: left; width: 91%;">
+        <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
+        <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
+        <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
+          <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
+          <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
+          <p><span id="display_message"></span></p>
+        </form>
+      </div>
+      <div style="float: right; position: relative; top: 5px;">
+          <p style="font-size: 0.9rem; position: relative; top: 7px; margin: 0;">Period</p>   
+          <button type="submit" class="add btn btn-light" style="font-size: 1.4rem; font-weight: 600; border-radius: 50%; height: 40px; width: 40px; position: relative; left: 1.4px;" name="periodNumber" title="Period"><p style="position: relative; bottom: 4.2px; right: 0.7px;"><%= ele.period %></p></button>
+      </div>
     </div>
 <% i+= 2;} }); i=1; %>
 

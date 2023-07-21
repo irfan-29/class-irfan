@@ -36,6 +36,7 @@ mongoose.connect("mongodb+srv://admin-irfan:Irf6360944@cluster0.jo7etur.mongodb.
 
 const periodSchema = new mongoose.Schema({
   day: String,
+  period: Number,
   start: String,
   end: String,
   subject: String
@@ -480,6 +481,7 @@ app.post("/deleteAllClass", function(req, res){
 
 app.post("/addClass", function(req, res) {
   const day = _.lowerCase(req.body.day);
+  const period = (req.body.period);
   var s = String(req.body.start);
   var e = String(req.body.end);
   const sub = req.body.subject;
@@ -514,15 +516,16 @@ app.post("/addClass", function(req, res) {
         e = splitEnd[0] + ":" + splitEnd[1] + "PM";
     }
 
-    const period = new Period({
+    const newClass = new Period({
       day: day,
+      period: period,
       start: s,
       end: e,
       subject: sub
     });
 
     User.findOne({_id: id}, function(err, user){
-      user.period.push(period);
+      user.period.push(newClass);
       user.save();
     });
 

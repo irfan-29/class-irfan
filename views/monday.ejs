@@ -10,7 +10,8 @@
 <% var i=1; %>
 <% keyPeriod.forEach(function(ele){ %>
   <% if(ele.day==day){%>
-    <div class="period">
+  <div class="period">
+    <div style="float: left; width: 93%; margin-top: 8px;">
       <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
       <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
       <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
@@ -19,6 +20,12 @@
         <p><span id="display_message"></span></p>
       </form>
     </div>
+    <div style="float: right; padding: 0;">
+        <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= ele.day %>-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">
+          <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+      
+    </div>
+  </div>
 <% i+= 2;} }); i=1; %>
 
 <div class="delete-add" style="display: flex; justify-content: space-between;">
