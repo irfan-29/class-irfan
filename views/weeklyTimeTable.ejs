@@ -1,0 +1,128 @@
+<%- include("partials/timeTableFix") -%>
+
+
+<div class="head">
+  <h4>Weekly Schedule</h4>
+</div>
+
+<table cellspacing="15px" align="center">
+    <!--<caption>Timetable</caption>-->
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.6);">
+        <th>
+            Day/Period
+        </th>
+        <th>
+            1<br>9:30-10:20
+        </th>
+        <th>
+            2<br>10:20-11:10
+        </th>
+        <th>
+            3<br>11:10-12:00
+        </th>
+        <th>
+            4<br>12:40-1:30
+        </th>
+        <th>
+            5<br>1:30-2:20
+        </th>
+        <th>
+            6<br>2:20-3:10
+        </th>
+        <th>
+            7<br>3:10-4:00
+        </th>
+    </tr>
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Monday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="monday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+    </tr>
+
+
+
+
+
+
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Tuesday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="tuesday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+    </tr>
+
+
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Wednesday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="wednesday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+    </tr>
+
+
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Thursday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="thursday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+        
+    </tr>
+
+
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Friday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="friday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+    </tr>
+
+
+    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+        <td>
+            <b>Saturday</b>
+        </td>
+        <% var i=1; %>
+        <% for(let j=1; j < 11; j++){ %>
+          <% keyPeriod.forEach(function(ele){ %>
+            <% if(ele.day=="saturday"){%>
+              <% if(ele.period==j){%>
+                <td><%= ele.subject %></td>
+        <% } } }); i+= 2;} i=1; %>
+    </tr>
+    
+</table>
+
+
+
+<%- include("partials/footer") -%>

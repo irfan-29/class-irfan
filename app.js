@@ -270,6 +270,8 @@ app.post("/timeTable", function(req, res) {
 
 
 
+
+
 // Passing attendance, present & absent details with respective subject
 
 app.get("/attendance", function(req, res){
@@ -405,6 +407,21 @@ app.get("/:day", function(req, res){
       }
     });
 });
+
+
+
+
+
+//passing details to weekly timetable
+
+app.get("/weeklyTimeTable", function(req, res) {
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+      res.render(weeklyTimeTable, {keyPeriod: user.period});
+    }
+  });
+});
+
 
 
 
