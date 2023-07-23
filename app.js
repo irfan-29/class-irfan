@@ -523,15 +523,6 @@ app.get("/:day", function(req, res){
 
 // Redirecting to add new Class & delete Class page
 
-// app.post("/day1", function(req, res) {
-//   const id = req.user.id;
-//   User.findOne({_id: id}, function(err, user){
-//     if (!err){
-//        res.render("deleteClass", {keyPeriod: user.period});
-//     }
-//   });
-// });
-
 app.post("/day1", function(req, res) {
   res.render("addClass");
 });
@@ -552,8 +543,6 @@ app.get("/editClass", function(req, res){
     }
   });
 })
-
-
 
 
 
@@ -651,7 +640,6 @@ app.post("/addClass", function(req, res) {
           });
           user.attendance.push(attendance);
           user.save();
-
         }
       }
     });
