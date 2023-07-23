@@ -404,8 +404,6 @@ app.post("/notCompleteTask", function(req,res){
 
 
 
-
-
 //passing details to weekly timetable
 
 app.get("/weeklyTimeTable", function(req, res) {
@@ -503,10 +501,6 @@ app.post("/backTiming", function(req,res){
 
 
 
-
-
-
-
 // Passing periods to respective day of timetable
 
 app.get("/:day", function(req, res){
@@ -530,8 +524,6 @@ app.post("/day1", function(req, res) {
 
 
 
-
-
 // Edit classes
 
 app.get("/editClass", function(req, res){
@@ -543,8 +535,6 @@ app.get("/editClass", function(req, res){
     }
   });
 })
-
-
 
 
 
