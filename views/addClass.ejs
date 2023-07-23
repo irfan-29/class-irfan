@@ -21,7 +21,6 @@
     <label for="day">Day</label>
   </div>
   <div class="form-floating">
-    <!-- <input class="form-control" placeholder="Enter the Day" type="text" required pattern="[a-zA-Z]{6,9}" title="must mention the day completely Ex:Monday" id="day" name="day"> -->
     <select name="period" id="period" class="form-control" title="select the period" placeholder="Enter the Period">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -33,14 +32,6 @@
       <option value="8">8</option>
     </select>
     <label for="period">Period</label>
-  </div>
-  <div class="form-floating">
-    <input class="form-control" onchange="onTimeChange()" type="time" required id="start" name="start">
-    <label for="start">Start time</label>
-  </div>
-  <div class="form-floating">
-    <input class="form-control" type="time" required id="end" name="end">
-    <label for="end">End time</label>
   </div>
   <div class="form-floating">
     <input class="form-control" type="text" required pattern="[a-zA-Z0-9\s]{1,10}" title="must contain only alphanumeric and space of upto 10 characters long" id="subject" placeholder="Subject" name="subject">

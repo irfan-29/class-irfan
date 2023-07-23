@@ -1,0 +1,120 @@
+<%- include("partials/header") -%>
+
+
+<div class="head">
+  <h4>Edit Class</h4>
+</div>
+
+
+
+<div class="task-title">
+  <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Add Class</h5>
+</div>
+
+<div class="period" style="display: flex; justify-content: space-between; padding-top: 25px; padding-bottom: 18px;">
+  <div style="float: left;">
+      To add new classes
+  </div>
+  <form action="/day1" method="post" style=" float: right;">
+      <button type="submit" style="position: relative; bottom:8px;" class="add btn btn-primary" name="addClass" value="addClass">Add Class</button>
+    </form>
+</div>
+
+
+
+
+<div class="task-title">
+    <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Edit Period Timings</h5>
+</div>
+
+<form action="/editTiming" method="post">
+    <div class="new-task">
+      <button type="submit" class="add btn btn-primary" name="add">Edit Timing</button>
+    </div>
+  </form>
+
+<div class="period">
+    <% var i=false; %>
+          <% for(let j=1; j < 9; j++){ %>
+            <% keyTiming.forEach(function(ele){ %>
+                <% if(ele.period==j){ %>
+                  <p>Period <%= j %>: <span style="font-size: 1.1rem; position: relative; bottom: .5px; left: 5px;"><%= ele.start %> - <%= ele.end %></span></p>  
+                <% i = true;} %>
+              <% });%>
+            <% if(i==false){ %>
+           <p>Period <%= j %>: -</p>
+          <% } i=false;} %>
+  </div>
+
+
+   
+  <div class="task-title">
+    <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Delete Class</h5>
+</div>
+
+
+  <div id="liveAlertPlaceholder"></div>
+
+<!-- <div class="delete-add" style="display: flex;">
+  <form action="/deleteAllClass" method="post" style="float: right;">
+    <div style="float: right;">
+      <button type="submit" class="add btn btn-danger" id="liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
+    </div>
+  </form>
+</div> -->
+
+<form action="/deleteAllClass" method="post">
+    <div class="new-task">
+      <button type="submit" class="add btn btn-danger" id="liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
+    </div>
+  </form>
+
+<% keyPeriod.forEach(function(ele){ %>
+    <% keyTiming.forEach(function(time){ %>
+        <% if(ele.period==time.period){ %>
+<div class="task" style="border-radius:20px;">
+  <div style="float: left; width: 93%; margin-top: 8px;">
+    <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= ele.day %></h5>
+    <p style="font-weight: 700; position: relative; top: 4px;"><%= ele.subject %></p>
+    <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;">Period: <%= ele.period %> (<%= time.start %> - <%= time.end %>)</p>
+  </div>
+  <div style="float: right; padding: 0;">
+    <form action="/deleteClass" method="post">
+      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= ele.day %>-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">
+        <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+    </form>
+  </div>
+</div>
+<% } }); }); %>
+
+
+<script>
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<figure class="notification_${type}">`,
+      `<div class="notification_body_${type}">`,
+        `<img src="images/${type}.png" title="Success" alt="Success" class="notification_icon_${type}"/>`,
+        `${message}`, 
+      '</div>',
+      `<div class="notification_progress_${type}"></div>`,
+    '</figure>',
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+
+const alertTrigger = document.getElementById('liveAlertBtn');
+
+
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('All the classes has been Deleted!', 'danger')
+  });
+}
+</script>
+
+  
+<%- include("partials/footer") -%>

@@ -12,13 +12,15 @@
   <% keyPeriod.forEach(function(ele){ %>
     <% if(ele.day==day){%>
       <% if(ele.period==j){%>
+        <% keyTiming.forEach(function(time){ %>
+          <% if(ele.period==time.period){%>
         <div class="period" style="display: flex;">
           <div style="float: left; width: 91%;">
             <h5 style="position: relative; top: 13px;"><%= ele.subject %></h5>
-            <p class="period-para"><%= ele.start %> - <%= ele.end %></p>
+            <p class="period-para"><%= time.start %> - <%= time.end %></p>
             <form action="/<%= ele.day %>" style="position: relative; bottom: 5px;" method="post">
-              <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Present</button>
-              <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">Absent</button>
+              <button type="submit" class="btn btn-outline-success" id="liveAlertBtn<%= i %>" style="font-weight: 600;" name="period" value="p-<%= ele.subject %>-<%= time.start %>-<%= time.end %>">Present</button>
+              <button type="submit" class="btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="font-weight: 600; position: relative; left: 5px;" name="period" value="a-<%= ele.subject %>-<%= time.start %>-<%= time.end %>">Absent</button>
               <p><span id="display_message"></span></p>
             </form>
           </div>
@@ -27,7 +29,7 @@
             <button type="submit" class="add btn btn-light" style="font-size: 1.4rem; font-weight: 600; border-radius: 50%; height: 37px; width: 37px; position: relative; left: 1.4px;" name="periodNumber" title="Period"><p style="position: relative; bottom: 6px; right: 0.7px;"><%= ele.period %></p></button>
           </div>
         </div>
-<% } } }); i+= 2;} i=1; %>
+<% } }); } } }); i+= 2;} i=1; %>
 
 <div class="new-class">
   <div class="dropdown">
@@ -48,14 +50,6 @@
   </div>
 </div>
 
-<div class="delete-add" style="display: flex; justify-content: space-between;">
-  <form action="/day1" method="post" style=" float: left;">
-    <button type="submit" class="add btn btn-danger" name="deleteClass" value="deleteClass">Delete Class</button>
-  </form>
-  <form action="/day2" method="post" style="float: right;">
-    <button type="submit" class="add btn btn-primary" name="addClass" value="addClass">Add Class</button>
-  </form>
-</div>
 
 
 <script>

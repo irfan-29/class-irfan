@@ -28,6 +28,7 @@
   --period-anime: #4d4d4d;
 }
 
+/* Alerts */
 .notification_success {
   position: fixed;
   bottom: 10px;
@@ -183,7 +184,8 @@ input[type="checkbox"] {
 
 
 table{
-  margin: 60px 12%;
+  width: 80%;
+  margin: 60px 10%;
   /* font-size: 1.5rem;
   font-weight: 900; */
   background: var(--secondary-color);
@@ -194,16 +196,16 @@ table{
 
 td {
   text-align: center;
-  /* width: 350px; */
+  /* max-width: 150px; */
   /* height: 65px;  */
-  padding: 20px 25px;
+  padding: 15px 40px;
   font-size: 1.2rem;
 }
 th{
   text-align: center;
   /* width: 450px; */
   /* height: 75px;  */
-  padding: 20px 25px;
+  padding: 20px 40px;
   font-size: 1.2rem;
   white-space: nowrap;
 
@@ -293,6 +295,7 @@ span {
   font-weight: 600;
   font-size: 1.2rem;
   color: white;
+  white-space: nowrap;
 }
 
 .det {
@@ -431,6 +434,16 @@ footer {
   margin-bottom: 50px;
 }
 
+/* .table-container{
+  display: block;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap; 
+} */
+
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .attendance {
@@ -471,6 +484,15 @@ footer {
 
   .top {
     width: 67%;
+  }
+
+  .table-container{
+    display: block;
+      max-width: -moz-fit-content;
+      max-width: fit-content;
+      margin: 0 auto;
+      overflow-x: auto;
+      white-space: nowrap; 
   }
 }
 

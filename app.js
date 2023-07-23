@@ -43,6 +43,13 @@ const periodSchema = new mongoose.Schema({
 });
 const Period = mongoose.model("Period", periodSchema);
 
+const timingSchema = new mongoose.Schema({
+  period: Number,
+  start: String,
+  end: String,
+});
+const Timing = mongoose.model("Timing", timingSchema);
+
 const attendanceSchema = new mongoose.Schema({
   subject: String,
   present: Number,
@@ -86,6 +93,7 @@ const userSchema = new mongoose.Schema({
   college: String,
   modifyDate: String,
   period: [periodSchema],
+  timing: [timingSchema],
   attendance: [attendanceSchema],
   present: [presentSchema],
   absent: [absentSchema],
@@ -395,50 +403,159 @@ app.post("/notCompleteTask", function(req,res){
 
 
 
-// Passing periods to respective day of timtable
-
-app.get("/:day", function(req, res){
-    const id = req.user.id;
-    const day = req.params.day;
-
-    User.findOne({_id: id}, function(err, user){
-      if (!err){
-        res.render(day, {keyPeriod: user.period, day: day});
-      }
-    });
-});
-
-
 
 
 
 //passing details to weekly timetable
 
 app.get("/weeklyTimeTable", function(req, res) {
+  const id = req.user.id;
+
   User.findOne({_id: id}, function(err, user){
     if (!err){
-      res.render(weeklyTimeTable, {keyPeriod: user.period});
+      res.render("weeklyTimeTable", {keyPeriod: user.period, keyTiming: user.timing});
     }
   });
 });
 
 
+
+// Period Timing
+
+app.get("/timing",function(req,res){
+  res.render("timing");
+});
+
+
+app.post("/timing", function(req, res){
+
+  const id = req.user.id;
+  const p1 = req.body.period;
+  var s1 = String(req.body.start);
+  var e1 = String(req.body.end);
+
+  //To convert the 24hrs format to 12hrs format
+  var splitStart = s1.split(":");
+  if(splitStart[0] < 12){
+    if(splitStart[0] == "0" || splitStart[0] == "00"){
+        splitStart[0] = "12";
+    }
+    s1 = splitStart[0] + ":" + splitStart[1] + "AM";
+  }else{
+    splitStart[0] = splitStart[0] % 12;
+    if (splitStart[0] == "0" || splitStart[0] == "00") {
+      splitStart[0] = "12";
+    }
+    s1 = splitStart[0] + ":" + splitStart[1] + "PM";
+  }
+
+  var splitEnd = e1.split(":");
+  if (splitEnd[0] < 12) {
+    if (splitEnd[0] == "0" || splitEnd[0] == "00") {
+      splitEnd[0] = "12";
+    }
+    e1 = splitEnd[0] + ":" + splitEnd[1] + "AM";
+    } else {
+        splitEnd[0] = splitEnd[0] % 12;
+        if (splitEnd[0] == "0" || splitEnd[0] == "00") {
+          splitEnd[0] = "12";
+        }
+        e1 = splitEnd[0] + ":" + splitEnd[1] + "PM";
+    }
+
+  console.log(p1);
+  User.findOne({_id: id}, function(err, user){
+    if(!err){
+      var i=0;
+      user.timing.forEach(function(time){
+        if(time.period==p1){
+          i++;
+        }
+      });
+      if(i==0){
+        User.updateOne({_id: id}, {$push: {timing: {start: s1, end: e1, period: p1}}}, function(err){
+          if(err){
+            console.log(err);
+          }
+        });
+      }else{
+        User.updateOne({_id: id, "timing.period": p1}, {"timing.$.start": s1, "timing.$.end": e1}, function(err){
+          if(err){
+            console.log(err);
+          }
+        });
+      }
+    }
+  });
+
+  res.redirect("/editClass");
+});
+
+
+app.post("/editTiming", function(req,res){
+  res.redirect("/timing");
+});
+
+app.post("/backTiming", function(req,res){
+  res.redirect("/editClass");
+});
+
+
+
+
+
+
+
+
+// Passing periods to respective day of timetable
+
+app.get("/:day", function(req, res){
+  const id = req.user.id;
+  const day = req.params.day;
+
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+      res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
+    }
+  });
+});
 
 
 // Redirecting to add new Class & delete Class page
 
+// app.post("/day1", function(req, res) {
+//   const id = req.user.id;
+//   User.findOne({_id: id}, function(err, user){
+//     if (!err){
+//        res.render("deleteClass", {keyPeriod: user.period});
+//     }
+//   });
+// });
+
 app.post("/day1", function(req, res) {
+  res.render("addClass");
+});
+
+
+
+
+
+
+// Edit classes
+
+app.get("/editClass", function(req, res){
+  // res.render("editClass");
   const id = req.user.id;
   User.findOne({_id: id}, function(err, user){
     if (!err){
-       res.render("deleteClass", {keyPeriod: user.period});
+       res.render("editClass", {keyPeriod: user.period, keyTiming: user.timing});
     }
   });
-});
+})
 
-app.post("/day2", function(req, res) {
-  res.render("addClass");
-});
+
+
+
 
 
 
@@ -449,11 +566,12 @@ app.post("/deleteClass", function(req, res){
    const deletePeriod = deleteClass.split("-");
    const day = deletePeriod[0];
    const sub = deletePeriod[1];
-   const start = deletePeriod[2];
-   const end = deletePeriod[3];
+   const period = deletePeriod[2];
+   const start = deletePeriod[3];
+   const end = deletePeriod[4];
    const id = req.user.id;
 
-   User.updateOne({_id: id}, {$pull: {period: {day: day, subject: sub, start: start, end: end}}}, function(err){
+   User.updateOne({_id: id}, {$pull: {period: {day: day, subject: sub, period: period}}}, function(err){
      if(!err){
        User.findOne({_id: id}, function(err, user){
          if(!err){
@@ -467,6 +585,9 @@ app.post("/deleteClass", function(req, res){
               User.updateOne({_id: id}, {$pull: {attendance: {subject: sub}}}, function(err){
                 if(err){console.log(err);}
               });
+              User.updateOne({_id: id}, {$pull: {present: {subject: sub}}}, function(err){
+                if(err){console.log(err);}
+              });
               User.updateOne({_id: id}, {$pull: {absent: {subject: sub}}}, function(err){
                 if(err){console.log(err);}
               });
@@ -475,7 +596,7 @@ app.post("/deleteClass", function(req, res){
        });
      }
    });
-   res.redirect("/deleteClass");
+   res.redirect("/editClass");
 });
 
 
@@ -484,10 +605,10 @@ app.post("/deleteClass", function(req, res){
 
 app.post("/deleteAllClass", function(req, res){
   const id = req.user.id;
-  User.findOneAndUpdate({_id: id}, {$set: {period: [], attendance: [], absent: []}}, function(err){
+  User.findOneAndUpdate({_id: id}, {$set: {period: [], attendance: [], absent: [], present: []}}, function(err){
     if(!err){
       setTimeout(function () {
-        res.redirect("/deleteClass");
+        res.redirect("/editClass");
        }, 1000); 
     }
   });
@@ -500,45 +621,12 @@ app.post("/deleteAllClass", function(req, res){
 app.post("/addClass", function(req, res) {
   const day = _.lowerCase(req.body.day);
   const period = (req.body.period);
-  var s = String(req.body.start);
-  var e = String(req.body.end);
   const sub = req.body.subject;
   const id = req.user.id;
-
-  //To convert the 24hrs format to 12hrs format
-  var splitStart = s.split(":");
-  if(splitStart[0] < 12){
-    if(splitStart[0] == "0" || splitStart[0] == "00"){
-        splitStart[0] = "12";
-    }
-    s = splitStart[0] + ":" + splitStart[1] + "AM";
-  }else{
-    splitStart[0] = splitStart[0] % 12;
-    if (splitStart[0] == "0" || splitStart[0] == "00") {
-      splitStart[0] = "12";
-    }
-    s = splitStart[0] + ":" + splitStart[1] + "PM";
-  }
-
-  var splitEnd = e.split(":");
-  if (splitEnd[0] < 12) {
-    if (splitEnd[0] == "0" || splitEnd[0] == "00") {
-      splitEnd[0] = "12";
-    }
-    e = splitEnd[0] + ":" + splitEnd[1] + "AM";
-    } else {
-        splitEnd[0] = splitEnd[0] % 12;
-        if (splitEnd[0] == "0" || splitEnd[0] == "00") {
-          splitEnd[0] = "12";
-        }
-        e = splitEnd[0] + ":" + splitEnd[1] + "PM";
-    }
 
     const newClass = new Period({
       day: day,
       period: period,
-      start: s,
-      end: e,
       subject: sub
     });
 
@@ -567,21 +655,9 @@ app.post("/addClass", function(req, res) {
         }
       }
     });
-    // User.findOne({_id: id}, function(err, user){
-    //   console.log(user.period);
-    //   user.aggregate( [
-    //        {
-    //            _id: 0,
-    //            result:
-    //              {
-    //                 $sortArray: { input: "$period", sortBy: { "period.period": 1 } }
-    //              }
-    //        }
-    //  ] );
-    // });
 
     setTimeout(function () {
-      res.redirect("/timeTable");
+      res.redirect("/editClass");
      }, 1000); 
 });
 
@@ -590,7 +666,7 @@ app.post("/addClass", function(req, res) {
 // Back in delete class and add class
 
 app.post("/back", function(req,res){
-  res.redirect("/timeTable");
+  res.redirect("/editClass");
 });
 
 

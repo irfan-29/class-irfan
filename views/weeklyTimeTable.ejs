@@ -1,127 +1,170 @@
-<%- include("partials/timeTableFix") -%>
+<%- include("partials/header") -%>
 
 
 <div class="head">
   <h4>Weekly Schedule</h4>
 </div>
 
-<table cellspacing="15px" align="center">
+<table class="table-container" cellspacing="15px" align="center">
     <!--<caption>Timetable</caption>-->
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.6);">
+    <tr style="box-shadow: 0px 3px 2px -3px rgba(0,0,0,.6);">
         <th>
             Day/Period
         </th>
         <th>
-            1<br>9:30-10:20
+            1
         </th>
         <th>
-            2<br>10:20-11:10
+            2
         </th>
         <th>
-            3<br>11:10-12:00
+            3
         </th>
         <th>
-            4<br>12:40-1:30
+            4
         </th>
         <th>
-            5<br>1:30-2:20
+            5
         </th>
         <th>
-            6<br>2:20-3:10
+            6
         </th>
         <th>
-            7<br>3:10-4:00
+            7
         </th>
+        <th>
+            8
+      </th>
     </tr>
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr style="box-shadow: 0px 2px 2px -2px rgba(0,0,0,.2);">
         <td>
             <b>Monday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="monday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>    
     </tr>
 
 
 
-
-
-
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr style="box-shadow: 0px 2px 2px -2px rgba(0,0,0,.3);">
         <td>
             <b>Tuesday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="tuesday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>
     </tr>
 
 
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr style="box-shadow: 0px 2px 2px -2px rgba(0,0,0,.3);">
         <td>
             <b>Wednesday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="wednesday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>
     </tr>
 
 
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr style="box-shadow: 0px 2px 2px -2px rgba(0,0,0,.3);">
         <td>
             <b>Thursday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="thursday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
-        
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>     
     </tr>
 
+    
 
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr style="box-shadow: 0px 2px 2px -2px rgba(0,0,0,.3);">
         <td>
             <b>Friday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="friday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>
     </tr>
 
 
-    <tr style="box-shadow: 2px 2px 2px -2px rgba(0,0,0,.3);">
+    <tr>
         <td>
             <b>Saturday</b>
         </td>
-        <% var i=1; %>
-        <% for(let j=1; j < 11; j++){ %>
+        <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
           <% keyPeriod.forEach(function(ele){ %>
             <% if(ele.day=="saturday"){%>
               <% if(ele.period==j){%>
                 <td><%= ele.subject %></td>
-        <% } } }); i+= 2;} i=1; %>
+              <% i = true;} %>
+            <% } });%>
+          <% if(i==false){ %>
+         <td>-</td>
+        <% } i=false;} %>
     </tr>
-    
 </table>
+
+
+
+<div class="head">
+  <h4>Timing</h4>
+</div>
+
+
+<div class="period">
+  <% var i=false; %>
+        <% for(let j=1; j < 9; j++){ %>
+          <% keyTiming.forEach(function(ele){ %>
+              <% if(ele.period==j){ %>
+                <p>Period <%= j %>: <span style="font-size: 1.1rem; position: relative; bottom: .5px; left: 5px;"><%= ele.start %> - <%= ele.end %></span></p>  
+              <% i = true;} %>
+            <% });%>
+          <% if(i==false){ %>
+         <p>Period <%= j %>: -</p>
+        <% } i=false;} %>
+</div>
 
 
 
