@@ -456,6 +456,12 @@ footer {
     height: 250px;
   }
 
+  table{
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+
   .period{
     margin: 25px 7%;
   }
