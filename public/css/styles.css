@@ -28,6 +28,7 @@
   --period-anime: #4d4d4d;
 }
 
+
 /* Alerts */
 .notification_success {
   position: fixed;
@@ -182,6 +183,7 @@ input[type="checkbox"] {
   top: 6px;
 }
 
+/* Table */
 
 table{
   width: 80%;
@@ -193,19 +195,14 @@ table{
 
 td {
   text-align: center;
-  /* max-width: 150px; */
-  /* height: 65px;  */
   padding: 15px 40px;
   font-size: 1.2rem;
 }
 th{
   text-align: center;
-  /* width: 450px; */
-  /* height: 75px;  */
   padding: 20px 40px;
   font-size: 1.2rem;
   white-space: nowrap;
-
 }
 
 .head {
