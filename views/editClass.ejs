@@ -9,11 +9,9 @@
 <div id="liveAlertPlaceholder"></div>
 
 
-
 <div class="task-title">
   <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Add Class</h5>
 </div>
-
 <div class="period" style="display: flex; justify-content: space-between; padding-top: 25px; padding-bottom: 18px;">
   <div style="float: left;">
       To add new classes
@@ -24,17 +22,14 @@
 </div>
 
 
-
 <div class="task-title">
-    <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Edit Period Timings</h5>
+  <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Edit Period Timings</h5>
 </div>
-
 <form action="/editTiming" method="post">
   <div class="new-task">
     <button type="submit" class="add btn btn-primary" id="edit-liveAlertBtn" name="add">Edit Timing</button>
   </div>
 </form>
-
 <div class="period">
     <% var i=false; %>
           <% for(let j=1; j < 9; j++){ %>
@@ -48,34 +43,33 @@
     <% } i=false;} %>
   </div>
 
-
-   
-  <div class="task-title">
-    <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Delete Class</h5>
+  
+<div class="task-title">
+  <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Delete Class</h5>
 </div>
 
 <form action="/deleteAllClass" method="post">
-    <div class="new-task">
-      <button type="submit" class="add btn btn-danger" id="delete-liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
-    </div>
+  <div class="new-task">
+    <button type="submit" class="add btn btn-danger" id="delete-liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
+  </div>
 </form>
 
-  <% for(let i = 0; i < keyPeriod.length; i++) { %>
-    <% keyTiming.forEach(function(time){ %>
-      <% if(keyPeriod[i].period==time.period){ %>
-<div class="task" style="border-radius:20px;">
-  <div style="float: left; width: 93%; margin-top: 8px;">
-    <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= keyPeriod[i].day %></h5>
-    <p style="font-weight: 700; position: relative; top: 4px;"><%= keyPeriod[i].subject %></p>
-    <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;">Period: <%= keyPeriod[i].period %> (<%= time.start %> - <%= time.end %>)</p>
-  </div>
-  <div style="float: right; padding: 0;">
-    <form action="/deleteClass" method="post">
-      <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
-        <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
-    </form>
-  </div>
-</div>
+<% for(let i = 0; i < keyPeriod.length; i++) { %>
+  <% keyTiming.forEach(function(time){ %>
+    <% if(keyPeriod[i].period==time.period){ %>
+      <div class="task" style="border-radius:20px;">
+        <div style="float: left; width: 93%; margin-top: 8px;">
+          <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= keyPeriod[i].day %></h5>
+          <p style="font-weight: 700; position: relative; top: 4px;"><%= keyPeriod[i].subject %></p>
+          <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;">Period: <%= keyPeriod[i].period %> (<%= time.start %> - <%= time.end %>)</p>
+        </div>
+        <div style="float: right; padding: 0;">
+          <form action="/deleteClass" method="post">
+            <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
+            <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+          </form>
+        </div>
+      </div>
 <% } }); } %>
 
 
@@ -95,7 +89,6 @@
 
   alertPlaceholder.append(wrapper)
 }
-
 
 const deleteAlertTrigger = document.getElementById('delete-liveAlertBtn');
 const alertTrigger1 = document.getElementById('liveAlertBtn1');
@@ -345,7 +338,6 @@ if (alertTrigger1) {
     appendAlert('Class deleted successfully!', 'danger')
   });
 }
-
 </script>
 
   
