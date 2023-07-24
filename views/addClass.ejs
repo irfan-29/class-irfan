@@ -37,10 +37,14 @@
     <input class="form-control" type="text" required pattern="[a-zA-Z0-9\s]{1,10}" title="must contain only alphanumeric and space of upto 10 characters long" id="subject" placeholder="Subject" name="subject">
     <label for="subject">Subject</label>
   </div>
+  <div class="task-title" style="font-size: 0.9rem; position: relative; bottom: 12px;">
+    <p>(NOTE: Add the respective timing for the period in the edit period timing)</p>
+  </div>
   <div class="new-task">
     <button type="submit" class="add btn btn-outline-primary" id="liveAlertBtn" value="add" name="add">Add</button>
   </div>
 </form>
+
 
 <form action="/back" method="post">
   <div class="delete-add" style="display: flex; justify-content: space-between;">

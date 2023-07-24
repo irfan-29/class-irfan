@@ -6,6 +6,9 @@
 </div>
 
 
+<div id="liveAlertPlaceholder"></div>
+
+
 
 <div class="task-title">
   <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Add Class</h5>
@@ -22,16 +25,15 @@
 
 
 
-
 <div class="task-title">
     <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Edit Period Timings</h5>
 </div>
 
 <form action="/editTiming" method="post">
-    <div class="new-task">
-      <button type="submit" class="add btn btn-primary" name="add">Edit Timing</button>
-    </div>
-  </form>
+  <div class="new-task">
+    <button type="submit" class="add btn btn-primary" id="edit-liveAlertBtn" name="add">Edit Timing</button>
+  </div>
+</form>
 
 <div class="period">
     <% var i=false; %>
@@ -43,7 +45,7 @@
               <% });%>
             <% if(i==false){ %>
            <p>Period <%= j %>: -</p>
-          <% } i=false;} %>
+    <% } i=false;} %>
   </div>
 
 
@@ -52,40 +54,29 @@
     <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Delete Class</h5>
 </div>
 
-
-  <div id="liveAlertPlaceholder"></div>
-
-<!-- <div class="delete-add" style="display: flex;">
-  <form action="/deleteAllClass" method="post" style="float: right;">
-    <div style="float: right;">
-      <button type="submit" class="add btn btn-danger" id="liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
-    </div>
-  </form>
-</div> -->
-
 <form action="/deleteAllClass" method="post">
     <div class="new-task">
-      <button type="submit" class="add btn btn-danger" id="liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
+      <button type="submit" class="add btn btn-danger" id="delete-liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
     </div>
-  </form>
+</form>
 
-<% keyPeriod.forEach(function(ele){ %>
+  <% for(let i = 0; i < keyPeriod.length; i++) { %>
     <% keyTiming.forEach(function(time){ %>
-        <% if(ele.period==time.period){ %>
+      <% if(keyPeriod[i].period==time.period){ %>
 <div class="task" style="border-radius:20px;">
   <div style="float: left; width: 93%; margin-top: 8px;">
-    <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= ele.day %></h5>
-    <p style="font-weight: 700; position: relative; top: 4px;"><%= ele.subject %></p>
-    <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;">Period: <%= ele.period %> (<%= time.start %> - <%= time.end %>)</p>
+    <h5 style="text-transform: capitalize; font-weight: 700; font-size: 1.35rem;"><%= keyPeriod[i].day %></h5>
+    <p style="font-weight: 700; position: relative; top: 4px;"><%= keyPeriod[i].subject %></p>
+    <p style="font-size: 1.1rem; font-weight: 500; position: relative; bottom: 4px;">Period: <%= keyPeriod[i].period %> (<%= time.start %> - <%= time.end %>)</p>
   </div>
   <div style="float: right; padding: 0;">
     <form action="/deleteClass" method="post">
-      <button type="submit" class="add btn btn-outline-danger" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= ele.day %>-<%= ele.subject %>-<%= ele.start %>-<%= ele.end %>">
+      <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
         <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
     </form>
   </div>
 </div>
-<% } }); }); %>
+<% } }); } %>
 
 
 <script>
@@ -106,14 +97,255 @@
 }
 
 
-const alertTrigger = document.getElementById('liveAlertBtn');
+const deleteAlertTrigger = document.getElementById('delete-liveAlertBtn');
+const alertTrigger1 = document.getElementById('liveAlertBtn1');
+const alertTrigger2 = document.getElementById('liveAlertBtn2');
+const alertTrigger3 = document.getElementById('liveAlertBtn3');
+const alertTrigger4 = document.getElementById('liveAlertBtn4');
+const alertTrigger5 = document.getElementById('liveAlertBtn5');
+const alertTrigger6 = document.getElementById('liveAlertBtn6');
+const alertTrigger7 = document.getElementById('liveAlertBtn7');
+const alertTrigger8 = document.getElementById('liveAlertBtn8');
+const alertTrigger9 = document.getElementById('liveAlertBtn9');
+const alertTrigger10 = document.getElementById('liveAlertBtn10');
+const alertTrigger11 = document.getElementById('liveAlertBtn11');
+const alertTrigger12 = document.getElementById('liveAlertBtn12');
+const alertTrigger13 = document.getElementById('liveAlertBtn13');
+const alertTrigger14 = document.getElementById('liveAlertBtn14');
+const alertTrigger15 = document.getElementById('liveAlertBtn15');
+const alertTrigger16 = document.getElementById('liveAlertBtn16');
+const alertTrigger17 = document.getElementById('liveAlertBtn17');
+const alertTrigger18 = document.getElementById('liveAlertBtn18');
+const alertTrigger19 = document.getElementById('liveAlertBtn19');
+const alertTrigger20 = document.getElementById('liveAlertBtn20');
+const alertTrigger21 = document.getElementById('liveAlertBtn21');
+const alertTrigger22 = document.getElementById('liveAlertBtn22');
+const alertTrigger23 = document.getElementById('liveAlertBtn23');
+const alertTrigger24 = document.getElementById('liveAlertBtn24');
+const alertTrigger25 = document.getElementById('liveAlertBtn25');
+const alertTrigger26 = document.getElementById('liveAlertBtn26');
+const alertTrigger27 = document.getElementById('liveAlertBtn27');
+const alertTrigger28 = document.getElementById('liveAlertBtn28');
+const alertTrigger29 = document.getElementById('liveAlertBtn29');
+const alertTrigger30 = document.getElementById('liveAlertBtn30');
+const alertTrigger31 = document.getElementById('liveAlertBtn31');
+const alertTrigger32 = document.getElementById('liveAlertBtn32');
+const alertTrigger33 = document.getElementById('liveAlertBtn33');
+const alertTrigger34 = document.getElementById('liveAlertBtn34');
+const alertTrigger35 = document.getElementById('liveAlertBtn35');
+const alertTrigger36 = document.getElementById('liveAlertBtn36');
+const alertTrigger37 = document.getElementById('liveAlertBtn37');
+const alertTrigger38 = document.getElementById('liveAlertBtn38');
+const alertTrigger39 = document.getElementById('liveAlertBtn39');
+const alertTrigger40 = document.getElementById('liveAlertBtn40');
+const alertTrigger41 = document.getElementById('liveAlertBtn41');
+const alertTrigger42 = document.getElementById('liveAlertBtn42');
+const alertTrigger43 = document.getElementById('liveAlertBtn43');
+const alertTrigger44 = document.getElementById('liveAlertBtn44');
+const alertTrigger45 = document.getElementById('liveAlertBtn45');
+const alertTrigger46 = document.getElementById('liveAlertBtn46');
+const alertTrigger47 = document.getElementById('liveAlertBtn47');
+const alertTrigger48 = document.getElementById('liveAlertBtn48');
 
-
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
+if (deleteAlertTrigger) {
+  deleteAlertTrigger.addEventListener('click', () => {
     appendAlert('All the classes has been Deleted!', 'danger')
   });
 }
+if (alertTrigger1) {
+  alertTrigger1.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger2) {
+  alertTrigger2.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger3) {
+  alertTrigger3.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger4) {
+  alertTrigger4.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger5) {
+  alertTrigger5.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger6) {
+  alertTrigger6.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger7) {
+  alertTrigger7.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger8) {
+  alertTrigger8.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger9) {
+  alertTrigger9.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger10) {
+  alertTrigger10.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger11) {
+  alertTrigger11.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger12) {
+  alertTrigger12.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger13) {
+  alertTrigger13.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger14) {
+  alertTrigger14.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger15) {
+  alertTrigger15.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger16) {
+  alertTrigger16.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger17) {
+  alertTrigger17.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger18) {
+  alertTrigger18.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger19) {
+  alertTrigger19.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger20) {
+  alertTrigger20.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger21) {
+  alertTrigger21.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger22) {
+  alertTrigger22.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger23) {
+  alertTrigger23.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger24) {
+  alertTrigger24.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger25) {
+  alertTrigger25.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger26) {
+  alertTrigger26.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger27) {
+  alertTrigger27.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger28) {
+  alertTrigger28.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger29) {
+  alertTrigger29.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger30) {
+  alertTrigger30.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger31) {
+  alertTrigger31.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger32) {
+  alertTrigger32.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger33) {
+  alertTrigger33.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger34) {
+  alertTrigger34.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger35) {
+  alertTrigger35.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger36) {
+  alertTrigger36.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger37) {
+  alertTrigger37.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger38) {
+  alertTrigger38.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger39) {
+  alertTrigger39.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger40) {
+  alertTrigger40.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger41) {
+  alertTrigger41.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger42) {
+  alertTrigger42.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger43) {
+  alertTrigger43.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger44) {
+  alertTrigger44.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger45) {
+  alertTrigger45.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger46) {
+  alertTrigger46.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger47) {
+  alertTrigger47.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}if (alertTrigger48) {
+  alertTrigger48.addEventListener('click', () => {
+    appendAlert('Class deleted successfully!', 'danger')
+  });
+}
+
 </script>
 
   

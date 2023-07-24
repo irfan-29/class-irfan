@@ -460,8 +460,6 @@ app.post("/timing", function(req, res){
         }
         e1 = splitEnd[0] + ":" + splitEnd[1] + "PM";
     }
-
-  console.log(p1);
   User.findOne({_id: id}, function(err, user){
     if(!err){
       var i=0;
@@ -485,8 +483,9 @@ app.post("/timing", function(req, res){
       }
     }
   });
-
-  res.redirect("/editClass");
+  setTimeout(function () {
+    res.redirect("/editClass");
+   }, 1000);
 });
 
 
@@ -575,7 +574,9 @@ app.post("/deleteClass", function(req, res){
        });
      }
    });
-   res.redirect("/editClass");
+   setTimeout(function () {
+    res.redirect("/editClass");
+   }, 1000); 
 });
 
 

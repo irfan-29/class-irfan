@@ -10,7 +10,7 @@
 <% var i=1; %>
 <% for(let j=1; j < 11; j++){ %>
   <% keyPeriod.forEach(function(ele){ %>
-    <% if(ele.day==day){%>
+    <% if(ele.day=="thursday"){%>
       <% if(ele.period==j){%>
         <% keyTiming.forEach(function(time){ %>
           <% if(ele.period==time.period){%>
@@ -30,7 +30,6 @@
           </div>
         </div>
 <% } }); } } }); i+= 2;} i=1; %>
-
 
 
 <script>
