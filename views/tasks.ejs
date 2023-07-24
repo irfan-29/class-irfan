@@ -65,16 +65,6 @@
 </form>
 
 
-<!-- 
-<figure class="notification_success"> 
-  <div class="notification_body_success">
-    <img src="images/success.png" title="Danger" alt="Success" class="notification_icon_success"/>
-    Your account has been created! &#128640; 
-  </div>
-  <div class="notification_progress_success"></div>
-</figure> -->
-
-
 <script>
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
   const appendAlert = (message, type) => {
@@ -89,12 +79,10 @@
     '</figure>',
 
   ].join('')
-
   alertPlaceholder.append(wrapper)
 }
 
 const alertTrigger = document.getElementById('liveAlertBtn');
-
 const alertTrigger1 = document.getElementById('liveAlertBtn1');
 const alertTrigger2 = document.getElementById('liveAlertBtn2');
 const alertTrigger3 = document.getElementById('liveAlertBtn3');
@@ -115,7 +103,6 @@ const alertTrigger17 = document.getElementById('liveAlertBtn17');
 const alertTrigger18 = document.getElementById('liveAlertBtn18');
 const alertTrigger19 = document.getElementById('liveAlertBtn19');
 const alertTrigger20 = document.getElementById('liveAlertBtn20');
-
 
 if (alertTrigger) {
   alertTrigger.addEventListener('click', () => {
@@ -204,8 +191,6 @@ if (alertTrigger1) {
   });
 }
 </script>
-
-
 
 
 <%- include("partials/footer") -%>

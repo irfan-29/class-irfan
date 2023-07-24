@@ -5,9 +5,7 @@
   <h4>Edit Class</h4>
 </div>
 
-
 <div id="liveAlertPlaceholder"></div>
-
 
 <div class="task-title">
   <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Add Class</h5>
@@ -21,7 +19,6 @@
     </form>
 </div>
 
-
 <div class="task-title">
   <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Edit Period Timings</h5>
 </div>
@@ -31,23 +28,21 @@
   </div>
 </form>
 <div class="period">
-    <% var i=false; %>
-          <% for(let j=1; j < 9; j++){ %>
-            <% keyTiming.forEach(function(ele){ %>
-                <% if(ele.period==j){ %>
-                  <p>Period <%= j %>: <span style="font-size: 1.1rem; position: relative; bottom: .5px; left: 5px;"><%= ele.start %> - <%= ele.end %></span></p>  
-                <% i = true;} %>
-              <% });%>
-            <% if(i==false){ %>
-           <p>Period <%= j %>: -</p>
-    <% } i=false;} %>
-  </div>
-
+  <% var i=false; %>
+    <% for(let j=1; j < 9; j++){ %>
+      <% keyTiming.forEach(function(ele){ %>
+        <% if(ele.period==j){ %>
+          <p>Period <%= j %>: <span style="font-size: 1.1rem; position: relative; bottom: .5px; left: 5px;"><%= ele.start %> - <%= ele.end %></span></p>  
+          <% i = true;} %>
+        <% });%>
+      <% if(i==false){ %>
+        <p>Period <%= j %>: -</p>
+  <% } i=false;} %>
+</div>
   
 <div class="task-title">
   <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 15px;">Delete Class</h5>
 </div>
-
 <form action="/deleteAllClass" method="post">
   <div class="new-task">
     <button type="submit" class="add btn btn-danger" id="delete-liveAlertBtn" name="deleteAllClass">Delete All Classes</button>
@@ -86,7 +81,6 @@
       `<div class="notification_progress_${type}"></div>`,
     '</figure>',
   ].join('')
-
   alertPlaceholder.append(wrapper)
 }
 
