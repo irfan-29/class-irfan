@@ -290,6 +290,7 @@ span {
   font-size: 1.2rem;
   color: white;
   white-space: nowrap;
+  box-shadow: none;
 }
 
 .det {
@@ -309,6 +310,7 @@ span {
   font-weight: bold;
   position: relative;
   top: 15px;
+  box-shadow: 2px 2px 8px -2px rgba(0,0,0,.25);
 }
 
 .contact-btn:hover {
@@ -374,6 +376,7 @@ h5 {
 
 button {
   margin-top: 6px;
+  box-shadow: 2px 2px 8px -2px rgba(0,0,0,.25);
 }
 
 footer {
