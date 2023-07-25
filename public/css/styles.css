@@ -1,11 +1,11 @@
 /* Theme */
+
 #icon {
   width: 25px;
   cursor: pointer;
   position: relative;
   left: 5px;
 }
-
 :root {
   --primary-color: white;
   --secondary-color: white;
@@ -16,7 +16,6 @@
   --head-border-color: black;
   --period-anime: linear-gradient(104.04deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
 }
-
 .dark-theme {
   --primary-color: #353535;
   --secondary-color: #525252;
@@ -29,7 +28,9 @@
 }
 
 
+
 /* Alerts */
+
 .notification_success {
   position: fixed;
   bottom: 10px;
@@ -58,7 +59,6 @@
   z-index: 1;
   visibility: hidden;
 }
-
 .notification_icon_success, .notification_icon_danger {
   height: 21px;
   width: 21px;
@@ -66,14 +66,12 @@
   position: relative;
   top: 1px;
 }
-
 .notification_body_success, .notification_body_danger {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 16px 8px;
 }
-
 .notification_progress_success {
   position: absolute;
   left: 4px;
@@ -110,7 +108,6 @@
     transform: translateY(0);
   }
 }
-
 @keyframes progress {
   to {
     transform: scaleX(1);
@@ -119,20 +116,36 @@
 
 
 
+/* Head */
+
+.head {
+  color: #36b170;
+  margin: 35px 23%;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  border: solid;
+  border-color: var(--head-border-color);
+  border-width: 2px;
+  box-shadow: 2px 2px 15px -2px rgba(0,0,0,.25);
+  padding: 15px 15px 10px 18px;
+}
+
+
 
 /* General */
+
 body {
   padding-bottom: 70px;
   background: var(--primary-color);
 }
-
 .task-title {
   background: var(--primary-color);
   color: #36b170;
   margin: 20px 23%;
   width: auto;
 }
-
 .period {
   margin: 20px 23%;
   width: auto;
@@ -170,18 +183,74 @@ body {
   box-shadow: 2px 2px 12px -2px rgba(0,0,0,.25);
   background-image: var(--period-anime);
 }
-
 input:checked + p {
   text-decoration: line-through;
   text-decoration-color: #36b170;
 }
-
 input[type="checkbox"] {
   width: 20px;
   height: 22px;
   position: relative;
   top: 6px;
 }
+.new-class,
+.new-task {
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: 25px;
+  margin-right: 23%;
+}
+h3 {
+  color: white;
+  text-align: left;
+  font-weight: 900;
+  width: 35%;
+  padding-right: 60%;
+  padding-left: 5px;
+  padding-top: 3px;
+}
+sup {
+  background: linear-gradient(250deg, #ed1e79, #662d8c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 0.65rem;
+  padding-left: 6px;
+  letter-spacing: 1.5px;
+  vertical-align: middle;
+}
+h4 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+button {
+  margin-top: 6px;
+  box-shadow: 2px 2px 8px -2px rgba(0,0,0,.25);
+}
+footer {
+  background-color: #3cc47c;
+  margin-bottom: 0;
+  margin-right: 0;
+  text-align: right;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  position: relative;
+  top: 70px;
+}
+.form-floating {
+  margin: 20px 23%;
+  width: auto;
+  text-align: center;
+}
+
+
 
 /* Table */
 
@@ -192,7 +261,6 @@ table{
   border-radius: 20px;
   box-shadow: 2px 2px 15px -2px rgba(0,0,0,.25);
 }
-
 td {
   text-align: center;
   padding: 15px 40px;
@@ -205,27 +273,9 @@ th{
   white-space: nowrap;
 }
 
-.head {
-  color: #36b170;
-  margin: 35px 23%;
-  font-size: 1.5rem;
-  font-weight: 900;
-  background: var(--secondary-color);
-  border-radius: 12px;
-  border: solid;
-  border-color: var(--head-border-color);
-  border-width: 2px;
-  box-shadow: 2px 2px 15px -2px rgba(0,0,0,.25);
-  padding: 15px 15px 10px 18px;
-}
 
-.new-class,
-.new-task {
-  text-align: right;
-  margin-top: 0;
-  margin-bottom: 25px;
-  margin-right: 23%;
-}
+
+/* Navigation bar */
 
 .container-fluid {
   margin-top: 0;
@@ -238,7 +288,6 @@ th{
   text-align: left;
   opacity: 0.9;
 }
-
 .navbar {
   margin: 0;
   position: fixed;
@@ -247,7 +296,6 @@ th{
   z-index: 1;
   filter: drop-shadow(1px 1px 2px #0c1012);
 }
-
 .navbar-timetable {
   display: flex;
   flex-wrap: wrap;
@@ -262,11 +310,9 @@ th{
   padding-bottom: 8px;
   filter: drop-shadow(1px 1px 2px #0c1012);
 }
-
 .nav-tabs {
   --bs-nav-tabs-border-width: 0px;
 }
-
 .navbar-nav a {
   font-weight: 600;
   font-size: 1rem;
@@ -275,15 +321,12 @@ th{
   padding-bottom: 3px;
   padding-top: 3px;
 }
-
 .nav-item {
   color: white;
 }
-
 span {
   text-align: center;
 }
-
 .nav-link {
   flex: 1;
   font-weight: 600;
@@ -293,13 +336,24 @@ span {
   box-shadow: none;
 }
 
+
+
+/* About page */
+
 .det {
   color: var(--forth-color);
   font-size: 19px;
   font-weight: 600;
   margin-bottom: 8px;
 }
-
+.dett {
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  margin: 0;
+  margin-top: 2px;
+}
 .contact-btn {
   background-color: #fd5200;
   color: white;
@@ -312,108 +366,40 @@ span {
   top: 15px;
   box-shadow: 2px 2px 8px -2px rgba(0,0,0,.25);
 }
-
 .contact-btn:hover {
   background-color: #3cc47c;
   color: white;
 }
-
 .parent {
   padding: 2rem 1rem;
   padding-bottom: 70px;
   text-align: center;
 }
-
 .child {
   display: inline-block;
   padding: 0.8rem 0.8rem;
   vertical-align: middle;
   text-align: center;
 }
-
 a:hover {
   color: black !important;
   text-decoration: none;
 }
-
 .nav-link:hover {
   color: black !important;
   text-decoration: none;
 }
-
-h3 {
-  color: white;
-  text-align: left;
-  font-weight: 900;
-  width: 35%;
-  padding-right: 60%;
-  padding-left: 5px;
-  padding-top: 3px;
-}
-
-sup {
-  background: linear-gradient(250deg, #ed1e79, #662d8c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-  font-size: 0.65rem;
-  padding-left: 6px;
-  letter-spacing: 1.5px;
-  vertical-align: middle;
-}
-
-h4 {
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.6rem;
-}
-
-h5 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  padding-bottom: 10px;
-}
-
-button {
-  margin-top: 6px;
-  box-shadow: 2px 2px 8px -2px rgba(0,0,0,.25);
-}
-
-footer {
-  background-color: #3cc47c;
-  margin-bottom: 0;
-  margin-right: 0;
-  text-align: right;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  width: 100%;
-  position: relative;
-  top: 70px;
-}
-
 .profile-tag{
   color: #36b170;
   text-decoration: none;
 }
-
 .profile-tag:hover {
   text-decoration: underline;
 }
 
-.dett {
-  font-weight: 400;
-  font-size: 0.9rem;
-  padding-right: 8px;
-  padding-bottom: 2px;
-  margin: 0;
-  margin-top: 2px;
-}
 
-.form-floating {
-  margin: 20px 23%;
-  width: auto;
-  text-align: center;
-}
+
+/* Attendance */
 
 .attendance {
   text-align: center;
@@ -422,7 +408,6 @@ footer {
   justify-content: center;
   margin-bottom: 50px;
 }
-
 .overallAttendance {
   text-align: center;
   align-items: center;
@@ -434,6 +419,7 @@ footer {
 
 
 /* Extra small devices (phones, 600px and down) */
+
 @media only screen and (max-width: 600px) {
   .attendance {
     width: 97%;
@@ -441,23 +427,19 @@ footer {
     margin-left: 1%;
     margin-right: 2%;
   }
-
   .overallAttendance {
     width: 100%;
     zoom: 150%;
     height: 250px;
   }
-
   table{
     width: 90%;
     margin-right: 5%;
     margin-left: 5%;
   }
-
   .period{
     margin: 25px 7%;
   }
-
   .new-class,
   .task,
   .task-title,
@@ -467,20 +449,16 @@ footer {
   .parent {
     margin: 20px 7%;
   }
-
   .chd-1 {
     position: relative;
     right: 12px;
   }
-
   .head {
     margin: 35px 7%;
   }
-
   .top {
     width: 67%;
   }
-
   .table-container{
     display: block;
       max-width: -moz-fit-content;
@@ -491,7 +469,10 @@ footer {
   }
 }
 
+
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
   .attendance {
     width: 70%;
@@ -499,7 +480,6 @@ footer {
     margin-left: 12%;
     margin-right: 20%;
   }
-
   .overallAttendance {
     width: 70%;
     height: 500px;
@@ -507,11 +487,9 @@ footer {
     margin-left: 15%;
     margin-right: 15%;
   }
-  
   .period{
     margin: 25px 20%;
   }
-
   .new-class,
   .task,
   .task-title,
@@ -521,17 +499,18 @@ footer {
   .parent {
     margin: 20px 20%;
   }
-
   .head {
     margin: 35px 20%;
   }
-
   .top {
     width: 85%;
   }
 }
 
+
+
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
   .attendance {
     width: 62%;
@@ -539,7 +518,6 @@ footer {
     margin-left: 16.5%;
     margin-right: 20%;
   }
-
   .overallAttendance {
     width: 70%;
     height: 500px;
@@ -547,11 +525,9 @@ footer {
     margin-left: 15%;
     margin-right: 15%;
   }
-
   .period{
     margin: 30px 30%;
   }
-
   .new-class,
   .task,
   .task-title,
@@ -561,11 +537,9 @@ footer {
   .parent {
     margin: 20px 30%;
   }
-
   .head {
     margin: 35px 30%;
   }
-
   .top {
     width: 85%;
   }
