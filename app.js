@@ -134,7 +134,7 @@ passport.use(new GoogleStrategy({
 
 
 
-// To set the error raised by favicon.ico
+// To fix the error raised by favicon.ico
 
 app.use(function(req, res, next) {
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
@@ -279,8 +279,7 @@ app.post("/timeTable", function(req, res) {
 
 
 
-
-// Passing attendance, present & absent details with respective subject
+// Passing attendance, present & absent details with respective subject to attendance page
 
 app.get("/attendance", function(req, res){
   const id = req.user.id;
@@ -403,7 +402,6 @@ app.post("/notCompleteTask", function(req,res){
  
 
 
-
 //passing details to weekly timetable
 
 app.get("/weeklyTimeTable", function(req, res) {
@@ -418,12 +416,11 @@ app.get("/weeklyTimeTable", function(req, res) {
 
 
 
-// Period Timing
+// Period Timings
 
 app.get("/timing",function(req,res){
   res.render("timing");
 });
-
 
 app.post("/timing", function(req, res){
 
@@ -499,7 +496,6 @@ app.post("/backTiming", function(req,res){
 
 
 
-
 // Passing periods to respective day of timetable
 
 app.get("/:day", function(req, res){
@@ -514,26 +510,25 @@ app.get("/:day", function(req, res){
 });
 
 
-// Redirecting to add new Class & delete Class page
-
-app.post("/day1", function(req, res) {
-  res.render("addClass");
-});
-
-
-
 
 // Edit classes
 
 app.get("/editClass", function(req, res){
-  // res.render("editClass");
   const id = req.user.id;
   User.findOne({_id: id}, function(err, user){
     if (!err){
        res.render("editClass", {keyPeriod: user.period, keyTiming: user.timing});
     }
   });
-})
+});
+
+
+
+// Redirecting to add new Class from edit class
+
+app.post("/day1", function(req, res) {
+  res.render("addClass");
+});
 
 
 
@@ -634,7 +629,6 @@ app.post("/addClass", function(req, res) {
         }
       }
     });
-
     setTimeout(function () {
       res.redirect("/editClass");
      }, 1000); 
@@ -642,7 +636,7 @@ app.post("/addClass", function(req, res) {
 
 
 
-// Back in delete class and add class
+// Back in add class
 
 app.post("/back", function(req,res){
   res.redirect("/editClass");
