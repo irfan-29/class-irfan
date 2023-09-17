@@ -148,7 +148,7 @@ app.use(function(req, res, next) {
 // Home page
 
 app.get("/", function(req, res) {
-  res.render("login");
+  res.render("login", {keyNote: ""});
 });
 
 
@@ -165,11 +165,11 @@ app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: 
 // login and register
 
 app.get("/login",function(req,res){
-  res.render("login");
+  res.render("login", {keyNote: ""});
 });
 
 app.get("/register",function(req,res){
-  res.render("register");
+  res.render("register", {keyNote: ""});
 });
 
 
@@ -177,7 +177,7 @@ app.post("/register", function(req, res){
   User.register({username: req.body.username}, req.body.password, function(err, user){
     if(err){
       console.log(err);
-      res.redirect("/register");
+      res.render("register", {keyNote: "*User already registered"});
     }else{
       passport.authenticate("local")(req, res, function(){
         res.redirect("/home");
@@ -186,21 +186,38 @@ app.post("/register", function(req, res){
   });
 });
 
-app.post("/login", function(req, res){
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
+// app.post("/login", function(req, res){
+//   const user = new User({
+//     username: req.body.username,
+//     password: req.body.password
+//   });
+//   req.login(user, function(err){
+//     if(err){
+//       console.log(err);
+//     }else{
+//       passport.authenticate("local")(req, res, function(){
+//         res.redirect("/home");
+//       });
+//     }
+//   });
+// });
 
-  req.login(user, function(err){
-    if(err){
-      console.log(err);
-    }else{
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/home");
-      });
+app.post("/login", function(req, res, next){
+
+  passport.authenticate("local", function(err, user) {
+    if(err){ 
+      return next(err); 
     }
-  });
+    if(!user){
+      return res.render("login", {keyNote: "*Invalid username and password"}); 
+    }
+    req.logIn(user, function(err) {
+      if(err){ 
+        return next(err); 
+      }
+      return res.redirect("/home");
+    });
+  })(req, res, next);
 });
 
 
