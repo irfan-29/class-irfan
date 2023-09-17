@@ -1,7 +1,7 @@
 /* Theme */
 
 #icon {
-  width: 25px;
+  width: 23px;
   cursor: pointer;
   position: relative;
   left: 5px;
@@ -214,9 +214,9 @@ sup {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
-  font-size: 0.65rem;
+  font-size: 0.60rem;
   padding-left: 6px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   vertical-align: middle;
 }
 h4 {
