@@ -287,6 +287,21 @@ th{
   padding-right: 25px;
   text-align: left;
   opacity: 0.9;
+  filter: drop-shadow(1px 1px 2px #0c1012);
+  /* filter: drop-shadow(1px -1px 0.5rem #0c1012); */
+}
+.container-fluid-2 {
+  margin-top: 0;
+  position: relative;
+  bottom: 8px;
+  background-color: #3cc47c;
+  padding-top: 15px;
+  padding-bottom: 14px;
+  padding-right: 25px;
+  text-align: left;
+  opacity: 0.9;
+  /* filter: drop-shadow(1px -1px 0.5rem #0c1012); */
+
 }
 .navbar {
   margin: 0;
@@ -294,7 +309,6 @@ th{
   top: 0;
   width: 100%;
   z-index: 1;
-  filter: drop-shadow(1px 1px 2px #0c1012);
 }
 .navbar-timetable {
   display: flex;
