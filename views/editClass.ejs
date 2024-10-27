@@ -60,8 +60,10 @@
         </div>
         <div style="float: right; padding: 0;">
           <form action="/deleteClass" method="post">
-            <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
-            <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button>
+            <!-- <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i+1 %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
+            <img class="delete" src="images/delete.png" style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button> -->
+            <button type="submit" class="add" id="liveAlertBtn<%= i+1 %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="deleteClass" value="<%= keyPeriod[i].day %>-<%= keyPeriod[i].subject %>-<%= time.period %>-<%= time.start %>-<%= time.end %>">
+              <img class="delete" src="images/delete.png" onmouseover="this.src='images/delete-hover.png';" onmouseout="this.src='images/delete.png';" style="width: 24px; height: 25px; position: relative; left: 9px;" alt="delete"></button>
           </form>
         </div>
       </div>
