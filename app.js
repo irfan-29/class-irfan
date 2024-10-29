@@ -20,7 +20,8 @@ app.use(express.static("public"));
 app.use(session({
   secret:"Our little secret.",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 1 * 60 * 60 * 1000 }   // cookie session timings in milliseconds - for 1 hrs
 }));
 
 app.use(passport.initialize());
@@ -28,7 +29,6 @@ app.use(passport.session());
 
 mongoose.set({strictQuery: true});
 mongoose.connect("mongodb+srv://admin-irfan:Irf6360944@cluster0.jo7etur.mongodb.net/newClassDB")
-
 
 
 
@@ -122,7 +122,8 @@ User.findById(id, function(err, user){
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://class-umi-apps.onrender.com/auth/google/class",
+    callbackURL: "https://class-umi-apps.onrender.com/auth/google/class",   // works for the hosting url
+    // callbackURL: "https://localhost:3000/auth/google/class",   // works for the local url, configure in the google
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -145,19 +146,31 @@ app.use(function(req, res, next) {
 
 
 
-// Home page
-
-app.get("/", function(req, res) {
-  res.render("login", {keyNote: ""});
-});
-
-
-
 // login with google
+
 app.get("/auth/google", passport.authenticate('google', {scope: ["profile"]}));
 app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: '/login'}),
   function(req, res){
     res.redirect("/home");
+});
+
+
+
+// to check for authentication on mentioned url, and redirect to login page if not
+
+function requireLogin(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
+  next();
+}
+
+
+
+// Home page
+
+app.get("/", function(req, res) {
+  res.render("login", {keyNote: ""});
 });
 
 
@@ -168,42 +181,7 @@ app.get("/login",function(req,res){
   res.render("login", {keyNote: ""});
 });
 
-app.get("/register",function(req,res){
-  res.render("register", {keyNote: ""});
-});
-
-
-app.post("/register", function(req, res){
-  User.register({username: req.body.username}, req.body.password, function(err, user){
-    if(err){
-      console.log(err);
-      res.render("register", {keyNote: "*User already registered"});
-    }else{
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/home");
-      });
-    }
-  });
-});
-
-// app.post("/login", function(req, res){
-//   const user = new User({
-//     username: req.body.username,
-//     password: req.body.password
-//   });
-//   req.login(user, function(err){
-//     if(err){
-//       console.log(err);
-//     }else{
-//       passport.authenticate("local")(req, res, function(){
-//         res.redirect("/home");
-//       });
-//     }
-//   });
-// });
-
 app.post("/login", function(req, res, next){
-
   passport.authenticate("local", function(err, user) {
     if(err){ 
       return next(err); 
@@ -221,10 +199,61 @@ app.post("/login", function(req, res, next){
 });
 
 
+app.get("/register",function(req,res){
+  res.render("register", {keyNote: ""});
+});
+
+app.post("/register", function(req, res){
+  User.register({username: req.body.username}, req.body.password, function(err, user){
+    if(err){
+      console.log(err);
+      res.render("register", {keyNote: "*User already registered"});
+    }else{
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/home");
+      });
+    }
+  });
+});
+
+
+
+
+// logout
+
+app.get('/logout', (req, res) => {
+  req.logout(err => {
+    if (err) {
+      return res.status(500).send("Error logging out.");
+    }
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).send("Error ending session.");
+      }
+      res.clearCookie('connect.sid'); // Clears the cookie
+      res.redirect('/login');
+    });
+  });
+});
+
+
+
+// render home page after login
+
+app.get("/home", requireLogin, function(req, res) {
+  const id = req.user.id;
+    User.findOne({_id: id}, function(err, user){
+        if (!err){
+          res.render("home", {keyName: user.name});
+        }
+    });
+});
+
+
 
 // User profile
 
-app.get("/profile",function(req,res){
+app.get("/profile", requireLogin, function(req,res){
   const id = req.user.id;
     User.findOne({_id: id}, function(err, user){
         if (!err){
@@ -233,7 +262,7 @@ app.get("/profile",function(req,res){
     });
 });
 
-app.post("/profile", function(req, res){
+app.post("/profile", requireLogin, function(req, res){
   const id = req.user.id;
   const name = req.body.name;
   const dob =req.body.dob;
@@ -248,98 +277,30 @@ app.post("/profile", function(req, res){
   res.redirect("/profile");
 });
 
-app.post("/editProfile", function(req, res){
+app.post("/editProfile", requireLogin, function(req, res){
   res.redirect("/editProfile");
 });
 
-app.post("/backProfile", function(req,res){
+app.post("/backProfile", requireLogin, function(req,res){
   res.redirect("/profile");
-});
-
-
-
-// logout
-
-app.post("/logout", function(req, res){
-  res.redirect("/");
-})
-
-
-
-// render home page after login
-
-app.get("/home", function(req, res) {
-  const id = req.user.id;
-    User.findOne({_id: id}, function(err, user){
-        if (!err){
-          res.render("home", {keyName: user.name});
-        }
-    });
-});
-
-
-
-// Time Table
-
-app.get("/timeTable", function(req, res) {
-  const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-  const d = new Date();
-  let day = weekday[d.getDay()];
-  res.redirect("/" + day);;
-});
-
-app.post("/timeTable", function(req, res) {
-  const day = req.body.day;
-  res.redirect(String(day));
-});
-
-
-
-
-// Passing attendance, present & absent details with respective subject to attendance page
-
-app.get("/attendance", function(req, res){
-  const id = req.user.id;
-    User.findOne({_id: id}, function(err, user){
-        if (!err){
-          res.render("attendance", {keyAttendance: user.attendance, keyDate: user.modifyDate, keyPresent: user.present, keyAbsent: user.absent});
-        }
-    });
-});
-
-
-
-// Overall Attendance
-
-app.post("/overallAttendance", function(req, res){
-  var oPresent = 0;
-  var oAbsent = 0;
-  const id = req.user.id;
-
-  User.findOne({_id: id}, function(err, user){
-    if(!err){
-      user.attendance.forEach(function(period){
-        oPresent += period.present;
-        oAbsent += period.absent;
-      });
-      res.render("overallAttendance", {keyPresent: oPresent, keyAbsent: oAbsent});
-    }
-  });
-});
-
-
-
-// Back in Overall Attendance
-
-app.post("/backAttendance", function(req,res){
-  res.redirect("/attendance");
 });
 
 
 
 // Tasks
 
-app.post("/tasks", function(req, res) {
+app.get("/tasks", requireLogin, function(req, res){
+  const id = req.user.id;
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+      setTimeout(function () {
+        res.render("tasks", {keyTask: user.task, keyCompleteTask: user.completeTask});
+       }, 1000); 
+    }
+  });
+});
+
+app.post("/tasks", requireLogin, function(req, res) {
   const task = req.body.newTask;
   const id = req.user.id;
   const newTask = new Task({
@@ -352,18 +313,7 @@ app.post("/tasks", function(req, res) {
   res.redirect("/tasks");
 });
 
-app.get("/tasks", function(req, res){
-  const id = req.user.id;
-  User.findOne({_id: id}, function(err, user){
-    if (!err){
-      setTimeout(function () {
-        res.render("tasks", {keyTask: user.task, keyCompleteTask: user.completeTask});
-       }, 1000); 
-    }
-  });
-});
-
-app.post("/deleteTask", function(req,res){
+app.post("/deleteTask", requireLogin, function(req,res){
   const deleteTask = req.body.deleteTask;
   const id = req.user.id;
   User.updateOne({_id: id}, {$pull: {task: {task: deleteTask}}}, function(err, user){
@@ -374,7 +324,7 @@ app.post("/deleteTask", function(req,res){
    }, 1000); 
 });
 
-app.post("/deleteCompleteTask", function(req,res){
+app.post("/deleteCompleteTask", requireLogin, function(req,res){
   const deleteCompleteTask = req.body.deleteCompleteTask;
   const id = req.user.id;
   User.updateOne({_id: id}, {$pull: {completeTask: {completeTask: deleteCompleteTask}}}, function(err, user){
@@ -385,7 +335,7 @@ app.post("/deleteCompleteTask", function(req,res){
    }, 1000); 
 });
 
-app.post("/completeTask", function(req,res){
+app.post("/completeTask", requireLogin, function(req,res){
   const completeTask = req.body.checkbox;
   const id = req.user.id;
   User.updateOne({_id: id}, {$pull: {task: {task: completeTask}}}, function(err, user){
@@ -401,7 +351,7 @@ app.post("/completeTask", function(req,res){
   res.redirect("/tasks");
 });
 
-app.post("/notCompleteTask", function(req,res){
+app.post("/notCompleteTask", requireLogin, function(req,res){
   const notCompleteTask = req.body.checkbox2;
   const id = req.user.id;
   User.updateOne({_id: id}, {$pull: {completeTask: {completeTask: notCompleteTask}}}, function(err, user){
@@ -416,12 +366,28 @@ app.post("/notCompleteTask", function(req,res){
   });
   res.redirect("/tasks");
 });
- 
+
+
+
+// Time Table
+
+app.get("/timeTable", requireLogin, function(req, res) {
+  const weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const d = new Date();
+  let day = weekday[d.getDay()];
+  res.redirect("/" + day);;
+});
+
+app.post("/timeTable", requireLogin, function(req, res) {
+  const day = req.body.day;
+  res.redirect(String(day));
+});
+
 
 
 //passing details to weekly timetable
 
-app.get("/weeklyTimeTable", function(req, res) {
+app.get("/weeklyTimeTable", requireLogin, function(req, res) {
   const id = req.user.id;
 
   User.findOne({_id: id}, function(err, user){
@@ -433,13 +399,29 @@ app.get("/weeklyTimeTable", function(req, res) {
 
 
 
+
+
+
+// Edit classes
+
+app.get("/editClass", requireLogin, function(req, res){
+  const id = req.user.id;
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+       res.render("editClass", {keyPeriod: user.period, keyTiming: user.timing});
+    }
+  });
+});
+
+
+
 // Period Timings
 
-app.get("/timing",function(req,res){
+app.get("/timing", requireLogin, function(req,res){
   res.render("timing");
 });
 
-app.post("/timing", function(req, res){
+app.post("/timing", requireLogin, function(req, res){
 
   const id = req.user.id;
   const p1 = req.body.period;
@@ -502,115 +484,27 @@ app.post("/timing", function(req, res){
    }, 1000);
 });
 
-
-app.post("/editTiming", function(req,res){
+app.post("/editTiming", requireLogin, function(req,res){
   res.redirect("/timing");
 });
 
-app.post("/backTiming", function(req,res){
+app.post("/backTiming", requireLogin, function(req,res){
   res.redirect("/editClass");
-});
-
-
-
-// Passing periods to respective day of timetable
-
-app.get("/:day", function(req, res){
-  const id = req.user.id;
-  const day = req.params.day;
-
-  User.findOne({_id: id}, function(err, user){
-    if (!err){
-      res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
-    }
-  });
-});
-
-
-
-// Edit classes
-
-app.get("/editClass", function(req, res){
-  const id = req.user.id;
-  User.findOne({_id: id}, function(err, user){
-    if (!err){
-       res.render("editClass", {keyPeriod: user.period, keyTiming: user.timing});
-    }
-  });
 });
 
 
 
 // Redirecting to add new Class from edit class
 
-app.post("/day1", function(req, res) {
+app.post("/day1", requireLogin, function(req, res) {
   res.render("addClass");
-});
-
-
-
-// Deleting period
-
-app.post("/deleteClass", function(req, res){
-   const deleteClass = req.body.deleteClass;
-   const deletePeriod = deleteClass.split("-");
-   const day = deletePeriod[0];
-   const sub = deletePeriod[1];
-   const period = deletePeriod[2];
-   const start = deletePeriod[3];
-   const end = deletePeriod[4];
-   const id = req.user.id;
-
-   User.updateOne({_id: id}, {$pull: {period: {day: day, subject: sub, period: period}}}, function(err){
-     if(!err){
-       User.findOne({_id: id}, function(err, user){
-         if(!err){
-           var i = 0;
-           user.period.forEach(function(period){
-             if(period.subject==sub){
-               i++;
-             }
-           });
-           if(i==0){
-              User.updateOne({_id: id}, {$pull: {attendance: {subject: sub}}}, function(err){
-                if(err){console.log(err);}
-              });
-              User.updateOne({_id: id}, {$pull: {present: {subject: sub}}}, function(err){
-                if(err){console.log(err);}
-              });
-              User.updateOne({_id: id}, {$pull: {absent: {subject: sub}}}, function(err){
-                if(err){console.log(err);}
-              });
-            }
-         }
-       });
-     }
-   });
-   setTimeout(function () {
-    res.redirect("/editClass");
-   }, 1000); 
-});
-
-
-
-// Delete All Periods
-
-app.post("/deleteAllClass", function(req, res){
-  const id = req.user.id;
-  User.findOneAndUpdate({_id: id}, {$set: {period: [], attendance: [], absent: [], present: []}}, function(err){
-    if(!err){
-      setTimeout(function () {
-        res.redirect("/editClass");
-       }, 1000); 
-    }
-  });
 });
 
 
 
 // Creating a new period
 
-app.post("/addClass", function(req, res) {
+app.post("/addClass", requireLogin, function(req, res) {
   const day = _.lowerCase(req.body.day);
   const period = (req.body.period);
   const sub = req.body.subject;
@@ -655,76 +549,201 @@ app.post("/addClass", function(req, res) {
 
 // Back in add class
 
-app.post("/back", function(req,res){
+app.post("/back", requireLogin, function(req,res){
   res.redirect("/editClass");
+});
+
+
+
+// Deleting period
+
+app.post("/deleteClass", requireLogin, function(req, res){
+   const deleteClass = req.body.deleteClass;
+   const deletePeriod = deleteClass.split("-");
+   const day = deletePeriod[0];
+   const sub = deletePeriod[1];
+   const period = deletePeriod[2];
+   const start = deletePeriod[3];
+   const end = deletePeriod[4];
+   const id = req.user.id;
+
+   User.updateOne({_id: id}, {$pull: {period: {day: day, subject: sub, period: period}}}, function(err){
+     if(!err){
+       User.findOne({_id: id}, function(err, user){
+         if(!err){
+           var i = 0;
+           user.period.forEach(function(period){
+             if(period.subject==sub){
+               i++;
+             }
+           });
+           if(i==0){
+              User.updateOne({_id: id}, {$pull: {attendance: {subject: sub}}}, function(err){
+                if(err){console.log(err);}
+              });
+              User.updateOne({_id: id}, {$pull: {present: {subject: sub}}}, function(err){
+                if(err){console.log(err);}
+              });
+              User.updateOne({_id: id}, {$pull: {absent: {subject: sub}}}, function(err){
+                if(err){console.log(err);}
+              });
+            }
+         }
+       });
+     }
+   });
+   setTimeout(function () {
+    res.redirect("/editClass");
+   }, 1000); 
+});
+
+
+
+// Delete All Periods
+
+app.post("/deleteAllClass", requireLogin, function(req, res){
+  const id = req.user.id;
+  User.findOneAndUpdate({_id: id}, {$set: {period: [], attendance: [], absent: [], present: []}}, function(err){
+    if(!err){
+      setTimeout(function () {
+        res.redirect("/editClass");
+       }, 1000); 
+    }
+  });
+});
+
+
+
+// Passing attendance, present & absent details with respective subject to attendance page
+
+app.get("/attendance", requireLogin, function(req, res){
+  const id = req.user.id;
+    User.findOne({_id: id}, function(err, user){
+        if (!err){
+          res.render("attendance", {keyAttendance: user.attendance, keyDate: user.modifyDate, keyPresent: user.present, keyAbsent: user.absent});
+        }
+    });
+});
+
+
+
+// Overall Attendance
+
+app.post("/overallAttendance", requireLogin, function(req, res){
+  var oPresent = 0;
+  var oAbsent = 0;
+  const id = req.user.id;
+
+  User.findOne({_id: id}, function(err, user){
+    if(!err){
+      user.attendance.forEach(function(period){
+        oPresent += period.present;
+        oAbsent += period.absent;
+      });
+      res.render("overallAttendance", {keyPresent: oPresent, keyAbsent: oAbsent});
+    }
+  });
+});
+
+
+
+// Back in Overall Attendance
+
+app.post("/backAttendance", requireLogin, function(req,res){
+  res.redirect("/attendance");
+});
+
+
+
+
+
+
+
+
+
+
+// Passing periods to respective day of timetable
+
+app.get("/:day", requireLogin, function(req, res){
+  const id = req.user.id;
+  const day = req.params.day;
+
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+      res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
+    }
+  });
 });
 
 
 
 // Attendance marking as Present or Absent
 
-app.post("/:day", function(req, res){
-    const day = req.params.day;
-    const sub = req.body.period;
-    const subject = sub.split("-");
-    const sub1 = subject[0];
-    const sub2 = subject[1];
-    const start = subject[2];
-    const end = subject[3];
-    const d = new Date().toLocaleDateString("fr-FR");
-    const id = req.user.id;
+app.post("/:day", requireLogin, function(req, res){
+  const day = req.params.day;
+  const sub = req.body.period;
+  const subject = sub.split("-");
+  const sub1 = subject[0];
+  const sub2 = subject[1];
+  const start = subject[2];
+  const end = subject[3];
+  const d = new Date().toLocaleDateString("fr-FR");
+  const id = req.user.id;
 
-    User.findOne({_id: id}, function(err, user){
-      if(!err){
-        user.attendance.forEach(function(period){
-          if(period.subject === sub2){
-            if(sub1 === "p"){
-              let present = period.present;
-              present = present + 1;
-              User.updateOne({_id: id, "attendance.subject": sub2}, {$set: {"attendance.$.present": present}}, function(err, user){
-                if(err){
-                  console.log(err);
-                }
-              });
-              const newPresent = new Present({
-                subject: sub2,
-                date: d,
-                start: start,
-                end: end
-              });
-              user.present.push(newPresent);
-              user.save();
-            }
-            else if(sub1 === "a"){
-              let absent = period.absent;
-              absent = absent + 1;
-              User.updateOne({_id: id, "attendance.subject": sub2}, {$set: {"attendance.$.absent": absent}}, function(err, user){
-                if(err){
-                  console.log(err);
-                }
-              });
-              const newAbsent = new Absent({
-                subject: sub2,
-                date: d,
-                start: start,
-                end: end
-              });
-              user.absent.push(newAbsent);
-              user.save();
-            }
+  User.findOne({_id: id}, function(err, user){
+    if(!err){
+      user.attendance.forEach(function(period){
+        if(period.subject === sub2){
+          if(sub1 === "p"){
+            let present = period.present;
+            present = present + 1;
+            User.updateOne({_id: id, "attendance.subject": sub2}, {$set: {"attendance.$.present": present}}, function(err, user){
+              if(err){
+                console.log(err);
+              }
+            });
+            const newPresent = new Present({
+              subject: sub2,
+              date: d,
+              start: start,
+              end: end
+            });
+            user.present.push(newPresent);
+            user.save();
           }
-        });
-      }
-    });
-    User.updateOne({_id: id}, {$set: {modifyDate: d}}, function(err){
-      if(err){
-        console.log(err);
-      }
-    });
-    setTimeout(function () {
-      res.redirect("/" + day);
-     }, 1000);  
+          else if(sub1 === "a"){
+            let absent = period.absent;
+            absent = absent + 1;
+            User.updateOne({_id: id, "attendance.subject": sub2}, {$set: {"attendance.$.absent": absent}}, function(err, user){
+              if(err){
+                console.log(err);
+              }
+            });
+            const newAbsent = new Absent({
+              subject: sub2,
+              date: d,
+              start: start,
+              end: end
+            });
+            user.absent.push(newAbsent);
+            user.save();
+          }
+        }
+      });
+    }
+  });
+  User.updateOne({_id: id}, {$set: {modifyDate: d}}, function(err){
+    if(err){
+      console.log(err);
+    }
+  });
+  setTimeout(function () {
+    res.redirect("/" + day);
+   }, 1000);  
 });
+
+
+
 
 
 
