@@ -166,7 +166,6 @@ app.use((req, res, next) => {
     User.findOne({ _id: id }, function (err, user) {
       if (!err) {
         res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
-        console.log(user.image.url);
       }
       next();
     });
