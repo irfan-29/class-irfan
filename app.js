@@ -160,26 +160,19 @@ app.use(function(req, res, next) {
 
 
 
-
-app.use((req, res, next) => {
-  if (req.isAuthenticated()) {
-    const id = req.user.id;
-    User.findOne({ _id: id }, function (err, user) {
-      if (!err) {
-        res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
-      }
-      next();
-    });
-  } else {
-    next();
-  }
-});
-
-
-
-
-
-
+// app.use((req, res, next) => {
+//   if (req.isAuthenticated()) {
+//     const id = req.user.id;
+//     User.findOne({ _id: id }, function (err, user) {
+//       if (!err) {
+//         res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+//       }
+//       next();
+//     });
+//   } else {
+//     next();
+//   }
+// });
 
 
 
