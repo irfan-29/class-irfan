@@ -285,12 +285,6 @@ const upload = multer({ storage });
 // }
 
 
-// // Google OAuth2 Client Setup
-// const CLIENT_ID = '558744717211-p9n9m2gseolpqianpj9p9oo2j7k32hfp.apps.googleusercontent.com';
-// const CLIENT_SECRET = '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';
-// const REDIRECT_URI = 'http://localhost:3000/oauth2callback';
-// const REFRESH_TOKEN = '1//0gHg-tN309fhdCgYIARAAGBASNwF-L9IrQuGOkX9PRj8pTGHxWRyKKh7YlKna2RBJRhVZ-Fwt7okXkHOqYnxDLKpnPW4FMTzxxaQ';
-
 
 // const oauth2Client = new google.auth.OAuth2(
 //   CLIENT_ID,
@@ -964,16 +958,16 @@ app.post("/backAttendance", requireLogin, function(req,res){
 
 // Passing periods to respective day of timetable
 
-app.get("/:day", requireLogin, function(req, res){
-  const id = req.user.id;
-  const day = req.params.day;
+// app.get("/:day", requireLogin, function(req, res){
+//   const id = req.user.id;
+//   const day = req.params.day;
 
-  User.findOne({_id: id}, function(err, user){
-    if (!err){
-      res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
-    }
-  });
-});
+//   User.findOne({_id: id}, function(err, user){
+//     if (!err){
+//       res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
+//     }
+//   });
+// });
 
 
 
