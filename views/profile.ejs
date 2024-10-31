@@ -7,8 +7,12 @@
 
 <div class="period" style="background: none; border: none; box-shadow: none;">
   <div style="text-align: center;">
-    <img src="images/user.png" style="width: 180px;">
+    <img src=<%= keyImg %> style="width: 180px; border-radius: 50%;" />
   </div>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
 </div>
 
 <div class="period">

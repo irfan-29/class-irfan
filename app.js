@@ -83,6 +83,19 @@ const completeTaskSchema = new mongoose.Schema({
 });
 const CompleteTask = mongoose.model("CompleteTask",completeTaskSchema);
 
+
+// 
+// MongoDB Schema and Model
+const ImageSchema = new mongoose.Schema({
+  filename: { type: String, required: true },
+  url: { type: String, required: true },
+});
+
+const Image = mongoose.model('Image', ImageSchema);
+// 
+
+
+
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
@@ -98,7 +111,8 @@ const userSchema = new mongoose.Schema({
   present: [presentSchema],
   absent: [absentSchema],
   task: [taskSchema],
-  completeTask: [completeTaskSchema]
+  completeTask: [completeTaskSchema],
+  image: ImageSchema
 });
 
 
@@ -146,6 +160,33 @@ app.use(function(req, res, next) {
 
 
 
+
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    const id = req.user.id;
+    User.findOne({ _id: id }, function (err, user) {
+      if (!err) {
+        res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 // login with google
 
 app.get("/auth/google", passport.authenticate('google', {scope: ["profile"]}));
@@ -153,6 +194,186 @@ app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: 
   function(req, res){
     res.redirect("/home");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const admin = require('firebase-admin');
+const serviceAccount = require('./firebaseServiceAccount.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'class-umi-apps-db.appspot.com' // Replace with your Firebase Storage bucket name
+});
+
+const bucket = admin.storage().bucket();
+
+
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+// const { v4: uuidv4 } = require('uuid'); // For generating unique filenames
+
+// Ensure 'uploads' directory exists
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
+
+// Upload File to Firebase Storage
+const uploadFileToFirebase = async (file, userId) => {
+  try {
+    const fileName = `${userId}-${file.originalname}`;
+    const fileUpload = bucket.file(fileName);
+    const stream = fileUpload.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+      },
+    });
+
+    await new Promise((resolve, reject) => {
+      stream.on('finish', resolve);
+      stream.on('error', reject);
+      fs.createReadStream(file.path).pipe(stream);
+    });
+
+    const [url] = await fileUpload.getSignedUrl({
+      action: 'read',
+      expires: '03-09-2491', // Adjust the expiration date as needed
+    });
+
+    return url;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};
+
+// Multer Configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+
+
+
+
+
+
+
+
+
+// const multer = require('multer');
+// const { google } = require('googleapis');
+// const path = require('path');
+// const fs = require('fs');
+
+// // Ensure 'uploads' directory exists
+// if (!fs.existsSync('uploads')) {
+//   fs.mkdirSync('uploads');
+// }
+
+
+// // Google OAuth2 Client Setup
+// const CLIENT_ID = '558744717211-p9n9m2gseolpqianpj9p9oo2j7k32hfp.apps.googleusercontent.com';
+// const CLIENT_SECRET = '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';
+// const REDIRECT_URI = 'http://localhost:3000/oauth2callback';
+// const REFRESH_TOKEN = '1//0gHg-tN309fhdCgYIARAAGBASNwF-L9IrQuGOkX9PRj8pTGHxWRyKKh7YlKna2RBJRhVZ-Fwt7okXkHOqYnxDLKpnPW4FMTzxxaQ';
+
+
+// const oauth2Client = new google.auth.OAuth2(
+//   CLIENT_ID,
+//   CLIENT_SECRET,
+//   REDIRECT_URI
+// );
+
+// oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+// const drive = google.drive({ version: 'v3', auth: oauth2Client });
+
+// // Upload File to Google Drive
+// const uploadFile = async (file) => {
+//   try {
+//     const response = await drive.files.create({
+//       requestBody: {
+//         name: file.originalname,
+//         mimeType: file.mimetype,
+//       },
+//       media: {
+//         mimeType: file.mimetype,
+//         body: fs.createReadStream(file.path),
+//       },
+//     });
+
+//     await drive.permissions.create({
+//       fileId: response.data.id,
+//       requestBody: {
+//         role: 'reader',
+//         type: 'anyone',
+//       },
+//     });
+
+//     const result = await drive.files.get({
+//       fileId: response.data.id,
+//       fields: 'webViewLink, webContentLink',
+//     });
+
+//     return result.data;
+//   } catch (error) {
+//     console.log(error.message);
+//     return null;
+//   }
+// };
+
+// // Multer Configuration
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'uploads/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}-${file.originalname}`);
+//   },
+// });
+
+// const upload = multer({ storage });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -251,16 +472,102 @@ app.get("/home", requireLogin, function(req, res) {
 
 
 
+
+
+
+
+
+
+
+// User profile
+app.get('/profile', requireLogin, function (req, res) {
+  const id = req.user.id;
+  User.findOne({ _id: id }, function (err, user) {
+    if (!err) {
+      res.render('profile', { keyUser: user, keyImg: user.image.url });
+    }
+  });
+});
+
+
+const deleteFileFromFirebase = async (fileName) => {
+  try {
+    await bucket.file(fileName).delete();
+    console.log(`Successfully deleted previous image: ${fileName}`);
+  } catch (error) {
+    console.log(`Failed to delete previous image: ${fileName}`, error.message);
+  }
+};
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  const id = req.user.id;
+  const oldFileName = `${id}-${req.user.image.filename}`;
+
+  await deleteFileFromFirebase(oldFileName); // Delete the previous image
+
+  const fileData = await uploadFileToFirebase(req.file, id);
+
+  const newImage = {
+    filename: req.file.originalname,
+    url: fileData,
+  };
+
+  User.updateOne({ _id: id }, { $set: { image: newImage } }, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+
+  fs.unlinkSync(req.file.path); // Remove the file from the server
+
+  res.redirect('/profile');
+});
+
+
+
+
+
+
+
+
 // User profile
 
-app.get("/profile", requireLogin, function(req,res){
-  const id = req.user.id;
-    User.findOne({_id: id}, function(err, user){
-        if (!err){
-          res.render("profile", {keyUser: user});
-        }
-    });
-});
+// app.get("/profile", requireLogin, function(req,res){
+//   const id = req.user.id;
+//     User.findOne({_id: id}, function(err, user){
+//         if (!err){
+//           var keyImg = user.image.url;
+//           keyImg=keyImg.replace("https://drive.google.com/file/d/", "https://drive.usercontent.google.com/download?id=");
+//           keyImg=keyImg.replace("/view?usp=drivesdk", "&export=view&authuser=0");                                                          
+          
+          
+//           res.render("profile", {keyUser: user, keyImg: keyImg}); 
+//           // res.render("profile", {keyUser: user, keyImg: "11nC8dSrLiRU4D1WcMvgMuk8cCsmTal9Q"});
+//         }
+//     });
+// });
+
+
+// app.post('/upload', upload.single('file'), async (req, res) => {
+//   const id = req.user.id;
+//   const fileData = await uploadFile(req.file);
+
+//   const newImage = new Image({
+//     filename: req.file.originalname,
+//     url: fileData.webViewLink,
+//   });
+
+//   // await img.save();
+//   User.updateOne({_id: id}, {$set: {image: newImage}}, function(err){
+//     console.log(err);
+//   });
+
+//   fs.unlinkSync(req.file.path); // Remove the file from the server
+
+//   res.redirect("/profile");
+// });
+
+
 
 app.post("/profile", requireLogin, function(req, res){
   const id = req.user.id;
@@ -268,7 +575,7 @@ app.post("/profile", requireLogin, function(req, res){
   const dob =req.body.dob;
   const degree =req.body.degree;
   const college =req.body.college;
-
+  
   User.updateOne({_id: id}, {$set: {name: name, dob: dob, degree: degree, college: college}}, function(err){
     if(err){
       console.log(err);
