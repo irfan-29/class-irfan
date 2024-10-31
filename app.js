@@ -166,6 +166,7 @@ app.use((req, res, next) => {
     User.findOne({ _id: id }, function (err, user) {
       if (!err) {
         res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+        console.log(user.image.url);
       }
       next();
     });
@@ -198,13 +199,8 @@ app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: 
 
 
 
-
-
-
-
-
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebaseServiceAccount.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
