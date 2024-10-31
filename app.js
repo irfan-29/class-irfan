@@ -160,19 +160,19 @@ app.use(function(req, res, next) {
 
 
 
-// app.use((req, res, next) => {
-//   if (req.isAuthenticated()) {
-//     const id = req.user.id;
-//     User.findOne({ _id: id }, function (err, user) {
-//       if (!err) {
-//         res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
-//       }
-//       next();
-//     });
-//   } else {
-//     next();
-//   }
-// });
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    const id = req.user.id;
+    User.findOne({ _id: id }, function (err, user) {
+      if (!err) {
+        res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 
 
@@ -958,16 +958,16 @@ app.post("/backAttendance", requireLogin, function(req,res){
 
 // Passing periods to respective day of timetable
 
-// app.get("/:day", requireLogin, function(req, res){
-//   const id = req.user.id;
-//   const day = req.params.day;
+app.get("/:day", requireLogin, function(req, res){
+  const id = req.user.id;
+  const day = req.params.day;
 
-//   User.findOne({_id: id}, function(err, user){
-//     if (!err){
-//       res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
-//     }
-//   });
-// });
+  User.findOne({_id: id}, function(err, user){
+    if (!err){
+      res.render(day, {keyPeriod: user.period, keyTiming: user.timing, day: day});
+    }
+  });
+});
 
 
 
