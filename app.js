@@ -203,8 +203,6 @@ const admin = require('firebase-admin');
 const jsonData = process.env.FIREBASE_SERVICE_ACCOUNT;
 const parsedData = JSON.parse(jsonData);
 
-console.log(parsedData);
-
 // const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
