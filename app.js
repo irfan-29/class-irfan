@@ -199,10 +199,16 @@ app.get("/auth/google/class", passport.authenticate('google', {failureRedirect: 
 
 
 const admin = require('firebase-admin');
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+const jsonData = process.env.FIREBASE_SERVICE_ACCOUNT;
+const parsedData = JSON.parse(jsonData);
+
+console.log(parsedData);
+
+// const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(parsedData),
   storageBucket: 'class-umi-apps-db.appspot.com' // Replace with your Firebase Storage bucket name
 });
 
