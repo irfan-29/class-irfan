@@ -164,8 +164,12 @@ app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     const id = req.user.id;
     User.findOne({ _id: id }, function (err, user) {
-      if (!err) {
-        res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+      if (!err && user) {
+        if (user.image && typeof user.image.url !== 'undefined') {
+          res.locals.userImageUrl = user.image.url; // Set user image URL to res.locals
+        } else {
+          res.locals.userImageUrl = "images/user.png"; // Fallback image URL
+        }
       }
       next();
     });
@@ -469,8 +473,12 @@ app.get("/home", requireLogin, function(req, res) {
 app.get('/profile', requireLogin, function (req, res) {
   const id = req.user.id;
   User.findOne({ _id: id }, function (err, user) {
-    if (!err) {
-      res.render('profile', { keyUser: user, keyImg: user.image.url });
+    if (!err && user) {
+      if (user.image && typeof user.image.url !== 'undefined') {
+        res.render('profile', { keyUser: user, keyImg: user.image.url });
+      } else {
+        res.render('profile', { keyUser: user, keyImg: "images/user.png" });
+      }
     }
   });
 });
@@ -479,7 +487,6 @@ app.get('/profile', requireLogin, function (req, res) {
 const deleteFileFromFirebase = async (fileName) => {
   try {
     await bucket.file(fileName).delete();
-    console.log(`Successfully deleted previous image: ${fileName}`);
   } catch (error) {
     console.log(`Failed to delete previous image: ${fileName}`, error.message);
   }
@@ -487,10 +494,12 @@ const deleteFileFromFirebase = async (fileName) => {
 
 app.post('/upload', upload.single('file'), async (req, res) => {
   const id = req.user.id;
-  const oldFileName = `${id}-${req.user.image.filename}`;
 
-  await deleteFileFromFirebase(oldFileName); // Delete the previous image
-
+  if (req.user.image && typeof req.user.image.url !== 'undefined') {
+    const oldFileName = `${id}-${req.user.image.filename}`;
+    await deleteFileFromFirebase(oldFileName); // Delete the previous image
+  }
+  
   const fileData = await uploadFileToFirebase(req.file, id);
 
   const newImage = {
@@ -575,8 +584,12 @@ app.post("/profile", requireLogin, function(req, res){
 app.get('/editProfile', requireLogin, function (req, res) {
   const id = req.user.id;
   User.findOne({ _id: id }, function (err, user) {
-    if (!err) {
-      res.render('editProfile', { keyUser: user, keyImg: user.image.url });
+    if (!err && user) {
+      if (user.image && typeof user.image.url !== 'undefined') {
+        res.render('editProfile', { keyUser: user, keyImg: user.image.url });
+      } else {
+        res.render('editProfile', { keyUser: user, keyImg: "images/user.png" });
+      }
     }
   });
 });

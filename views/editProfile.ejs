@@ -44,7 +44,7 @@
 
 <form id="uploadForm" class="form-floating" action="/upload" method="post" enctype="multipart/form-data">
   <div class="mb-3">
-    <label for="fileInput" class="form-label">Upload Profile Photo</label>
+    <label for="fileInput" class="form-label">Change Profile Photo</label>
     <!-- <input class="form-control" type="file" id="formFile"> -->
     <input class="form-control" type="file" name="file" id="fileInput" accept="image/*" required>
   </div>
@@ -122,19 +122,19 @@
 
 <form action="/profile" method="post">
   <div class="form-floating">
-    <input class="form-control" placeholder="Enter your name" type="text" required id="name" name="name">
+    <input class="form-control" placeholder="Enter your name" type="text" required id="name" name="name" value="<%= keyUser.name %>">
     <label for="name">Name</label>
   </div>
   <div class="form-floating">
-    <input class="form-control" type="date" required id="dob" name="dob">
+    <input class="form-control" type="date" required id="dob" name="dob" value="<%= keyUser.dob %>">
     <label for="dob">Date Of Birth</label>
   </div>
   <div class="form-floating">
-    <input class="form-control" type="text" required placeholder="degree" id="degree" name="degree">
+    <input class="form-control" type="text" required placeholder="degree" id="degree" name="degree" value="<%= keyUser.degree %>">
     <label for="degree">Degree</label>
   </div>
   <div class="form-floating">
-    <input class="form-control" type="text" required id="college" placeholder="college" name="college">
+    <input class="form-control" type="text" required id="college" placeholder="college" name="college" value="<%= keyUser.college %>">
     <label for="college">College</label>
   </div>
   <div class="new-task">
