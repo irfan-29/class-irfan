@@ -411,14 +411,17 @@ app.post("/login", function(req, res, next){
 
 
 app.get("/register",function(req,res){
-  res.render("register", {keyNote: ""});
+  res.render("register", {keyNote: "", keyEmail: ""});
 });
 
 app.post("/register", function(req, res){
+  if(req.body.password !== req.body.cpassword){
+    return res.render("register", {keyNote: "*Passwords do not match", keyEmail: req.body.username});
+  }
   User.register({username: req.body.username}, req.body.password, function(err, user){
     if(err){
       console.log(err);
-      res.render("register", {keyNote: "*User already registered"});
+      return res.render("register", {keyNote: "*User already registered", keyEmail: ""});
     }else{
       passport.authenticate("local")(req, res, function(){
         res.redirect("/home");
