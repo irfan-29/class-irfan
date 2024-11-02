@@ -21,7 +21,7 @@ app.use(session({
   secret:"Our little secret.",
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 1 * 60 * 60 * 1000 }   // cookie session timings in milliseconds - for 1 hrs
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }   // cookie session timings in milliseconds - for 24 hrs
 }));
 
 app.use(passport.initialize());
