@@ -5,6 +5,117 @@
   <h4>Edit Profile</h4>
 </div>
 
+
+<div class="period" style="text-align: center; background: none; border: none; box-shadow: none;">
+  <div style="text-align: center;">
+    <img src="<%= keyImg %>" style="width: 180px; border-radius: 50%;" />
+  </div>
+<style>
+  #crop-modal {
+      display: none;
+      z-index: 1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+  }
+  #crop-modal .content {
+      background: #fff;
+      padding: 15px 0;
+      border-radius: 5px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+  }
+  #crop-image {
+      max-width: 50%;
+      height: auto;
+  }
+  .actions {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 15px 0 15px;
+  }
+</style>
+
+<form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" id="fileInput" required>
+</form>
+
+
+<div id="crop-modal">
+    <div class="content period">
+        <img id="crop-image" src="" alt="Image to crop">
+        <div class="actions">
+            <button id="crop-button">Crop and Upload</button>
+            <button id="back-button">Back</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const modal = document.getElementById('crop-modal');
+    const image = document.getElementById('crop-image');
+    const cropButton = document.getElementById('crop-button');
+    const backButton = document.getElementById('back-button');
+    let cropper;
+    let originalFileName;
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            originalFileName = file.name;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                image.src = e.target.result;
+                modal.style.display = 'flex';
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    cropButton.addEventListener('click', function() {
+        const canvas = cropper.getCroppedCanvas({
+            width: 200,
+            height: 200,
+        });
+        canvas.toBlob(function(blob) {
+            const formData = new FormData();
+            formData.append('file', blob, originalFileName); // Preserve the original file name
+            fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/editProfile';
+                } else {
+                    console.log('Upload failed');
+                }
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+            });
+        });
+    });
+
+    backButton.addEventListener('click', function() {
+        window.location.href = '/editProfile';
+    });
+</script>
+</div>
+
+
 <form action="/profile" method="post">
   <div class="form-floating">
     <input class="form-control" placeholder="Enter your name" type="text" required id="name" name="name">

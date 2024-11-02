@@ -570,6 +570,17 @@ app.post("/profile", requireLogin, function(req, res){
   res.redirect("/profile");
 });
 
+
+
+app.get('/editProfile', requireLogin, function (req, res) {
+  const id = req.user.id;
+  User.findOne({ _id: id }, function (err, user) {
+    if (!err) {
+      res.render('editProfile', { keyUser: user, keyImg: user.image.url });
+    }
+  });
+});
+
 app.post("/editProfile", requireLogin, function(req, res){
   res.redirect("/editProfile");
 });
