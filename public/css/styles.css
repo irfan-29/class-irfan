@@ -340,8 +340,8 @@ th{
   font-size: 1rem;
   font-stretch: condensed;
   text-decoration: none;
-  padding-bottom: 3px;
-  padding-top: 3px;
+  padding-bottom: 0;
+  padding-top: 7px;
 }
 .nav-item {
   color: white;
@@ -357,7 +357,10 @@ span {
   white-space: nowrap;
   box-shadow: none;
 }
-
+.dropdown-menu{
+  position: absolute;
+  right: 0;
+}
 
 
 /* About page */
@@ -534,6 +537,10 @@ a:hover {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 
 @media only screen and (min-width: 1200px) {
+  .navbar-display-image{
+    position: relative; 
+    bottom: 5px;
+  }
   .attendance {
     width: 62%;
     height: 750px;
