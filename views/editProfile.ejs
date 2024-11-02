@@ -42,8 +42,12 @@
   }
 </style>
 
-<form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
-  <input type="file" name="file" id="fileInput" required>
+<form id="uploadForm" class="form-floating" action="/upload" method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="fileInput" class="form-label">Upload Profile Photo</label>
+    <!-- <input class="form-control" type="file" id="formFile"> -->
+    <input class="form-control" type="file" name="file" id="fileInput" accept="image/*" required>
+  </div>
 </form>
 
 
@@ -51,8 +55,8 @@
     <div class="content period">
         <img id="crop-image" src="" alt="Image to crop">
         <div class="actions">
-            <button id="crop-button">Crop and Upload</button>
-            <button id="back-button">Back</button>
+          <button id="back-button" class="add btn btn-danger">Back</button>
+          <button id="crop-button" class="add btn btn-primary">Crop and Upload</button>
         </div>
     </div>
 </div>
