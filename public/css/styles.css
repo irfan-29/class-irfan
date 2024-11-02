@@ -478,6 +478,10 @@ a:hover {
     position: relative;
     right: 12px;
   }
+  .delete{
+    position: relative; 
+    left: 5px;
+  }
   .head {
     margin: 35px 7%;
   }
@@ -524,6 +528,10 @@ a:hover {
   .parent {
     margin: 20px 20%;
   }
+  .delete{
+    position: relative; 
+    left: 5px;
+  }
   .head {
     margin: 35px 20%;
   }
@@ -540,10 +548,6 @@ a:hover {
   .navbar-display-image{
     position: relative; 
     bottom: 5px;
-  }
-  .delete{
-    position: relative; 
-    left: 12px;
   }
   .attendance {
     width: 62%;
@@ -569,6 +573,10 @@ a:hover {
   .delete-add,
   .parent {
     margin: 20px 30%;
+  }
+  .delete{
+    position: relative; 
+    left: 12px;
   }
   .head {
     margin: 35px 30%;
