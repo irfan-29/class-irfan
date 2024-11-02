@@ -541,6 +541,10 @@ a:hover {
     position: relative; 
     bottom: 5px;
   }
+  .delete{
+    position: relative; 
+    left: 12px;
+  }
   .attendance {
     width: 62%;
     height: 750px;
