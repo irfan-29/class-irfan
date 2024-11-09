@@ -272,101 +272,6 @@ const upload = multer({ storage });
 
 
 
-
-
-
-
-
-// const multer = require('multer');
-// const { google } = require('googleapis');
-// const path = require('path');
-// const fs = require('fs');
-
-// // Ensure 'uploads' directory exists
-// if (!fs.existsSync('uploads')) {
-//   fs.mkdirSync('uploads');
-// }
-
-
-
-// const oauth2Client = new google.auth.OAuth2(
-//   CLIENT_ID,
-//   CLIENT_SECRET,
-//   REDIRECT_URI
-// );
-
-// oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-
-// const drive = google.drive({ version: 'v3', auth: oauth2Client });
-
-// // Upload File to Google Drive
-// const uploadFile = async (file) => {
-//   try {
-//     const response = await drive.files.create({
-//       requestBody: {
-//         name: file.originalname,
-//         mimeType: file.mimetype,
-//       },
-//       media: {
-//         mimeType: file.mimetype,
-//         body: fs.createReadStream(file.path),
-//       },
-//     });
-
-//     await drive.permissions.create({
-//       fileId: response.data.id,
-//       requestBody: {
-//         role: 'reader',
-//         type: 'anyone',
-//       },
-//     });
-
-//     const result = await drive.files.get({
-//       fileId: response.data.id,
-//       fields: 'webViewLink, webContentLink',
-//     });
-
-//     return result.data;
-//   } catch (error) {
-//     console.log(error.message);
-//     return null;
-//   }
-// };
-
-// // Multer Configuration
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-
-// const upload = multer({ storage });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // to check for authentication on mentioned url, and redirect to login page if not
 
 function requireLogin(req, res, next) {
@@ -423,9 +328,10 @@ app.post("/register", function(req, res){
       console.log(err);
       return res.render("register", {keyNote: "*User already registered", keyEmail: ""});
     }else{
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/home");
-      });
+      // passport.authenticate("local")(req, res, function(){
+      //   res.redirect("/home");
+      // });
+      res.redirect("/login");
     }
   });
 });
