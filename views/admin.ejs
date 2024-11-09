@@ -1,0 +1,31 @@
+<%- include("partials/header") -%>
+
+
+<div class="head">
+  <h4>Admin</h4>
+</div>
+
+<div class="task-title">
+    <h5 style="font-size: 1.4rem; font-weight: 700; padding-bottom: 0; padding-top: 5px;">Add New Message</h5>
+</div>
+
+<form action="/new-message" method="post">
+    <div class="form-floating">
+      <input class="form-control" placeholder="Topic" type="text" required id="topic" name="topic">
+      <label for="topic">Topic</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" required placeholder="Description" id="description" name="description"">
+        <label for="description">Description</label>
+      </div>
+    <div class="form-floating">
+      <input class="form-control" type="date" required id="date" name="date"">
+      <label for="date">Date</label>
+    </div>
+
+    <div class="new-task">
+      <button type="submit" class="add btn btn-outline-primary" value="add" name="add">Save</button>
+    </div>
+  </form>
+
+<%- include("partials/footer") -%>

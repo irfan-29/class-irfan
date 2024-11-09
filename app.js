@@ -83,17 +83,19 @@ const completeTaskSchema = new mongoose.Schema({
 });
 const CompleteTask = mongoose.model("CompleteTask",completeTaskSchema);
 
-
-// 
-// MongoDB Schema and Model
 const ImageSchema = new mongoose.Schema({
   filename: { type: String, required: true },
   url: { type: String, required: true },
 });
 
 const Image = mongoose.model('Image', ImageSchema);
-// 
 
+const messageSchema = new mongoose.Schema({
+  topic: String,
+  description: String,
+  date: String
+});
+const Message = mongoose.model("Message",messageSchema);
 
 
 const userSchema = new mongoose.Schema({
@@ -881,8 +883,43 @@ app.post("/backAttendance", requireLogin, function(req,res){
 
 
 
+// Message page
+
+app.get("/message", requireLogin, function(req, res){
+  Message.find({}, function(err, msg){
+    if(!err) res.render("message", {keyMessage: msg});
+  });
+});
 
 
+
+// Admin page - to add new message
+
+app.get("/admin", requireLogin, function(req, res){
+  const id = req.user.id;
+  if(id=="641833b7cbc7e3c2dc14e1cd"){
+    res.render("admin");
+  }else{
+    res.redirect("home");
+  }
+});
+
+app.post("/new-message", requireLogin, function(req, res){
+  const topic = req.body.topic;
+  const description = req.body.description;
+  const date = req.body.date;
+  const arr = date.split("-");
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const newDate = months[parseInt(arr[1])-1]+" "+arr[2]+", "+arr[0];
+
+  const newMessage = new Message({
+    topic: topic,
+    description: description,
+    date: newDate
+  });
+  newMessage.save();
+  res.redirect("/admin");
+});
 
 
 
