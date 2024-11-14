@@ -172,6 +172,7 @@ app.use((req, res, next) => {
         } else {
           res.locals.userImageUrl = "images/user.png"; // Fallback image URL
         }
+        res.locals.user = user;
       }
       next();
     });
