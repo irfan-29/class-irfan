@@ -93,6 +93,7 @@ const Image = mongoose.model('Image', ImageSchema);
 const messageSchema = new mongoose.Schema({
   topic: String,
   description: String,
+  tag: String,
   date: String
 });
 const Message = mongoose.model("Message",messageSchema);
@@ -887,9 +888,19 @@ app.post("/backAttendance", requireLogin, function(req,res){
 // Message page
 
 app.get("/message", requireLogin, function(req, res){
-  Message.find({}, function(err, msg){
-    if(!err) res.render("message", {keyMessage: msg});
-  });
+  const tag=req.query.tag;
+  if(typeof tag !=='undefined'){
+    Message.find({tag: tag}, function(err, msg){
+      if(!err){
+        res.render("message", {keyMessage: msg, keyTag: tag});
+      }
+    });
+  }else{
+    Message.find({}, function(err, msg){
+      if(!err)
+        res.render("message", {keyMessage: msg, keyTag: ""});
+    });
+  }
 });
 
 
@@ -908,6 +919,7 @@ app.get("/admin", requireLogin, function(req, res){
 app.post("/new-message", requireLogin, function(req, res){
   const topic = req.body.topic;
   const description = req.body.description;
+  const tag = req.body.tag;
   const date = req.body.date;
   const arr = date.split("-");
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -916,6 +928,7 @@ app.post("/new-message", requireLogin, function(req, res){
   const newMessage = new Message({
     topic: topic,
     description: description,
+    tag: tag,
     date: newDate
   });
   newMessage.save();

@@ -5,15 +5,47 @@
   <h4>Message</h4>
 </div>
 
+<div class="period" style="box-shadow: none; padding: 0; margin-bottom: 0;">
+  <ul class="nav nav-pills" style="padding: 0; margin-bottom: 5px;">
+    <li class="nav-item">
+      <a class="nav-link l1 <%=keyTag === '' ? 'active' : '' %>" href="/message">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link l1 <%=keyTag === 'feature' ? 'active' : '' %>" href="/message?tag=feature">Feature</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link l1 <%=keyTag === 'fix' ? 'active' : '' %>" href="/message?tag=fix">UI & Fix</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link l1 <%=keyTag === 'message' ? 'active' : '' %>"  href="/message?tag=message">Message</a>
+    </li>
+  </ul>
+  <hr class="h1"/>
+</div>
+
+<style>
+  .l1{
+    font-size: 1.1rem;
+    color: black;
+    padding: 0 10px;
+    margin: 0 2.5px;
+  }
+  .l1:hover{
+    color: blue;
+  }
+</style>
+
 <% for (var i = keyMessage.length-1; i>=0; i--) { %>
   <div class="period">
-    <h5 style="margin: 0;">What's new🔈</h5>
+    <h5 style="margin: 0;">What's new🔈<span class="badge rounded-pill text-bg-primary" style="font-weight: normal; font-size: 0.8rem; position: relative; bottom: 3px;"><%= keyMessage[i].tag === "feature" ? "Feature" : keyMessage[i].tag === "fix" ? "UI & Fix" : keyMessage[i].tag === "message" ? "Message" : "" %></span></h5>
     <hr style="margin: 0; margin-bottom: 8px;">
     <p style="margin-bottom: 7px; font-weight: 700; font-size: 1.4rem;"><%= keyMessage[i].topic %></p>
     <p> • <%= keyMessage[i].description %></p>
     <p> • <%= keyMessage[i].date %></p>
+    
   </div>
 <% } %>
+
 
 
 <%- include("partials/footer") -%>

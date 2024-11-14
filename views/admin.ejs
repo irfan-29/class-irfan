@@ -17,11 +17,20 @@
     <div class="form-floating">
         <input class="form-control" type="text" required placeholder="Description" id="description" name="description"">
         <label for="description">Description</label>
-      </div>
+    </div>
+    <div class="form-floating">
+        <select name="tag" id="tag" class="form-control" placeholder="Enter the Tag">
+          <option value="feature">Feature</option>
+          <option value="fix">UI & Fix</option>
+          <option value="message">Message</option>
+        </select>
+        <label for="tag">Tag</label>
+    </div>
     <div class="form-floating">
       <input class="form-control" type="date" required id="date" name="date"">
       <label for="date">Date</label>
     </div>
+    
 
     <div class="new-task">
       <button type="submit" class="add btn btn-outline-primary" value="add" name="add">Save</button>
