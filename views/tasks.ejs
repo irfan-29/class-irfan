@@ -25,8 +25,8 @@
   <div style="float: right; padding: 0; display: flex;">
 
     <form action="/editTask" method="post">
-      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="editTask" value="<%= ele.task %>"><img class="delete" src="images/edit.png" onmouseover="this.src='images/edit-hover.png';" onmouseout="this.src='images/edit.png';"
-        style="width: 22px; height: 22px; margin-right: 10px;" alt="edit"></button>
+      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="editTask" value="<%= ele.task %>"><img class="edit" src="images/edit.png" onmouseover="this.src='images/edit-hover.png';" onmouseout="this.src='images/edit.png';"
+        style="width: 22px; height: 22px;" alt="edit"></button>
     </form>
 
     <form action="/deleteTask" method="post">

@@ -493,6 +493,11 @@ a:hover {
     position: relative;
     right: 12px;
   }
+  .edit{
+    margin-right: 7px;
+    position: relative; 
+    left: 5px;
+  }
   .delete{
     position: relative; 
     left: 5px;
@@ -548,6 +553,11 @@ a:hover {
   .parent {
     margin: 20px 20%;
   }
+  .edit{
+    margin-right: 7px;
+    position: relative; 
+    left: 5px;
+  }
   .delete{
     position: relative; 
     left: 5px;
@@ -593,6 +603,11 @@ a:hover {
   .delete-add,
   .parent {
     margin: 20px 30%;
+  }
+  .edit{
+    margin-right: 11px;
+    position: relative; 
+    left: 12px;
   }
   .delete{
     position: relative; 
