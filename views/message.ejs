@@ -23,18 +23,6 @@
   <hr class="h1"/>
 </div>
 
-<style>
-  .l1{
-    font-size: 1.2rem;
-    color: black;
-    padding: 0 10px;
-    margin: 0 2px;
-  }
-  .l1:hover{
-    color: blue;
-  }
-</style>
-
 <% for (var i = keyMessage.length-1; i>=0; i--) { %>
   <div class="period">
     <h5 style="margin: 0;">What's new🔈<span class="badge rounded-pill text-bg-primary" style="font-weight: normal; font-size: 0.8rem; position: relative; bottom: 3px;"><%= keyMessage[i].tag === "feature" ? "Feature" : keyMessage[i].tag === "fix" ? "UI & Fix" : keyMessage[i].tag === "message" ? "Message" : "" %></span></h5>

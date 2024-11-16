@@ -363,6 +363,21 @@ span {
 }
 
 
+
+/* Message */
+
+.l1{
+  font-size: 1.2rem;
+  color: black;
+  padding: 0 10px;
+  margin: 0 2.5px;
+}
+.l1:hover{
+  color: blue;
+}
+
+
+
 /* About page */
 
 .det {
@@ -481,6 +496,11 @@ a:hover {
   .delete{
     position: relative; 
     left: 5px;
+  }
+  .l1{
+    font-size: 1.1rem;
+    padding: 0 8px;
+    margin: 0 2px;
   }
   .head {
     margin: 35px 7%;
