@@ -14,7 +14,7 @@
 <% var i=1; %>
 <% keyTask.forEach(function(ele){ %>
 <div class="task">
-  <div style="float: left; width: 93%; display: flex; margin-top: 8px;">
+  <div style="float: left; width: 88%; display: flex; margin-top: 8px;">
     <form action="/completeTask" method="post">
       <div style="display: flex; position: relative; top: 2px;">
         <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>" onchange="this.form.submit()">
@@ -22,12 +22,16 @@
       </div>
     </form>
   </div>
-  <div style="float: right; padding: 0;">
+  <div style="float: right; padding: 0; display: flex;">
+
+    <form action="/editTask" method="post">
+      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="editTask" value="<%= ele.task %>"><img class="delete" src="images/edit.png" onmouseover="this.src='images/edit-hover.png';" onmouseout="this.src='images/edit.png';"
+        style="width: 22px; height: 22px; margin-right: 10px;" alt="edit"></button>
+    </form>
+
     <form action="/deleteTask" method="post">
-      <!-- <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png"
-          style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button> -->
-          <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" onmouseover="this.src='images/delete-hover.png';" onmouseout="this.src='images/delete.png';"
-            style="width: 23px; height: 24px;" alt="delete"></button>
+      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" onmouseover="this.src='images/delete-hover.png';" onmouseout="this.src='images/delete.png';"
+        style="width: 23px; height: 24px;" alt="delete"></button>
     </form>
   </div>
 </div>
