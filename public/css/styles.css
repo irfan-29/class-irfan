@@ -1,7 +1,7 @@
 /* Theme */
 
 #icon {
-  width: 23px;
+  width: 20px;
   cursor: pointer;
   position: relative;
   left: 5px;
@@ -32,7 +32,7 @@
 
 /* Alerts */
 
-.notification_success {
+/* .notification_success {
   position: fixed;
   bottom: 10px;
   right: 10px;
@@ -113,7 +113,87 @@
   to {
     transform: scaleX(1);
   }
+} */
+
+.notification_success, .notification_danger {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30px);
+  width: max-content;
+  border-radius: 10px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  visibility: hidden;
+  animation: fade-in 2.5s linear;
+  border: 2px solid white;
 }
+
+.notification_success {
+  background-color: #d1e8de;
+  color: #0a3622;
+}
+
+.notification_danger {
+  background-color: #f7d7da;
+  color: #58151C;
+}
+
+/* .notification_icon_success, .notification_icon_danger {
+  height: 21px;
+  width: 21px;
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+} */
+
+.notification_body_success, .notification_body_danger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 12px 15px 12px;
+}
+
+.notification_progress_success, .notification_progress_danger {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  width: calc(100% - 8px);
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: inherit;
+  animation: progress 2s 0.3s linear;
+}
+
+.notification_progress_success {
+  background: linear-gradient(to right, #aaec8a, hsl(153, 96%, 29%));
+}
+
+.notification_progress_danger {
+  background: linear-gradient(to right, #f0a9b8, #dc093e);
+}
+
+@keyframes fade-in {
+  5% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* Move to the final position */
+  }
+  95% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Maintain position */
+  }
+}
+
+@keyframes progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+
 
 
 
@@ -140,6 +220,9 @@
 body {
   padding-bottom: 70px;
   background: var(--primary-color);
+}
+#loader{
+  background-color: var(--primary-color);
 }
 .task-title {
   background: var(--primary-color);
@@ -259,6 +342,7 @@ table{
   width: 80%;
   margin: 60px 10%;
   background: var(--secondary-color);
+  color: var(--forth-color);
   border-radius: 20px;
   box-shadow: 2px 2px 15px -2px rgba(0,0,0,.25);
 }
@@ -515,11 +599,11 @@ a:hover {
   }
   .table-container{
     display: block;
-      max-width: -moz-fit-content;
-      max-width: fit-content;
-      margin: 0 auto;
-      overflow-x: auto;
-      white-space: nowrap; 
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap; 
   }
 }
 
