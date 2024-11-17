@@ -32,89 +32,6 @@
 
 /* Alerts */
 
-/* .notification_success {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: max-content;
-  background-color: #d1e7dd;
-  color: #0a3622;
-  border-radius: 6px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-  transform: translateY(30px);
-  animation: fade-in 2s linear;
-  z-index: 1;
-  visibility: hidden;
-}
-.notification_danger {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: max-content;
-  background-color: #F8D7DA;
-  color: #58151C;
-  border-radius: 6px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-  transform: translateY(30px);
-  animation: fade-in 2s linear;
-  z-index: 1;
-  visibility: hidden;
-}
-.notification_icon_success, .notification_icon_danger {
-  height: 21px;
-  width: 21px;
-  margin-right: 5px;
-  position: relative;
-  top: 1px;
-}
-.notification_body_success, .notification_body_danger {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 16px 8px;
-}
-.notification_progress_success {
-  position: absolute;
-  left: 4px;
-  bottom: 4px;
-  width: calc(100% - 8px);
-  height: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: linear-gradient(to right, #aaec8a, hsl(153, 96%, 29%));
-  border-radius: inherit;
-  animation: progress 1.5s 0.3s linear;
-}
-.notification_progress_danger {
-  position: absolute;
-  left: 4px;
-  bottom: 4px;
-  width: calc(100% - 8px);
-  height: 3px;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: linear-gradient(to right, #f0a9b8, #dc093e);
-  border-radius: inherit;
-  animation: progress 1.5s 0.3s linear;
-}
-
-@keyframes fade-in {
-  5% {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  95% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes progress {
-  to {
-    transform: scaleX(1);
-  }
-} */
-
 .notification_success, .notification_danger {
   position: fixed;
   top: 50px;
@@ -221,8 +138,16 @@ body {
   padding-bottom: 70px;
   background: var(--primary-color);
 }
-#loader{
-  background-color: var(--primary-color);
+.form-control{
+  background-color: var(--tertiary-color);
+  color: var(--forth-color);
+}
+label{
+  color: var(--forth-color);
+}
+.form-control:focus{
+  background-color: var(--tertiary-color);
+  color: var(--forth-color);
 }
 .task-title {
   background: var(--primary-color);
@@ -526,6 +451,7 @@ a:hover {
 /* Attendance */
 
 .attendance {
+  /* background-color: var(--tertiary-color); */
   text-align: center;
   align-items: center;
   display: flex;
@@ -533,6 +459,7 @@ a:hover {
   margin-bottom: 50px;
 }
 .overallAttendance {
+  /* background-color: var(--tertiary-color); */
   text-align: center;
   align-items: center;
   display: flex;
