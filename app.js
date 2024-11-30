@@ -597,6 +597,18 @@ app.post("/notCompleteTask", requireLogin, function(req,res){
   res.redirect("/tasks");
 });
 
+app.post("/editTask", requireLogin, function(req, res){
+  const id = req.user.id;
+  const originalTask = req.body.originalTask;
+  const editedTask = req.body.editedTask;
+
+  User.updateOne({_id: id, "task.task": originalTask}, {$set: {"task.$.task": editedTask}}, function(err){
+    if(err){
+      console.log(err);
+    }
+  });
+  res.redirect("/tasks");
+});
 
 
 // Time Table

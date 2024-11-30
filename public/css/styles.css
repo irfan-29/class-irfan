@@ -505,7 +505,7 @@ a:hover {
     right: 12px;
   }
   .edit{
-    margin-right: 7px;
+    margin-right: 8px;
     position: relative; 
     left: 5px;
   }
@@ -565,7 +565,7 @@ a:hover {
     margin: 20px 20%;
   }
   .edit{
-    margin-right: 7px;
+    margin-right: 8px;
     position: relative; 
     left: 5px;
   }
@@ -616,13 +616,13 @@ a:hover {
     margin: 20px 30%;
   }
   .edit{
-    margin-right: 11px;
+    margin-right: 12px;
     position: relative; 
-    left: 12px;
+    left:4px;
   }
   .delete{
     position: relative; 
-    left: 12px;
+    left: 0;
   }
   .head {
     margin: 35px 30%;
