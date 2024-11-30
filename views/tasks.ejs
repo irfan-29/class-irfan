@@ -87,7 +87,7 @@
     taskContainer.innerHTML = `
       <form action="/editTask" method="post" style="display: flex; align-items: left;">
         <input type="hidden" name="originalTask" value="${taskText}">
-        <input type="text" name="editedTask" value="${taskText}" style="flex: 1;">
+        <input class="form-control" type="text" name="editedTask" value="${taskText}" style="flex: 1;">
         <button type="submit" id="liveAlertBtnForEdit" class="add btn btn-primary" style="margin-left: 10px; position: relative; bottom: 3px;">Save</button>
       </form>`;
   }
