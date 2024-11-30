@@ -70,7 +70,7 @@
     <button type="button" class="add alert" style="background-color: transparent; border: none; padding: 0; box-shadow: none;">
       <img class="edit" src="images/drop-down.png" onmouseover="this.src='images/drop-down-hover.png';" onmouseout="this.src='images/drop-down.png';" style="width: 22px; height: 22px;" alt="edit">
     </button>
-    <button type="button" class="add alert" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" onclick="enableEdit(<%= i %>)">
+    <button type="button" class="add alert" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" onclick="enableEdit('<%= i %>', '<%= ele._id %>')">
       <img class="edit" src="images/pencil.png" onmouseover="this.src='images/pencil-hover.png';" onmouseout="this.src='images/pencil.png';" style="width: 22px; height: 22px;" alt="edit">
     </button>
     <form action="/deleteTask" method="post" style="margin: 0;">
@@ -81,12 +81,13 @@
   </div>
 </div>
 <script>
-  function enableEdit(index) {
+  function enableEdit(index, id) {
     var taskContainer = document.getElementById('task-container-' + index);
     var taskText = document.getElementById('task-' + index).innerText;
     taskContainer.innerHTML = `
       <form action="/editTask" method="post" style="display: flex; align-items: left;">
         <input type="hidden" name="originalTask" value="${taskText}">
+        <input type="hidden" name="originalId" value="${id}">
         <input class="form-control" type="text" name="editedTask" value="${taskText}" style="flex: 1;">
         <button type="submit" id="liveAlertBtnForEdit" class="add btn btn-primary" style="margin-left: 10px; position: relative; bottom: 3px;">Save</button>
       </form>`;

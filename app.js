@@ -601,8 +601,9 @@ app.post("/editTask", requireLogin, function(req, res){
   const id = req.user.id;
   const originalTask = req.body.originalTask;
   const editedTask = req.body.editedTask;
+  const taskId = req.body.originalId;
 
-  User.updateOne({_id: id, "task.task": originalTask}, {$set: {"task.$.task": editedTask}}, function(err){
+  User.updateOne({_id: id, "task._id": taskId}, {$set: {"task.$.task": editedTask}}, function(err){
     if(err){
       console.log(err);
     }
