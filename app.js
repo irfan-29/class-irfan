@@ -544,9 +544,9 @@ app.post("/tasks", requireLogin, function(req, res) {
 });
 
 app.post("/deleteTask", requireLogin, function(req,res){
-  const deleteTask = req.body.deleteTask;
-  const id = req.user.id;
-  User.updateOne({_id: id}, {$pull: {task: {task: deleteTask}}}, function(err, user){
+  const taskId = req.body.deleteTask;
+  const id = req.user.id; 
+  User.updateOne({_id: id}, {$pull: {task: {_id: taskId}}}, function(err, user){
     if(err){console.log(err);}
   });
   setTimeout(function () {
@@ -555,9 +555,9 @@ app.post("/deleteTask", requireLogin, function(req,res){
 });
 
 app.post("/deleteCompleteTask", requireLogin, function(req,res){
-  const deleteCompleteTask = req.body.deleteCompleteTask;
+  const completeTaskId = req.body.deleteCompleteTask;
   const id = req.user.id;
-  User.updateOne({_id: id}, {$pull: {completeTask: {completeTask: deleteCompleteTask}}}, function(err, user){
+  User.updateOne({_id: id}, {$pull: {completeTask: {_id: completeTaskId}}}, function(err, user){
     if(err){console.log(err);}
   });
   setTimeout(function () {
@@ -599,7 +599,6 @@ app.post("/notCompleteTask", requireLogin, function(req,res){
 
 app.post("/editTask", requireLogin, function(req, res){
   const id = req.user.id;
-  const originalTask = req.body.originalTask;
   const editedTask = req.body.editedTask;
   const taskId = req.body.originalId;
 

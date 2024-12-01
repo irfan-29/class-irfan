@@ -36,28 +36,6 @@
   </div>
 </div> -->
 
-<!-- <div class="task">
-  <div style="float: left; width: 88%; display: flex; margin-top: 8px;">
-    <form action="/completeTask" method="post">
-      <div style="display: flex; position: relative; top: 2px;">
-        <input class="taskInput" type="checkbox" name="checkbox" value="<%= ele.task %>" onchange="this.form.submit()">
-        <div id="task-container-<%= i %>" style="position: relative; left: 5px;">
-          <p id="task-<%= i %>"><%= ele.task %></p>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div style="float: right; padding: 0; display: flex;">
-    <button type="button" class="add alert" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" onclick="enableEdit(<%= i %>)">
-      <img class="edit" src="images/edit.png" onmouseover="this.src='images/edit-hover.png';" onmouseout="this.src='images/edit.png';" style="width: 22px; height: 22px;" alt="edit">
-    </button>
-    <form action="/deleteTask" method="post">
-      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" name="deleteTask" value="<%= ele.task %>">
-        <img class="delete" src="images/delete.png" onmouseover="this.src='images/delete-hover.png';" onmouseout="this.src='images/delete.png';" style="width: 23px; height: 24px;" alt="delete">
-      </button>
-    </form>
-  </div>
-</div> -->
 
 <div class="task" style="display: flex; justify-content: space-between; align-items: center; ">
   <form action="/completeTask" method="post" style="display: flex; align-items: center;  margin-right: 10px; position: relative; bottom: 4px;">
@@ -74,8 +52,8 @@
       <img class="edit" src="images/pencil.png" onmouseover="this.src='images/pencil-hover.png';" onmouseout="this.src='images/pencil.png';" style="width: 22px; height: 22px;" alt="edit">
     </button>
     <form action="/deleteTask" method="post" style="margin: 0;">
-      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" name="deleteTask" value="<%= ele.task %>">
-        <img class="delete" src="images/new-delete-1.png" onmouseover="this.src='images/new-delete-1-hover.png';" onmouseout="this.src='images/new-delete-1.png';" style="width: 20px; height: 23px;" alt="delete">
+      <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0; box-shadow: none;" name="deleteTask" value="<%= ele._id %>">
+        <img class="delete" src="images/new-delete.png" onmouseover="this.src='images/new-delete-hover.png';" onmouseout="this.src='images/new-delete.png';" style="width: 20px; height: 23px;" alt="delete">
       </button>
     </form>
   </div>
@@ -86,7 +64,6 @@
     var taskText = document.getElementById('task-' + index).innerText;
     taskContainer.innerHTML = `
       <form action="/editTask" method="post" style="display: flex; align-items: left;">
-        <input type="hidden" name="originalTask" value="${taskText}">
         <input type="hidden" name="originalId" value="${id}">
         <input class="form-control" type="text" name="editedTask" value="${taskText}" style="flex: 1;">
         <button type="submit" id="liveAlertBtnForEdit" class="add btn btn-primary" style="margin-left: 10px; position: relative; bottom: 3px;">Save</button>
@@ -113,10 +90,10 @@
     </div>
     <div style="float: right; padding: 0;">
       <form action="/deleteCompleteTask" method="post">
-        <!-- <button type="submit" class="add btn btn-outline-danger" id="liveAlertBtn<%= i %>" style="border-radius: 50%; height: 40px; width: 40px;" name="deleteCompleteTask" value="<%= ele.completeTask %>"><img class="delete" src="images/delete.png"
-          style="width: 22px; height: 23px; position: relative; bottom: 1.5px; right: 3.5px;" alt="delete"></button> -->
-          <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="deleteTask" value="<%= ele.task %>"><img class="delete" src="images/delete.png" onmouseover="this.src='images/delete-hover.png';" onmouseout="this.src='images/delete.png';"
-            style="width: 23px; height: 24px;" alt="delete"></button>
+        <button type="submit" class="add alert" id="liveAlertBtn<%= i %>" style="background-color: transparent; border: none; padding: 0;  box-shadow: none;" name="deleteCompleteTask" value="<%= ele._id %>">
+          <img class="delete" src="images/new-delete.png" onmouseover="this.src='images/new-delete-hover.png';" onmouseout="this.src='images/new-delete.png';"
+            style="width: 20px; height: 23px;" alt="delete">
+        </button>
       </form>
    </div>
   </div>
